@@ -96,7 +96,7 @@ class SendInquiryMails implements ShouldQueue
                     'questions' => [
                         'istSpam' => [
                             'type' => 'noul',
-                            'instructions' => 'Ist dieser Text aus einem Kontaktformular Spam?',
+                            'instructions' => 'Dormed ist ein deutsches Unternehmen für Medizintechnik und verkauft ausschließlich innerhalb Deutschlands. Über dieses Kontaktformular gehen normalerweise echte Anfragen von Kliniken und Praxen zu Produkten, Wartung oder Service ein. Ist die folgende Nachricht für uns Spam — dazu zählt auch unaufgeforderte Kaltakquise wie Vertriebs-, Marketing- oder SEO-Angebote fremder Anbieter, nicht nur klassischer Werbe- oder Betrugsspam?',
                         ],
                     ],
                 ]);
