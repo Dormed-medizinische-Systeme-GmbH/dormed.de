@@ -23,6 +23,7 @@ class ContactFormCompanyMail extends Mailable
         public ?string $fachgebiet,
         public bool $wantsCallback,
         public ?string $rueckrufDatum,
+        public ?float $spamScore = null,
     ) {}
 
     /**

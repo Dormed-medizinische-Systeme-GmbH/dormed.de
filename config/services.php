@@ -42,4 +42,9 @@ return [
         'product_key' => env('CAS_GENESIS_WORLD_PRODUCT_KEY'),
     ],
 
+    'decision_model' => [
+        'url' => env('DECISION_MODEL_URL'),
+        'key' => env('DECISION_MODEL_KEY'),
+    ],
+
 ];

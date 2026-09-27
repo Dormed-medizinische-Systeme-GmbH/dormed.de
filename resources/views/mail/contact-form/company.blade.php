@@ -8,6 +8,21 @@
         <tr>
             <td align="center">
                 <table role="presentation" width="100%" style="max-width:560px;background-color:#ffffff;border-radius:8px;overflow:hidden;">
+                    @if ($spamScore !== null)
+                    @php
+                        $spamPercent = (int) round($spamScore * 100);
+                        [$spamColor, $spamBackground] = match (true) {
+                            $spamScore >= 0.7 => ['#B91C1C', '#FEE2E2'],
+                            $spamScore >= 0.4 => ['#B45309', '#FEF3C7'],
+                            default => ['#047857', '#ECFDF5'],
+                        };
+                    @endphp
+                    <tr>
+                        <td style="background-color:{{ $spamBackground }};padding:12px 32px;">
+                            <span style="color:{{ $spamColor }};font-size:13px;font-weight:bold;letter-spacing:0.3px;">Spam-Score: {{ $spamPercent }} %</span>
+                        </td>
+                    </tr>
+                    @endif
                     <tr>
                         <td style="background-color:#0c162c;padding:24px 32px;">
                             <span style="color:#ffffff;font-size:18px;font-weight:bold;">Neue Anfrage über das Kontaktformular</span>

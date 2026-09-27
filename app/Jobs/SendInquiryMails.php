@@ -7,6 +7,7 @@ use App\Mail\ContactFormCustomerMail;
 use DateTime;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
@@ -63,11 +64,57 @@ class SendInquiryMails implements ShouldQueue
             fachgebiet: $this->fachgebiet,
             wantsCallback: $this->wantsCallback,
             rueckrufDatum: $this->rueckrufDatum,
+            spamScore: $this->spamScore(),
         ));
 
         Mail::send(new ContactFormCustomerMail(name: $this->name, email: $this->email));
 
         $this->logSubmission(mailSucceeded: true);
+    }
+
+    /**
+     * Interim spam score (0-1) for the company mail, until the contact form
+     * moves to the new monolith and its SDK. Only the free-text message is
+     * sent - never name, e-mail or other personal fields. Any failure
+     * (timeout, HTTP error, unexpected payload) yields null so the mails
+     * still go out unchanged.
+     */
+    private function spamScore(): ?float
+    {
+        if (blank($this->nachricht)) {
+            return null;
+        }
+
+        try {
+            $response = Http::baseUrl(rtrim((string) config('services.decision_model.url'), '/'))
+                ->withToken((string) config('services.decision_model.key'))
+                ->acceptJson()
+                ->asJson()
+                ->timeout(8)
+                ->post('/v1/systemone', [
+                    'state' => $this->nachricht,
+                    'questions' => [
+                        'istSpam' => [
+                            'type' => 'noul',
+                            'instructions' => 'Ist dieser Text aus einem Kontaktformular Spam?',
+                        ],
+                    ],
+                ]);
+
+            $score = $response->successful() ? $response->json('answers.istSpam.noul') : null;
+        } catch (Throwable $exception) {
+            Log::warning('Spam score request failed.', ['exception' => $exception->getMessage()]);
+
+            return null;
+        }
+
+        if (! is_numeric($score) || $score < 0 || $score > 1) {
+            Log::warning('Spam score unavailable.', ['status' => $response->status()]);
+
+            return null;
+        }
+
+        return (float) $score;
     }
 
     public function failed(Throwable $exception): void

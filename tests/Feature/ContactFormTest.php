@@ -20,6 +20,8 @@ beforeEach(function () {
         'services.cas_genesis_world.username' => 'testuser',
         'services.cas_genesis_world.password' => 'secret',
         'services.cas_genesis_world.product_key' => 'test-product-key',
+        'services.decision_model.url' => 'https://decision.example.test',
+        'services.decision_model.key' => 'test-decision-key',
     ]);
 
     File::ensureDirectoryExists(storage_path('logs'));
@@ -199,4 +201,100 @@ test('SendInquiryMails failed() hook logs a failure line', function () {
 
     $logContent = file_get_contents(storage_path('logs/mail.log'));
     expect($logContent)->toContain('Mailversand an max@example.com ✗');
+});
+
+test('SendInquiryMails sends only the message text to the decision model and passes the spam score to the company mail', function () {
+    Mail::fake();
+    Http::fake([
+        'https://decision.example.test/v1/systemone' => Http::response([
+            'answers' => ['istSpam' => ['type' => 'noul', 'noul' => 0.83, 'confidence' => 0.9]],
+        ]),
+    ]);
+
+    mailJob([
+        'telefon' => '0231123456',
+        'nachricht' => 'Testnachricht',
+        'praxis' => 'Praxis Mustermann',
+    ])->handle();
+
+    Http::assertSent(function ($request) {
+        return $request->method() === 'POST'
+            && $request->hasHeader('Authorization', 'Bearer test-decision-key')
+            && $request->data() === [
+                'state' => 'Testnachricht',
+                'questions' => [
+                    'istSpam' => [
+                        'type' => 'noul',
+                        'instructions' => 'Ist dieser Text aus einem Kontaktformular Spam?',
+                    ],
+                ],
+            ];
+    });
+    Mail::assertSent(ContactFormCompanyMail::class, fn ($mail) => $mail->spamScore === 0.83);
+});
+
+test('SendInquiryMails skips the spam score request when the message is empty', function () {
+    Mail::fake();
+    Http::fake();
+
+    mailJob(['nachricht' => null])->handle();
+
+    Http::assertNothingSent();
+    Mail::assertSent(ContactFormCompanyMail::class, fn ($mail) => $mail->spamScore === null);
+});
+
+test('SendInquiryMails still sends both mails without a spam score when the decision model fails', function (Closure $fakeResponse) {
+    Mail::fake();
+    Http::fake(['https://decision.example.test/*' => $fakeResponse]);
+
+    mailJob(['nachricht' => 'Testnachricht'])->handle();
+
+    Mail::assertSent(ContactFormCompanyMail::class, fn ($mail) => $mail->spamScore === null);
+    Mail::assertSent(ContactFormCustomerMail::class);
+})->with([
+    'http error' => fn () => fn () => Http::response('Internal Server Error', 500),
+    'connection error' => fn () => fn () => Http::failedConnection(),
+    'malformed json' => fn () => fn () => Http::response('not json', 200),
+    'missing score' => fn () => fn () => Http::response(['answers' => []], 200),
+    'score out of range' => fn () => fn () => Http::response(['answers' => ['istSpam' => ['noul' => 1.5]]], 200),
+]);
+
+test('company mail shows the spam score banner with the matching colour', function (float $score, string $percent, string $color, string $background) {
+    $mail = new ContactFormCompanyMail(
+        name: 'Dr. Max Mustermann',
+        email: 'max@example.com',
+        telefon: null,
+        plz: '44269',
+        nachricht: 'Testnachricht',
+        praxis: null,
+        fachgebiet: null,
+        wantsCallback: false,
+        rueckrufDatum: null,
+        spamScore: $score,
+    );
+
+    $mail->assertSeeInHtml("Spam-Score: {$percent} %", false)
+        ->assertSeeInHtml("color:{$color};", false)
+        ->assertSeeInHtml("background-color:{$background};", false);
+})->with([
+    'red' => [0.83, '83', '#B91C1C', '#FEE2E2'],
+    'red threshold' => [0.7, '70', '#B91C1C', '#FEE2E2'],
+    'orange' => [0.4, '40', '#B45309', '#FEF3C7'],
+    'green' => [0.12, '12', '#047857', '#ECFDF5'],
+]);
+
+test('company mail omits the spam score banner without a score', function () {
+    $mail = new ContactFormCompanyMail(
+        name: 'Dr. Max Mustermann',
+        email: 'max@example.com',
+        telefon: null,
+        plz: '44269',
+        nachricht: null,
+        praxis: null,
+        fachgebiet: null,
+        wantsCallback: false,
+        rueckrufDatum: null,
+    );
+
+    $mail->assertDontSeeInHtml('Spam-Score', false);
 });
