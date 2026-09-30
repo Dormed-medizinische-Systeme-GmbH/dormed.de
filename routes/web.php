@@ -29,7 +29,6 @@ Route::get('/ultraschallgeraete/{path}.md', function (string $path) {
         ->header('Content-Type', 'text/markdown; charset=UTF-8');
 })->where('path', '[a-z0-9\-\/]+')->name('ultraschallgeraete.markdown');
 
-Route::view('/blog2', 'blog.index')->name('blog.index');
 Route::view('/blog', 'blog.index')->name('blog.index');
 Route::view('/danke', 'danke')->name('danke');
 Route::view('/fuer/allgemeinmedizin', 'fuer.allgemeinmedizin.index')->name('fuer.allgemeinmedizin.index');
