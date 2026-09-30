@@ -33,7 +33,16 @@ class ContactFormRequest extends FormRequest
             'rueckruf' => ['nullable', 'in:ja'],
             'rueckruf_datum' => ['nullable', 'date'],
             'datenschutz' => ['required', 'in:ja'],
+            'website' => ['nullable', 'string'],
         ];
+    }
+
+    /**
+     * Whether the hidden honeypot field was filled in, which only bots do.
+     */
+    public function isHoneypotTriggered(): bool
+    {
+        return filled($this->validated('website'));
     }
 
     /**

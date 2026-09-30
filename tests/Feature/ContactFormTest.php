@@ -94,14 +94,50 @@ test('contact form requires name, email, plz and datenschutz consent', function 
     Bus::assertNothingDispatched();
 });
 
-test('the contact form is rate limited to 3 submissions per minute', function () {
+test('the contact form allows only one submission per minute', function () {
+    Bus::fake();
+
+    $this->post(route('kontakt.store'), validContactFormData())->assertRedirect(route('danke'));
+
+    $this->post(route('kontakt.store'), validContactFormData())->assertSessionHasErrors('rate_limit');
+
+    Bus::assertDispatchedTimes(CreateInquiryInCas::class, 1);
+});
+
+test('the contact form allows at most three submissions per day', function () {
     Bus::fake();
 
     for ($i = 0; $i < 3; $i++) {
         $this->post(route('kontakt.store'), validContactFormData())->assertRedirect(route('danke'));
+        $this->travel(2)->minutes();
     }
 
-    $this->post(route('kontakt.store'), validContactFormData())->assertStatus(429);
+    $this->post(route('kontakt.store'), validContactFormData())->assertSessionHasErrors('rate_limit');
+
+    Bus::assertDispatchedTimes(CreateInquiryInCas::class, 3);
+});
+
+test('a failed validation does not use up the rate limit', function () {
+    Bus::fake();
+
+    $this->post(route('kontakt.store'), [])->assertSessionHasErrors(['name']);
+
+    $this->post(route('kontakt.store'), validContactFormData())->assertRedirect(route('danke'));
+});
+
+test('a filled honeypot field silently redirects without creating a CAS inquiry or sending mails', function () {
+    Bus::fake();
+
+    $this->post(route('kontakt.store'), validContactFormData(['website' => 'https://spam.example']))
+        ->assertRedirect(route('danke'));
+
+    Bus::assertNothingDispatched();
+});
+
+test('the contact form template contains a hidden honeypot field', function () {
+    expect(file_get_contents(resource_path('views/kontakt.blade.php')))
+        ->toContain('name="website"')
+        ->toContain('tabindex="-1"');
 });
 
 test('valid submission dispatches CreateInquiryInCas and SendInquiryMails independently and redirects to the danke page', function () {

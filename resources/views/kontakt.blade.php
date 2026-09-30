@@ -1011,6 +1011,11 @@
         <form id="kon-form" method="POST" action="{{ route('kontakt.store') }}" novalidate>
           @csrf
 
+          <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+            <label for="kon-website">Website</label>
+            <input id="kon-website" name="website" type="text" tabindex="-1" autocomplete="off" value=""/>
+          </div>
+
           @if ($errors->any())
             <div class="kon-form__error-msg" style="display:block;">
               @foreach ($errors->all() as $message)
