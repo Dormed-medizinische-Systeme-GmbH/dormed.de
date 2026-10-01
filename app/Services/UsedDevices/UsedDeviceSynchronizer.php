@@ -5,15 +5,15 @@ namespace App\Services\UsedDevices;
 use App\Services\Cas\CasClient;
 use App\Services\Cas\CasRequestFailedException;
 use App\UsedDevice;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * Mirrors the CAS "GEBRAUCHTGERAETE" view (online devices only) into the
- * local used_devices table and the first-party image store. The view is the
- * single source of truth: a device that is not in it - deleted, set offline
- * or no longer matching the view - is removed locally.
+ * Mirrors single CAS "GEBRAUCHTGERAETE" records into the local used_devices
+ * table and the public image store. The record is fetched directly by its
+ * GUID (no list/view involved): found -> stored, deleted in CAS (404) or
+ * explicitly ONLINE=false -> removed locally. Any other CAS failure throws
+ * and leaves local data untouched, so the queue retries.
  */
 class UsedDeviceSynchronizer
 {
@@ -26,54 +26,41 @@ class UsedDeviceSynchronizer
     public function __construct(private readonly CasClient $cas) {}
 
     /**
+     * CAS may send the GUID in any case and with braces or dashes.
+     */
+    public static function normalizeGuid(string $guid): string
+    {
+        return strtoupper(str_replace(['{', '}', '-'], '', trim($guid)));
+    }
+
+    /**
      * @throws CasRequestFailedException
      */
     public function sync(string $guid): void
     {
-        $record = $this->onlineRecords()->get($guid);
+        $result = $this->cas->getDataObject(self::DATA_OBJECT_TYPE, $guid);
 
-        if ($record === null) {
-            $this->remove($guid);
+        if ($result === null || ($result['record']['fields']['ONLINE'] ?? true) === false) {
+            $this->remove($guid, $result === null ? 'deleted in CAS' : 'set offline in CAS');
 
             return;
         }
 
-        $this->store($guid, $record);
+        $this->store($guid, $result['record'], $result['etag']);
     }
 
     /**
-     * Full reconcile. Returns the number of devices now stored.
+     * Re-sync every device known locally. Returns how many were processed.
      *
      * @throws CasRequestFailedException
      */
-    public function syncAll(): int
+    public function syncKnown(): int
     {
-        $records = $this->onlineRecords();
+        $guids = UsedDevice::query()->pluck('cas_id');
 
-        foreach ($records as $guid => $record) {
-            $this->store($guid, $record);
-        }
+        $guids->each(fn (string $guid) => $this->sync($guid));
 
-        UsedDevice::query()
-            ->whereNotIn('cas_id', $records->keys())
-            ->pluck('cas_id')
-            ->each(fn (string $guid) => $this->remove($guid));
-
-        return $records->count();
-    }
-
-    /**
-     * @return Collection<string, array<string, mixed>> online records keyed by upper-case GUID
-     *
-     * @throws CasRequestFailedException
-     */
-    private function onlineRecords(): Collection
-    {
-        $records = $this->cas->listView(self::DATA_OBJECT_TYPE, (string) config('services.cas_genesis_world.used_devices_view_id'));
-
-        return collect($records)
-            ->filter(fn (array $record): bool => ($record['fields']['ONLINE'] ?? false) === true)
-            ->keyBy(fn (array $record): string => strtoupper((string) $record['id']));
+        return $guids->count();
     }
 
     /**
@@ -84,19 +71,17 @@ class UsedDeviceSynchronizer
      *
      * @throws CasRequestFailedException
      */
-    private function store(string $guid, array $record): void
+    private function store(string $guid, array $record, ?string $etag): void
     {
         $fields = $record['fields'];
-        $year = (string) ($fields['GG_SYSTEM_BAUJAHR'] ?? '');
-
         $images = $this->syncImages($guid);
 
         $device = UsedDevice::updateOrCreate(['cas_id' => $guid], [
-            'etag' => $record['ETAG'] ?? null,
+            'etag' => $etag,
             'name' => (string) ($fields['GG_SYSTEM_ARTIKEL'] ?? 'Ultraschallgerät'),
             'manufacturer' => $fields['GG_SYSTEM_HERSTELLER'] ?? null,
             'description' => $fields['GG_SYSTEM_BEZ'] ?? null,
-            'year' => ctype_digit($year) ? (int) $year : null,
+            'year' => $this->year((string) ($fields['GG_SYSTEM_BAUJAHR'] ?? '')),
             'probes' => $this->probes($fields),
             'images' => $images,
             'cas_updated_at' => $fields['UPDATETIMESTAMP'] ?? null,
@@ -111,12 +96,21 @@ class UsedDeviceSynchronizer
         ]);
     }
 
-    private function remove(string $guid): void
+    private function remove(string $guid, string $reason): void
     {
         $deleted = UsedDevice::where('cas_id', $guid)->delete();
         Storage::disk('public')->deleteDirectory(self::IMAGE_DIRECTORY."/{$guid}");
 
-        Log::channel('webhook')->info('Used device not online in CAS, removed locally.', ['gguid' => $guid, 'hadRecord' => $deleted > 0]);
+        Log::channel('webhook')->info("Used device removed locally ({$reason}).", ['gguid' => $guid, 'hadRecord' => $deleted > 0]);
+    }
+
+    /**
+     * CAS stores the year free-form ("2021", "2021-01-13", "07/2009"), so
+     * the four-digit year is picked out of whatever was typed.
+     */
+    private function year(string $value): ?int
+    {
+        return preg_match('/\b(19|20)\d{2}\b/', $value, $match) === 1 ? (int) $match[0] : null;
     }
 
     /**

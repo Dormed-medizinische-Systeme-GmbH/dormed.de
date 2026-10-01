@@ -8,14 +8,21 @@ use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
-#[Signature('used-devices:sync')]
-#[Description('Import all online used devices from CAS and remove the ones that are no longer online')]
+#[Signature('used-devices:sync {gguid?* : GGUIDs to import; without any, all locally known devices are re-synced}')]
+#[Description('Fetch used devices from CAS by GGUID (imports new ones, updates known ones, removes deleted ones)')]
 class SyncUsedDevices extends Command
 {
     public function handle(UsedDeviceSynchronizer $synchronizer): int
     {
         try {
-            $count = $synchronizer->syncAll();
+            $guids = collect($this->argument('gguid'))->map(UsedDeviceSynchronizer::normalizeGuid(...));
+
+            if ($guids->isEmpty()) {
+                $count = $synchronizer->syncKnown();
+            } else {
+                $guids->each(fn (string $guid) => $synchronizer->sync($guid));
+                $count = $guids->count();
+            }
         } catch (CasRequestFailedException $exception) {
             $this->error($exception->getMessage());
 

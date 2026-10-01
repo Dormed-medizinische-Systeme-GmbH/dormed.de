@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\UsedDevices\UsedDeviceSynchronizer;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,7 +22,7 @@ class UsedDeviceWebhookRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         if (is_string($this->input('gguid'))) {
-            $this->merge(['gguid' => strtoupper(str_replace(['{', '}', '-'], '', trim($this->input('gguid'))))]);
+            $this->merge(['gguid' => UsedDeviceSynchronizer::normalizeGuid($this->input('gguid'))]);
         }
     }
 

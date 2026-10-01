@@ -41,7 +41,6 @@ return [
         'password' => env('CAS_GENESIS_WORLD_PASSWORD'),
         'product_key' => env('CAS_GENESIS_WORLD_PRODUCT_KEY'),
         'webhook_bearer' => env('CAS_GENESIS_WORLD_WEBHOOK_BEARER'),
-        'used_devices_view_id' => env('CAS_USED_DEVICES_VIEW_ID', 'B86EB490AF784312A4291087260E10DB'),
     ],
 
     'decision_model' => [
