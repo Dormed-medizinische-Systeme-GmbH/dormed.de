@@ -36,7 +36,18 @@ function casRecord(string $id, array $fields = []): array
 }
 
 test('webhook logs go to their own file', function () {
-    expect(config('logging.channels.webhook.path'))->toEndWith('storage/logs/webhook.api.log');
+    expect(config('logging.channels.webhook_file.path'))->toEndWith('storage/logs/webhook.api.log');
+});
+
+test('an unwritable webhook log file never breaks the request or the sync', function () {
+    // a directory as log path makes opening the file fail, like a file owned by another user
+    config()->set('logging.channels.webhook_file.path', storage_path('logs'));
+    config()->set('logging.channels.api_file.path', storage_path('logs'));
+    Queue::fake();
+
+    $this->withToken('secret-token')->postJson(WEBHOOK_URL, ['gguid' => DC70])->assertStatus(202);
+
+    Queue::assertPushed(SyncUsedDevice::class);
 });
 
 describe('webhook endpoint', function () {

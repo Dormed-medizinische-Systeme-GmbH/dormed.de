@@ -485,7 +485,7 @@
 .gb2__card:hover { box-shadow: 0 8px 32px rgba(9,58,126,0.10); transform: translateY(-2px); }
 .gb2__card--hidden { display: none; }
 .gb2__card-img { position: relative; aspect-ratio: 4 / 3; background: #F4F6F9; display: flex; align-items: center; justify-content: center; }
-.gb2__card-img img { width: 100%; height: 100%; object-fit: contain; padding: 1.2rem; }
+.gb2__card-img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .gb2__badge {
   position: absolute; top: 0.8rem; left: 0.8rem; font-family: 'JetBrains Mono', monospace;
   font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.25rem 0.6rem;
