@@ -20,7 +20,7 @@ test('the used devices page lists the stored devices with filter attributes and 
     ]);
     UsedDevice::factory()->create(['name' => 'M6', 'description' => 'portables Farbdopplersystem', 'year' => null]);
 
-    $response = $this->get('/gebraucht2');
+    $response = $this->get('/ultraschallgeraete/gebraucht2');
 
     $response->assertOk();
     $response->assertSeeText(['DC-70 EXP X-INSIGHT', 'M6', 'Convex-Sonde SC6-1E', 'Baujahr auf Anfrage']);
@@ -37,7 +37,7 @@ test('the used devices page lists the stored devices with filter attributes and 
 test('the used devices page keeps all other sections of the current used devices page', function () {
     $this->withoutVite();
 
-    $this->get('/gebraucht2')->assertOk()->assertSeeText([
+    $this->get('/ultraschallgeraete/gebraucht2')->assertOk()->assertSeeText([
         'Gebrauchte Ultraschallgeräte',
         'So bereiten wir',
         'Warum ein Gebrauchtgerät von Dormed?',
@@ -49,13 +49,13 @@ test('the used devices page keeps all other sections of the current used devices
 test('the used devices page shows the empty state without devices', function () {
     $this->withoutVite();
 
-    $this->get('/gebraucht2')->assertOk()->assertSeeText('Keine Geräte gefunden');
+    $this->get('/ultraschallgeraete/gebraucht2')->assertOk()->assertSeeText('Keine Geräte gefunden');
 });
 
 test('the used devices page is not indexed while it is being built', function () {
     $this->withoutVite();
 
-    $this->get('/gebraucht2')->assertSee('noindex', false);
+    $this->get('/ultraschallgeraete/gebraucht2')->assertSee('noindex', false);
 });
 
 test('devices are grouped into year bands and systems', function () {
