@@ -171,25 +171,25 @@
 
       <div class="gb2__cards" role="list">
         @foreach ($devices as $device)
-          <article class="gb2__card" role="listitem" data-brand="{{ $device['brand'] }}" data-system="{{ $device['system'] }}" data-year="{{ $device['yearBand'] }}">
+          <article class="gb2__card" role="listitem" data-brand="{{ $device->brand }}" data-system="{{ $device->system }}" data-year="{{ $device->yearBand }}">
             <div class="gb2__card-img">
-              <img src="{{ route('gebraucht2.bild', $device['id']) }}" alt="{{ $device['brandLabel'] }} {{ $device['name'] }}" loading="lazy" onerror="this.onerror=null;this.src='/assets/img/platzhalter-geraet.svg'">
-              <span class="gb2__badge">{{ $device['brandLabel'] }}</span>
-              @if ($device['year'])
-                <span class="gb2__badge gb2__badge--year">{{ $device['year'] }}</span>
+              <img src="{{ $device->imageUrl ?? '/assets/img/platzhalter-geraet.svg' }}" alt="{{ $device->brandLabel }} {{ $device->name }}" loading="lazy">
+              <span class="gb2__badge">{{ $device->brandLabel }}</span>
+              @if ($device->year)
+                <span class="gb2__badge gb2__badge--year">{{ $device->year }}</span>
               @endif
             </div>
             <div class="gb2__card-body">
-              <h3 class="gb2__card-title">{{ $device['name'] }}</h3>
-              <p class="gb2__card-text">{{ $device['description'] ?: $device['systemLabel'] }}</p>
-              @if ($device['probes'])
+              <h3 class="gb2__card-title">{{ $device->name }}</h3>
+              <p class="gb2__card-text">{{ $device->description ?: $device->systemLabel }}</p>
+              @if ($device->probes)
                 <ul class="gb2__features">
-                  @foreach ($device['probes'] as $probe)
+                  @foreach ($device->probes as $probe)
                     <li>{{ $probe }}</li>
                   @endforeach
                 </ul>
               @endif
-              <a class="gb2__card-cta" href="{{ route('kontakt') }}?{{ http_build_query(['geraet' => $device['name'], 'utm_source' => 'gebraucht', 'utm_medium' => 'produktkarte', 'utm_campaign' => 'geraet-anfrage']) }}">Gerät anfragen</a>
+              <a class="gb2__card-cta" href="{{ route('kontakt') }}?{{ http_build_query(['geraet' => $device->name, 'utm_source' => 'gebraucht', 'utm_medium' => 'produktkarte', 'utm_campaign' => 'geraet-anfrage']) }}">Gerät anfragen</a>
             </div>
           </article>
         @endforeach

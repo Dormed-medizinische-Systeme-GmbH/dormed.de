@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CasWebhookController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\UsedDeviceController;
+use App\Http\Middleware\EnsureValidCasWebhookToken;
 use Illuminate\Support\Facades\Route;
 
 // Core Rule 2: sitemap.xml/sitemap-system-pages.xml werden über eine Route ausgeliefert,
@@ -75,7 +77,6 @@ Route::view('/ueber', 'ueber.index')->name('ueber.index');
 Route::view('/ueber/sonoring', 'ueber.sonoring')->name('ueber.sonoring');
 Route::view('/ultraschallgeraete/gebraucht', 'ultraschallgeraete.gebraucht')->name('ultraschallgeraete.gebraucht');
 Route::get('/gebraucht2', [UsedDeviceController::class, 'index'])->name('gebraucht2');
-Route::get('/gebraucht2/bild/{id}', [UsedDeviceController::class, 'image'])->where('id', '[0-9A-Fa-f]{32}')->name('gebraucht2.bild');
 Route::view('/ultraschallgeraete/handheld', 'ultraschallgeraete.handheld.index')->name('ultraschallgeraete.handheld.index');
 Route::view('/ultraschallgeraete/handheld/mindray-te-air-e5m', 'ultraschallgeraete.handheld.mindray-te-air-e5m')->name('ultraschallgeraete.handheld.mindray-te-air-e5m');
 Route::view('/ultraschallgeraete/handheld/mindray-te-air-i3m', 'ultraschallgeraete.handheld.mindray-te-air-i3m')->name('ultraschallgeraete.handheld.mindray-te-air-i3m');
@@ -112,3 +113,8 @@ Route::view('/ultraschallgeraete/standgeraete/mindray-nuewa-i9', 'ultraschallger
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i8', 'ultraschallgeraete.standgeraete.mindray-resona-i8')->name('ultraschallgeraete.standgeraete.mindray-resona-i8');
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i9', 'ultraschallgeraete.standgeraete.mindray-resona-i9')->name('ultraschallgeraete.standgeraete.mindray-resona-i9');
 Route::view('/veranstaltungen', 'veranstaltungen')->name('veranstaltungen');
+
+// Webhook-Trigger aus CAS: nur die GUID kommt rein, die Daten holt der Job per API.
+Route::post('/webhooks/cas/gebrauchtgeraete', [CasWebhookController::class, 'usedDevice'])
+    ->middleware([EnsureValidCasWebhookToken::class, 'throttle:60,1'])
+    ->name('webhooks.cas.gebrauchtgeraete');
