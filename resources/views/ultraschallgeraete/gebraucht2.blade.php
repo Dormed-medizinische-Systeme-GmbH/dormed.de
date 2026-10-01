@@ -72,8 +72,6 @@
 .gb2__card-text { font-size: 0.88rem; line-height: 1.65; color: var(--muted); }
 .gb2__features { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.8rem; color: var(--muted); }
 .gb2__features li::before { content: '·'; margin-right: 0.5rem; color: var(--blue-m); font-weight: 700; }
-.gb2__price { font-size: 1.05rem; font-weight: 700; color: var(--text); }
-.gb2__price span { margin-left: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; color: rgba(9,58,126,0.5); }
 .gb2__card-cta {
   margin-top: auto; align-self: flex-start; font-size: 0.85rem; font-weight: 600; color: #fff;
   text-decoration: none; background: var(--grad); padding: 0.7rem 1.2rem;
@@ -190,9 +188,6 @@
                     <li>{{ $probe }}</li>
                   @endforeach
                 </ul>
-              @endif
-              @if ($device['price'])
-                <p class="gb2__price">{{ number_format($device['price'], 0, ',', '.') }} €<span>{{ $device['taxNote'] }}</span></p>
               @endif
               <a class="gb2__card-cta" href="{{ route('kontakt') }}?{{ http_build_query(['geraet' => $device['name'], 'utm_source' => 'gebraucht', 'utm_medium' => 'produktkarte', 'utm_campaign' => 'geraet-anfrage']) }}">Gerät anfragen</a>
             </div>

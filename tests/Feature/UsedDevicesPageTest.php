@@ -75,9 +75,11 @@ test('the used devices page lists the online devices from CAS with filter attrib
     $response = $this->get('/gebraucht2');
 
     $response->assertOk();
-    $response->assertSeeText(['DC-70 EXP X-INSIGHT', 'M6', 'Convex-Sonde SC6-1E', '6.900 €']);
+    $response->assertSeeText(['DC-70 EXP X-INSIGHT', 'M6', 'Convex-Sonde SC6-1E']);
     $response->assertDontSeeText('Offline-Gerät');
     $response->assertDontSeeText('Sonde 3');
+    $response->assertDontSeeText('6.900');
+    $response->assertDontSee('€');
     $response->assertSee('data-brand="mindray"', false);
     $response->assertSee('data-system="farbdoppler"', false);
     $response->assertSee('data-year="ab-2020"', false);

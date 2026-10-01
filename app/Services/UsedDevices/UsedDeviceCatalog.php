@@ -23,8 +23,6 @@ use Illuminate\Support\Facades\Storage;
  *     description: string,
  *     year: int|null,
  *     yearBand: string,
- *     price: float|null,
- *     taxNote: string|null,
  *     probes: list<string>,
  * }
  */
@@ -175,8 +173,6 @@ class UsedDeviceCatalog
             'description' => $description,
             'year' => $year,
             'yearBand' => $this->yearBand($year),
-            'price' => isset($fields['DORMEDGGPREIS']) ? (float) $fields['DORMEDGGPREIS'] : null,
-            'taxNote' => $fields['DORMEDGGSTEUER'] ?? null,
             'probes' => $this->probes($fields),
         ];
     }
