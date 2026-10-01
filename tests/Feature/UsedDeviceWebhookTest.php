@@ -28,6 +28,10 @@ function casRecord(string $id, array $fields = []): array
     ];
 }
 
+test('webhook logs go to their own file', function () {
+    expect(config('logging.channels.webhook.path'))->toEndWith('storage/logs/webhook.api.log');
+});
+
 describe('webhook endpoint', function () {
     test('it queues a sync for a valid request', function () {
         Queue::fake();

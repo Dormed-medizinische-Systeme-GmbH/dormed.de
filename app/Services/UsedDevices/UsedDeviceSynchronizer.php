@@ -6,6 +6,7 @@ use App\Services\Cas\CasClient;
 use App\Services\Cas\CasRequestFailedException;
 use App\UsedDevice;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -88,23 +89,34 @@ class UsedDeviceSynchronizer
         $fields = $record['fields'];
         $year = (string) ($fields['GG_SYSTEM_BAUJAHR'] ?? '');
 
-        UsedDevice::updateOrCreate(['cas_id' => $guid], [
+        $images = $this->syncImages($guid);
+
+        $device = UsedDevice::updateOrCreate(['cas_id' => $guid], [
             'etag' => $record['ETAG'] ?? null,
             'name' => (string) ($fields['GG_SYSTEM_ARTIKEL'] ?? 'Ultraschallgerät'),
             'manufacturer' => $fields['GG_SYSTEM_HERSTELLER'] ?? null,
             'description' => $fields['GG_SYSTEM_BEZ'] ?? null,
             'year' => ctype_digit($year) ? (int) $year : null,
             'probes' => $this->probes($fields),
-            'images' => $this->syncImages($guid),
+            'images' => $images,
             'cas_updated_at' => $fields['UPDATETIMESTAMP'] ?? null,
             'synced_at' => now(),
+        ]);
+
+        Log::channel('webhook')->info('Used device synced.', [
+            'gguid' => $guid,
+            'name' => $device->name,
+            'images' => count($images),
+            'created' => $device->wasRecentlyCreated,
         ]);
     }
 
     private function remove(string $guid): void
     {
-        UsedDevice::where('cas_id', $guid)->delete();
+        $deleted = UsedDevice::where('cas_id', $guid)->delete();
         Storage::disk('public')->deleteDirectory(self::IMAGE_DIRECTORY."/{$guid}");
+
+        Log::channel('webhook')->info('Used device not online in CAS, removed locally.', ['gguid' => $guid, 'hadRecord' => $deleted > 0]);
     }
 
     /**

@@ -141,6 +141,15 @@ return [
             'replace_placeholders' => true,
         ],
 
+        // Eingehende CAS-Webhooks und der dadurch ausgeloeste Abgleich der Gebrauchtgeraete.
+        'webhook' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/webhook.api.log'),
+            'permission' => 0664,
+            'level' => 'debug',
+            'replace_placeholders' => true,
+        ],
+
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],

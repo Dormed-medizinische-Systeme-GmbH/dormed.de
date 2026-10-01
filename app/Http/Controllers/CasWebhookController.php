@@ -19,7 +19,7 @@ class CasWebhookController extends Controller
     {
         $guid = $request->validated('gguid');
 
-        Log::channel('api')->info('CAS webhook: used device changed.', [
+        Log::channel('webhook')->info('CAS webhook: used device changed.', [
             'gguid' => $guid,
             'action' => $request->validated('action'),
         ]);

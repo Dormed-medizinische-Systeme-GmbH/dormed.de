@@ -149,13 +149,19 @@ class CasClient
             throw new CasRequestFailedException("CAS GET [{$path}] failed: {$exception->getMessage()}", previous: $exception);
         }
 
-        $this->logExchange('GET', $path, [], $response);
+        // Reads belong to the webhook-triggered sync: logged to the webhook
+        // channel, and only as a summary - the body would repeat the whole
+        // device list (serial numbers etc.) on every webhook.
+        $body = $response->json();
+
+        Log::channel('webhook')->info("CAS GET {$path}", [
+            'status' => $response->status(),
+            'count' => is_array($body) ? count($body) : null,
+        ]);
 
         if ($response->failed()) {
             throw new CasRequestFailedException("CAS GET [{$path}] failed with status {$response->status()}.");
         }
-
-        $body = $response->json();
 
         return is_array($body) ? array_values($body) : [];
     }
