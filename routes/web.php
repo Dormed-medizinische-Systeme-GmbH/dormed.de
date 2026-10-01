@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\UsedDeviceController;
 use Illuminate\Support\Facades\Route;
 
 // Core Rule 2: sitemap.xml/sitemap-system-pages.xml werden über eine Route ausgeliefert,
@@ -73,6 +74,8 @@ Route::view('/ueber/dormed', 'ueber.dormed')->name('ueber.dormed');
 Route::view('/ueber', 'ueber.index')->name('ueber.index');
 Route::view('/ueber/sonoring', 'ueber.sonoring')->name('ueber.sonoring');
 Route::view('/ultraschallgeraete/gebraucht', 'ultraschallgeraete.gebraucht')->name('ultraschallgeraete.gebraucht');
+Route::get('/gebraucht2', [UsedDeviceController::class, 'index'])->name('gebraucht2');
+Route::get('/gebraucht2/bild/{id}', [UsedDeviceController::class, 'image'])->where('id', '[0-9A-Fa-f]{32}')->name('gebraucht2.bild');
 Route::view('/ultraschallgeraete/handheld', 'ultraschallgeraete.handheld.index')->name('ultraschallgeraete.handheld.index');
 Route::view('/ultraschallgeraete/handheld/mindray-te-air-e5m', 'ultraschallgeraete.handheld.mindray-te-air-e5m')->name('ultraschallgeraete.handheld.mindray-te-air-e5m');
 Route::view('/ultraschallgeraete/handheld/mindray-te-air-i3m', 'ultraschallgeraete.handheld.mindray-te-air-i3m')->name('ultraschallgeraete.handheld.mindray-te-air-i3m');
