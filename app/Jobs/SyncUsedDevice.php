@@ -7,6 +7,8 @@ use DateTime;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 /**
  * Brings one used device in line with CAS (create/update/delete, incl.
@@ -41,5 +43,13 @@ class SyncUsedDevice implements ShouldBeUnique, ShouldQueue
     public function handle(UsedDeviceSynchronizer $synchronizer): void
     {
         $synchronizer->sync($this->guid);
+    }
+
+    public function failed(Throwable $exception): void
+    {
+        Log::channel('webhook')->error('SyncUsedDevice permanently failed.', [
+            'gguid' => $this->guid,
+            'message' => $exception->getMessage(),
+        ]);
     }
 }

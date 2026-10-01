@@ -91,15 +91,38 @@ class CasClient
     }
 
     /**
-     * Fetch all records of a saved CAS view.
+     * Fetch one record by GUID, built straight from the type and GUID.
+     * Returns null if CAS reports it as not found (deleted); any other
+     * failure throws, since that is worth retrying and must never be
+     * mistaken for a deletion.
      *
-     * @return list<array<string, mixed>>
+     * @return array{record: array<string, mixed>, etag: string|null}|null
      *
      * @throws CasRequestFailedException
      */
-    public function listView(string $dataObjectType, string $viewId): array
+    public function getDataObject(string $dataObjectType, string $guid): ?array
     {
-        return $this->getJsonList("/v7.0/type/{$dataObjectType}/view/{$viewId}/list");
+        $path = "/v7.0/type/{$dataObjectType}/{$guid}";
+
+        try {
+            $response = $this->client()->timeout(15)->get($path);
+        } catch (ConnectionException $exception) {
+            throw new CasRequestFailedException("CAS GET [{$path}] failed: {$exception->getMessage()}", previous: $exception);
+        }
+
+        Log::channel('webhook')->info("CAS GET {$path}", ['status' => $response->status()]);
+
+        if ($response->status() === 404) {
+            return null;
+        }
+
+        if ($response->failed() || ! is_array($response->json('fields'))) {
+            throw new CasRequestFailedException("CAS GET [{$path}] failed with status {$response->status()}.");
+        }
+
+        $etag = trim($response->header('ETag'), '"');
+
+        return ['record' => $response->json(), 'etag' => $etag !== '' ? $etag : null];
     }
 
     /**
@@ -149,13 +172,19 @@ class CasClient
             throw new CasRequestFailedException("CAS GET [{$path}] failed: {$exception->getMessage()}", previous: $exception);
         }
 
-        $this->logExchange('GET', $path, [], $response);
+        // Reads belong to the webhook-triggered sync: logged to the webhook
+        // channel, and only as a summary - the body would repeat the whole
+        // device list (serial numbers etc.) on every webhook.
+        $body = $response->json();
+
+        Log::channel('webhook')->info("CAS GET {$path}", [
+            'status' => $response->status(),
+            'count' => is_array($body) ? count($body) : null,
+        ]);
 
         if ($response->failed()) {
             throw new CasRequestFailedException("CAS GET [{$path}] failed with status {$response->status()}.");
         }
-
-        $body = $response->json();
 
         return is_array($body) ? array_values($body) : [];
     }

@@ -62,6 +62,7 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            'permission' => 0664,
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
@@ -127,6 +128,7 @@ return [
         'mail' => [
             'driver' => 'single',
             'path' => storage_path('logs/mail.log'),
+            'permission' => 0664,
             'level' => 'info',
             'tap' => [PlainLineFormatter::class],
         ],
@@ -134,6 +136,16 @@ return [
         'api' => [
             'driver' => 'single',
             'path' => storage_path('logs/api.log'),
+            'permission' => 0664,
+            'level' => 'debug',
+            'replace_placeholders' => true,
+        ],
+
+        // Eingehende CAS-Webhooks und der dadurch ausgeloeste Abgleich der Gebrauchtgeraete.
+        'webhook' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/webhook.api.log'),
+            'permission' => 0664,
             'level' => 'debug',
             'replace_placeholders' => true,
         ],

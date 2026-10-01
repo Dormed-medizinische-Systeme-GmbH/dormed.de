@@ -34,6 +34,18 @@ test('the used devices page lists the stored devices with filter attributes and 
     Http::assertNothingSent();
 });
 
+test('the used devices page keeps all other sections of the current used devices page', function () {
+    $this->withoutVite();
+
+    $this->get('/gebraucht2')->assertOk()->assertSeeText([
+        'Gebrauchte Ultraschallgeräte',
+        'So bereiten wir',
+        'Warum ein Gebrauchtgerät von Dormed?',
+        'Was suchen Sie',
+        'Ihre Fragen, unsere Antworten',
+    ])->assertSee('"@type": "FAQPage"', false);
+});
+
 test('the used devices page shows the empty state without devices', function () {
     $this->withoutVite();
 
