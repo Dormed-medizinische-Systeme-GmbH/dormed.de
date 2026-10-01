@@ -2,6 +2,7 @@
 
 namespace App\Services\Cas;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -87,6 +88,76 @@ class CasClient
         }
 
         return $this->extractGuid($response);
+    }
+
+    /**
+     * Fetch all records of a saved CAS view.
+     *
+     * @return list<array<string, mixed>>
+     *
+     * @throws CasRequestFailedException
+     */
+    public function listView(string $dataObjectType, string $viewId): array
+    {
+        return $this->getJsonList("/v7.0/type/{$dataObjectType}/view/{$viewId}/list");
+    }
+
+    /**
+     * Fetch the dossier (linked documents) of a record.
+     *
+     * @return list<array<string, mixed>>
+     *
+     * @throws CasRequestFailedException
+     */
+    public function dossier(string $dataObjectType, string $guid): array
+    {
+        return $this->getJsonList("/v7.0/type/{$dataObjectType}/{$guid}/dossier/full");
+    }
+
+    /**
+     * Download the binary file of a CAS document. The body is not logged.
+     *
+     * @throws CasRequestFailedException
+     */
+    public function documentFile(string $documentGuid): string
+    {
+        try {
+            $response = $this->client()->timeout(30)->get("/v7.0/type/document/{$documentGuid}/file");
+        } catch (ConnectionException $exception) {
+            throw new CasRequestFailedException("CAS document download [{$documentGuid}] failed: {$exception->getMessage()}", previous: $exception);
+        }
+
+        if ($response->failed()) {
+            throw new CasRequestFailedException(
+                "CAS document download [{$documentGuid}] failed with status {$response->status()}."
+            );
+        }
+
+        return $response->body();
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     *
+     * @throws CasRequestFailedException
+     */
+    private function getJsonList(string $path): array
+    {
+        try {
+            $response = $this->client()->timeout(15)->get($path);
+        } catch (ConnectionException $exception) {
+            throw new CasRequestFailedException("CAS GET [{$path}] failed: {$exception->getMessage()}", previous: $exception);
+        }
+
+        $this->logExchange('GET', $path, [], $response);
+
+        if ($response->failed()) {
+            throw new CasRequestFailedException("CAS GET [{$path}] failed with status {$response->status()}.");
+        }
+
+        $body = $response->json();
+
+        return is_array($body) ? array_values($body) : [];
     }
 
     private function extractGuid(Response $response): ?string
