@@ -279,6 +279,20 @@ test('SendInquiryMails skips the spam score request when the message is empty', 
     Mail::assertSent(ContactFormCompanyMail::class, fn ($mail) => $mail->spamScore === null);
 });
 
+test('SendInquiryMails logs the status and body when the decision model rejects the request', function () {
+    $logFile = storage_path('logs/decision-model-test.log');
+    File::delete($logFile);
+    config(['logging.default' => 'single', 'logging.channels.single.path' => $logFile]);
+    Mail::fake();
+    Http::fake(['https://decision.example.test/*' => Http::response(['error' => 'invalid api key'], 401)]);
+
+    mailJob(['nachricht' => 'Testnachricht'])->handle();
+
+    Mail::assertSent(ContactFormCompanyMail::class, fn ($mail) => $mail->spamScore === null);
+    expect(File::get($logFile))->toContain('Spam score unavailable.', '"status":401', 'invalid api key');
+    File::delete($logFile);
+});
+
 test('SendInquiryMails still sends both mails without a spam score when the decision model fails', function (Closure $fakeResponse) {
     Mail::fake();
     Http::fake(['https://decision.example.test/*' => $fakeResponse]);

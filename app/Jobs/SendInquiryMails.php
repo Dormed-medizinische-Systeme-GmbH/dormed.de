@@ -10,6 +10,7 @@ use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Throwable;
 
 /**
@@ -109,7 +110,13 @@ class SendInquiryMails implements ShouldQueue
         }
 
         if (! is_numeric($score) || $score < 0 || $score > 1) {
-            Log::warning('Spam score unavailable.', ['status' => $response->status()]);
+            // The error body usually says why (e.g. "invalid API key"); the
+            // effective URL shows whether a redirect changed the host.
+            Log::warning('Spam score unavailable.', [
+                'status' => $response->status(),
+                'url' => (string) $response->effectiveUri(),
+                'body' => Str::limit($response->body(), 300),
+            ]);
 
             return null;
         }
