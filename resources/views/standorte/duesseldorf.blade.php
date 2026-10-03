@@ -2455,12 +2455,6 @@ a.std-ct__cblock-value:hover { color: #093A7E; }
           <span class="std-ct__cblock-sub">Samstag & Sonntag: Termin auf Anfrage</span>
         </div>
 
-        <div class="std-ct__cblock std-ct__cblock--cta">
-          <span class="std-ct__cta-title">Termin vereinbaren</span>
-          <p class="std-ct__cta-sub">Unverbindliche Beratung, Vorführtermin oder Serviceanfrage — wir melden uns schnellstmöglich.</p>
-          <a href="/kontakt" class="std-ct__cta-btn">Jetzt anfragen</a>
-        </div>
-
       </div>
     </div>
 
