@@ -267,7 +267,7 @@
           <div class="ni9-hero__feature">
             <div class="ni9-hero__feature-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div>
             <div class="ni9-hero__feature-text">
-              <span class="ni9-hero__feature-title">4 Stunden Akkubetrieb</span>
+              <span class="ni9-hero__feature-title">4 Stunden Akkubetrieb (optional)</span>
               <span class="ni9-hero__feature-sub">Kabelloses Scannen am Patientenbett — auch im Kreißsaal</span>
             </div>
           </div>

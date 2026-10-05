@@ -215,8 +215,8 @@
           <div class="cn8-hero__feature">
             <div class="cn8-hero__feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
             <div class="cn8-hero__feature-text">
-              <span class="cn8-hero__feature-title">3D/4D inklusive</span>
-              <span class="cn8-hero__feature-sub">Vollvolumen-Bildgebung für Gynäkologie und Geburtshilfe — ab Werk</span>
+              <span class="cn8-hero__feature-title">3D/4D (optional)</span>
+              <span class="cn8-hero__feature-sub">Vollvolumen-Bildgebung für Gynäkologie und Geburtshilfe</span>
             </div>
           </div>
           <div class="cn8-hero__feature">
@@ -392,7 +392,7 @@
       </div>
       <div class="cn8-tech__feat">
         <span class="cn8-tech__feat-label">3D/4D · Gynäkologie</span>
-        <h3 class="cn8-tech__feat-h3">Vollvolumen 3D/4D — ab Werk inklusive</h3>
+        <h3 class="cn8-tech__feat-h3">Vollvolumen 3D/4D (optional)</h3>
         <p class="cn8-tech__feat-body">3D/4D-Bildgebung für Gynäkologie und Geburtshilfe mit Volumen-Schallköpfen DE11-3 und D7-2. <strong>Identischer Funktionsumfang wie N9</strong> — nur der Monitor ist kleiner.</p>
       </div>
       <div class="cn8-tech__feat">

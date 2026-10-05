@@ -254,8 +254,8 @@
           <div class="cn9-hero__feature">
             <div class="cn9-hero__feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
             <div class="cn9-hero__feature-text">
-              <span class="cn9-hero__feature-title">3D/4D inklusive</span>
-              <span class="cn9-hero__feature-sub">Vollvolumen-Bildgebung für Gynäkologie und Geburtshilfe — kein Aufpreis</span>
+              <span class="cn9-hero__feature-title">Vollvolumen 3D/4D (optional)</span>
+              <span class="cn9-hero__feature-sub">Vollvolumen-Bildgebung für Gynäkologie und Geburtshilfe</span>
             </div>
           </div>
           <div class="cn9-hero__feature">
@@ -431,7 +431,7 @@
       </div>
       <div class="cn9-tech__feat">
         <span class="cn9-tech__feat-label">3D/4D · Gynäkologie</span>
-        <h3 class="cn9-tech__feat-h3">Vollvolumen 3D/4D — ab Werk inklusive</h3>
+        <h3 class="cn9-tech__feat-h3">Vollvolumen 3D/4D (optional)</h3>
         <p class="cn9-tech__feat-body">3D/4D-Volumen-Bildgebung für gynäkologische und geburtshilfliche Untersuchungen — <strong>ohne zusätzliche Lizenz oder Aufpreis</strong>. Mit 4D-Volumen-Schallköpfen (DE11-3, D7-2, SD8-1) direkt einsetzbar.</p>
       </div>
       <div class="cn9-tech__feat">
