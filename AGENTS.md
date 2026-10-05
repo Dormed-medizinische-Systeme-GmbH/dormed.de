@@ -288,8 +288,10 @@ offene Frage.
 
 ## Bekannte offene Punkte (dokumentiert, aktuell nicht in Bearbeitung)
 
-- Impressum, Datenschutzerklärung und AGB fehlen komplett — Footer-Links auf allen Seiten
-  laufen ins Leere. Für eine deutsche Firmenseite rechtlich relevant.
+- Impressum, Datenschutzerklärung und AGB (`/impressum`, `/datenschutz`, `/agb`) sind aus der
+  Legacy-Übergabe 1:1 übernommen (Originale unter `.old/`). Inhaltlich ungeprüft und teils
+  veraltet (z. B. Google Tag Manager statt Rybbit, Consent-Tool, CAS-Anbindung und
+  Spam-Score-Dienst nicht erwähnt) — vor dem Livegang rechtlich prüfen/aktualisieren lassen.
 - Rund 30 weitere kaputte interne Links, vorbestehend (Tippfehler in Produkt-/
   Leistungs-Slugs, fehlende Blog-Artikel, zwei fehlende Fachgebiets-Seiten unter `/fuer/`).
   Nicht durch die Migration verursacht, aber noch nicht behoben.

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 // Core Rule 2: sitemap.xml/sitemap-system-pages.xml werden über eine Route ausgeliefert,
 // nicht als statische Datei in public/ - Inhalt aktuell 1:1 die alte Datei, damit sie
 // später ohne URL-Änderung dynamisch generiert werden können.
+Route::view('/agb', 'agb')->name('agb');
 Route::get('/sitemap.xml', function () {
     return response(file_get_contents(resource_path('sitemap/sitemap.xml')))
         ->header('Content-Type', 'application/xml');
@@ -34,6 +35,7 @@ Route::get('/ultraschallgeraete/{path}.md', function (string $path) {
 
 Route::view('/blog', 'blog.index')->name('blog.index');
 Route::view('/danke', 'danke')->name('danke');
+Route::view('/datenschutz', 'datenschutz')->name('datenschutz');
 Route::view('/fuer/allgemeinmedizin', 'fuer.allgemeinmedizin.index')->name('fuer.allgemeinmedizin.index');
 Route::view('/fuer/allgemeinmedizin/leber-elastographie', 'fuer.allgemeinmedizin.leber-elastographie')->name('fuer.allgemeinmedizin.leber-elastographie');
 Route::view('/fuer/allgemeinmedizin/schilddruesen-sonographie', 'fuer.allgemeinmedizin.schilddruesen-sonographie')->name('fuer.allgemeinmedizin.schilddruesen-sonographie');
@@ -53,6 +55,7 @@ Route::view('/hersteller/esaote', 'hersteller.esaote')->name('hersteller.esaote'
 Route::view('/hersteller', 'hersteller.index')->name('hersteller.index');
 Route::view('/hersteller/mindray', 'hersteller.mindray')->name('hersteller.mindray');
 Route::view('/', 'index')->name('index');
+Route::view('/impressum', 'impressum')->name('impressum');
 Route::view('/karriere', 'karriere')->name('karriere');
 Route::view('/kontakt', 'kontakt')->name('kontakt');
 Route::post('/kontakt', [ContactFormController::class, 'store'])->name('kontakt.store');
