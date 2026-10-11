@@ -230,7 +230,6 @@
         </div>
         <div class="dp3-hero__ctas">
           <a href="/kontakt" class="dp3-hero__btn">Unverbindlich anfragen</a>
-          <a href="/kontakt" class="dp3-hero__btn dp3-hero__btn--ghost">Beratung vereinbaren</a>
           <a href="/assets/pdf/Prospekt_DP-30_V3_ENG_Dormed-1-.pdf" class="dp3-hero__btn dp3-hero__btn--outline" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Broschüre herunterladen

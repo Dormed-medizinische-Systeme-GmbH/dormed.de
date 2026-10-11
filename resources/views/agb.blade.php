@@ -5,7 +5,7 @@
 
     <title>Allgemeine Geschäftsbedingungen | SONORING DORMED med. Systeme</title>
     <meta name="description" content="AGB der SONORING DORMED med. Systeme GmbH – Allgemeine Geschäftsbedingungen für den Kauf und Service von Ultraschallgeräten.">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://dormed.de/agb">
 
     <meta property="og:title" content="Allgemeine Geschäftsbedingungen | SONORING DORMED med. Systeme">

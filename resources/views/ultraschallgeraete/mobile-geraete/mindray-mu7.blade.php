@@ -163,10 +163,9 @@
         </div>
         <div class="mu7-hero__ctas">
           <a href="/kontakt" class="mu7-hero__btn">Unverbindlich anfragen</a>
-          <a href="/kontakt" class="mu7-hero__btn mu7-hero__btn--ghost">Beratung vereinbaren</a>
           <a href="/assets/pdf/ENG-MU7-210285X4p-20260303-small.pdf" class="mu7-hero__btn mu7-hero__btn--outline" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Datenblatt anfragen
+            Broschüre herunterladen
           </a>
         </div>
         <div class="mu7-hero__service-strip">

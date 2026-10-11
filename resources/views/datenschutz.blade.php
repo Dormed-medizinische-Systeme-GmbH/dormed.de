@@ -5,7 +5,7 @@
 
     <title>Datenschutzerklärung | SONORING DORMED med. Systeme</title>
     <meta name="description" content="Datenschutzerklärung der SONORING DORMED med. Systeme GmbH gemäß DSGVO.">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://dormed.de/datenschutz">
 
     <meta property="og:title" content="Datenschutzerklärung | SONORING DORMED med. Systeme">

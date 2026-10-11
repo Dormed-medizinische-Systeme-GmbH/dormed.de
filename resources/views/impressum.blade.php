@@ -5,7 +5,7 @@
 
     <title>Impressum | SONORING DORMED med. Systeme</title>
     <meta name="description" content="Impressum der SONORING DORMED med. Systeme GmbH – Angaben gemäß § 5 TMG.">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://dormed.de/impressum">
 
     <meta property="og:title" content="Impressum | SONORING DORMED med. Systeme">

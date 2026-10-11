@@ -231,7 +231,6 @@
         </div>
         <div class="a50-hero__ctas">
           <a href="/kontakt" class="a50-hero__btn">Unverbindlich anfragen</a>
-          <a href="/kontakt" class="a50-hero__btn a50-hero__btn--ghost">Beratung vereinbaren</a>
           <a href="/assets/pdf/Brochure-A50-D_210x297_8s_240827_LR200.pdf" class="a50-hero__btn a50-hero__btn--outline" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Broschüre herunterladen

@@ -292,11 +292,6 @@
         </div>
         <div class="i10-hero__ctas">
           <a href="/kontakt" class="i10-hero__btn">Unverbindlich anfragen</a>
-          <a href="/kontakt" class="i10-hero__btn i10-hero__btn--ghost">Beratung vereinbaren</a>
-          <a href="" class="i10-hero__btn i10-hero__btn--outline" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Datenblatt anfragen
-          </a>
         </div>
         <div class="i10-hero__service-strip">
           <div class="i10-hero__service-item"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Lieferung bundesweit</span></div>
