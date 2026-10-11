@@ -19,12 +19,6 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://dormed.de/danke</loc>
-    <lastmod>2026-04-14T09:51:05Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://dormed.de/ultraschallgeraete/gebraucht</loc>
     <lastmod>2026-06-12T14:30:09Z</lastmod>
     <changefreq>weekly</changefreq>
@@ -351,24 +345,6 @@
   <url>
     <loc>https://dormed.de/leistungen/garantie-versicherung</loc>
     <lastmod>2026-04-07T19:12:21Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dormed.de/impressum</loc>
-    <lastmod>2026-04-14T09:51:02Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dormed.de/datenschutz</loc>
-    <lastmod>2026-04-14T09:50:59Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dormed.de/agb</loc>
-    <lastmod>2026-04-14T09:50:56Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
