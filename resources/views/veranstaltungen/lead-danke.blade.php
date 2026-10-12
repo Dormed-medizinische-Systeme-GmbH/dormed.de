@@ -11,7 +11,8 @@
   -webkit-font-smoothing: antialiased;
   width: 100%;
   background: #fff;
-  padding: 2.5rem 1rem 3rem;
+  /* Header ist position:fixed mit 68px Höhe (--nav-h in style.css). */
+  padding: calc(68px + 2.5rem) 1rem 3rem;
   text-align: center;
 }
 .lead-danke__inner { width: 100%; max-width: 520px; margin: 0 auto; }
@@ -60,7 +61,7 @@
 .lead-danke__btn--secondary { color: #0B5FB7; background: #fff; border: 1px solid rgba(9,58,126,0.25); }
 
 @media (min-width: 640px) {
-  .lead-danke__wrap { padding: 4rem 1.5rem 5rem; }
+  .lead-danke__wrap { padding: calc(68px + 4rem) 1.5rem 5rem; }
   .lead-danke__h1 { font-size: 2rem; }
   .lead-danke__actions { flex-direction: row; justify-content: center; }
 }
