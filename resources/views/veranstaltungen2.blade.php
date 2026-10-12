@@ -801,7 +801,7 @@
           <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">{{ $event->starts_on->format('d') }}</div><div class="ver-tl__ev-mon">{{ mb_substr(\App\CalendarEvent::MONTHS[$event->starts_on->month], 0, 3) }}</div></div>
           <div class="ver-tl__ev-body">
             <span class="ver-tl__ev-badge ver-tl__ev-badge--{{ $event->typeShort }}">{{ $event->typeLabel }}</span>
-            <div class="ver-tl__ev-title">{{ $event->displayTitle }}</div>
+            <div class="ver-tl__ev-title">{{ $event->name }}</div>
             <div class="ver-tl__ev-meta">{{ $event->dateRangeLabel }} · {{ $event->locationLabel }}{{ $event->statusLabel ? ' · '.$event->statusLabel : '' }}</div>
           </div>
           <div class="ver-tl__ev-right">
@@ -812,7 +812,7 @@
         <div class="ver-tl__ev-expand" aria-hidden="true">
           <div class="ver-tl__ev-expand-inner">
             <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>{{ $event->detailLocationLabel }}</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>{{ $event->location }}</div>
               @if ($event->description)
               <p class="ver-tl__ev-detail-desc">{{ $event->description }}</p>
               @endif

@@ -13,7 +13,6 @@ beforeEach(function () {
 test('the events work copy lists upcoming events from the database grouped by month', function () {
     CalendarEvent::factory()->messe()->create([
         'name' => 'MEDICA 2026',
-        'title' => 'MEDICA 2026 — Weltgrößte Medizinmesse',
         'starts_on' => '2026-11-16',
         'ends_on' => '2026-11-19',
         'description' => 'Weltgrößte Medizinmesse.',
@@ -23,16 +22,15 @@ test('the events work copy lists upcoming events from the database grouped by mo
         'name' => 'Pränatales Symposium',
         'starts_on' => '2026-10-24',
         'ends_on' => null,
-        'city' => 'Hamburg',
-        'location_note' => 'Hamburger Team vor Ort',
+        'location' => 'Hamburg, Hamburger Team vor Ort',
     ]);
 
     $this->get(route('veranstaltungen2'))
         ->assertOk()
-        ->assertSeeInOrder(['Oktober 2026', 'Pränatales Symposium', 'November 2026', 'MEDICA 2026 — Weltgrößte Medizinmesse'])
+        ->assertSeeInOrder(['Oktober 2026', 'Pränatales Symposium', 'November 2026', 'MEDICA 2026'])
         ->assertSee('24. Oktober 2026 · Hamburg')
         ->assertSee('16.–19. November 2026 · Messe Düsseldorf')
-        ->assertSee('Hamburg · Hamburger Team vor Ort')
+        ->assertSee('Hamburg, Hamburger Team vor Ort')
         ->assertSee('data-date="2026-11-16"', false)
         ->assertSee('href="https://example.com/anmeldung"', false)
         ->assertSee('ver-tl__ev-badge--me', false);
@@ -82,7 +80,11 @@ test('the countdown and the event JSON-LD are generated from the database', func
             'endDate' => '2026-11-19',
             'eventStatus' => 'https://schema.org/EventPostponed',
         ])
-        ->and($schema['@graph'][0]['location']['name'])->toBe('Messe Düsseldorf');
+        ->and($schema['@graph'][0]['location'])->toBe([
+            '@type' => 'Place',
+            'name' => 'Messe Düsseldorf',
+            'address' => 'Messe Düsseldorf, Düsseldorfer Messegelände',
+        ]);
 
     $response->assertSee('"@type": "Event"', false);
 });

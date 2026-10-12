@@ -26,13 +26,10 @@ class CalendarEventFactory extends Factory
             'slug' => str($name)->slug()->toString(),
             'type' => 'fachtagung',
             'name' => $name,
-            'title' => null,
             'starts_on' => $startsOn,
             'ends_on' => (clone $startsOn)->modify('+1 day'),
             'status' => 'scheduled',
-            'venue' => null,
-            'city' => fake()->city(),
-            'location_note' => null,
+            'location' => fake()->city(),
             'description' => fake()->sentence(12),
             'registration_url' => null,
             'synced_at' => now(),
@@ -41,7 +38,7 @@ class CalendarEventFactory extends Factory
 
     public function messe(): static
     {
-        return $this->state(fn (): array => ['type' => 'messe', 'venue' => 'Messe Düsseldorf', 'city' => 'Düsseldorf']);
+        return $this->state(fn (): array => ['type' => 'messe', 'location' => 'Messe Düsseldorf, Düsseldorfer Messegelände']);
     }
 
     public function past(): static

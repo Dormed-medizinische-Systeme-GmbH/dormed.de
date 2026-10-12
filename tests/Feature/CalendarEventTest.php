@@ -9,22 +9,25 @@ test('an event stores everything the events page renders', function () {
     $event = CalendarEvent::factory()->messe()->create([
         'slug' => 'medica-2026',
         'name' => 'MEDICA 2026',
-        'title' => 'MEDICA 2026 — Weltgrößte Medizinmesse',
         'starts_on' => '2026-11-16',
         'ends_on' => '2026-11-19',
     ])->fresh();
 
     expect($event->typeLabel)->toBe('Messe')
-        ->and($event->displayTitle)->toBe('MEDICA 2026 — Weltgrößte Medizinmesse')
-        ->and($event->venue)->toBe('Messe Düsseldorf')
+        ->and($event->name)->toBe('MEDICA 2026')
+        ->and($event->location)->toBe('Messe Düsseldorf, Düsseldorfer Messegelände')
+        ->and($event->locationLabel)->toBe('Messe Düsseldorf')
         ->and($event->starts_on->toDateString())->toBe('2026-11-16')
         ->and($event->ends_on->toDateString())->toBe('2026-11-19')
         ->and($event->status)->toBe('scheduled');
 });
 
-test('the display title falls back to the name', function () {
-    expect(CalendarEvent::factory()->make(['name' => 'MEDICA 2026', 'title' => null])->displayTitle)->toBe('MEDICA 2026');
-});
+test('the short location is the free text up to the first comma', function (string $location, string $expected) {
+    expect(CalendarEvent::factory()->make(['location' => $location])->locationLabel)->toBe($expected);
+})->with([
+    ['Messe Düsseldorf, Düsseldorfer Messegelände', 'Messe Düsseldorf'],
+    ['Travemünde', 'Travemünde'],
+]);
 
 test('an event is past once its last day is over', function () {
     $this->travelTo('2026-11-19 23:00');

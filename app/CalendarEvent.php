@@ -22,19 +22,16 @@ use Illuminate\Support\Carbon;
  * @property-read string $dateRangeLabel
  * @property-read string $monthLabel
  * @property-read string $locationLabel
- * @property-read string $detailLocationLabel
  * @property-read string|null $statusLabel
  * @property-read string $registrationLink
- * @property-read string $displayTitle
  * @property-read string $schemaStatus
  * @property-read bool $isPast
  * @property-read Carbon $leadsUntil
  * @property-read bool $acceptsLeads
  */
 #[Fillable([
-    'cas_id', 'etag', 'cas_updated_at', 'synced_at', 'slug', 'type', 'name', 'title',
-    'starts_on', 'ends_on', 'status', 'venue', 'city', 'location_note', 'description',
-    'registration_url',
+    'cas_id', 'etag', 'cas_updated_at', 'synced_at', 'slug', 'type', 'name',
+    'starts_on', 'ends_on', 'status', 'location', 'description', 'registration_url',
 ])]
 class CalendarEvent extends Model
 {
@@ -112,13 +109,6 @@ class CalendarEvent extends Model
         return Attribute::get(fn (): string => self::TYPES[$this->type] ?? ucfirst($this->type));
     }
 
-    /**
-     * @return Attribute<string, never>
-     */
-    protected function displayTitle(): Attribute
-    {
-        return Attribute::get(fn (): string => $this->title ?: $this->name);
-    }
 
     /**
      * Past once the last day (or the only day) is over - moves the event
@@ -215,24 +205,16 @@ class CalendarEvent extends Model
     }
 
     /**
-     * Short location for the meta line and the countdown: venue if known,
-     * otherwise the city.
+     * Short location for the meta line and the countdown: the free-text
+     * location up to the first comma ("Messe Düsseldorf, Düsseldorfer
+     * Messegelände" -> "Messe Düsseldorf"). The expanded card shows the
+     * full text.
      *
      * @return Attribute<string, never>
      */
     protected function locationLabel(): Attribute
     {
-        return Attribute::get(fn (): string => $this->venue ?: $this->city);
-    }
-
-    /**
-     * Location line in the expanded card: "Travemünde · Ostseeküste".
-     *
-     * @return Attribute<string, never>
-     */
-    protected function detailLocationLabel(): Attribute
-    {
-        return Attribute::get(fn (): string => collect([$this->venue ?: $this->city, $this->location_note])->filter()->implode(' · '));
+        return Attribute::get(fn (): string => trim(str($this->location)->before(',')->toString()));
     }
 
     /**
@@ -265,14 +247,12 @@ class CalendarEvent extends Model
             'endDate' => ($this->ends_on ?? $this->starts_on)->toDateString(),
             'eventStatus' => $this->schemaStatus,
             'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+            // CAS only has free text for the location, so the address is
+            // passed as text (schema.org allows Text for Place.address).
             'location' => [
                 '@type' => 'Place',
-                'name' => $this->venue ?: $this->city,
-                'address' => [
-                    '@type' => 'PostalAddress',
-                    'addressLocality' => $this->city,
-                    'addressCountry' => 'DE',
-                ],
+                'name' => $this->locationLabel,
+                'address' => $this->location,
             ],
             'organizer' => ['@id' => 'https://dormed.de/#organization'],
             'description' => $this->description,

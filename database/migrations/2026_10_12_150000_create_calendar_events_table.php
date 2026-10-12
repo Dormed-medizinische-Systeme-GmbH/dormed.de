@@ -28,10 +28,8 @@ return new class extends Migration
             // "fachtagung" | "messe" - badge, accent colour and filter pill
             $table->string('type', 32);
 
-            // Short name: countdown, JSON-LD name, past-events card ("MEDICA 2026")
+            // CAS KEYWORD - the title shown everywhere ("MEDICA 2026")
             $table->string('name');
-            // Long timeline title, falls back to name ("MEDICA 2026 — Weltgrößte Medizinmesse")
-            $table->string('title')->nullable();
 
             // Date column, month grouping, countdown, meta line, JSON-LD start/endDate
             $table->date('starts_on');
@@ -40,12 +38,9 @@ return new class extends Migration
             // Event-specific CAS status -> JSON-LD eventStatus (see CalendarEvent::STATUSES)
             $table->string('status', 32)->default('scheduled');
 
-            // JSON-LD Place name / meta line ("Messe Düsseldorf")
-            $table->string('venue')->nullable();
-            // JSON-LD addressLocality ("Düsseldorf", "Travemünde")
-            $table->string('city');
-            // Addition in the detail location line ("Ostseeküste", "Hamburger Team vor Ort")
-            $table->string('location_note')->nullable();
+            // CAS GISDESCRIPTION - free text, CAS has no structured address
+            // ("Messe Düsseldorf, Düsseldorfer Messegelände")
+            $table->string('location');
 
             // Detail text and JSON-LD description
             $table->text('description')->nullable();
