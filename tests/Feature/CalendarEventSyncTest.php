@@ -230,3 +230,44 @@ test('the lead form uses the synced event and its three-month window', function 
     $this->travelTo('2027-02-20 12:00');
     $this->get('/veranstaltungen/medica-2026/kontakt')->assertOk()->assertDontSee('name="praxis_name"', false);
 });
+
+test('appointments without keyword or start date are removed', function () {
+    CalendarEvent::factory()->create(['cas_id' => MEDICA_GUID]);
+    fakeCasAppointment(['KEYWORD' => '']);
+
+    syncMedica();
+
+    expect(CalendarEvent::count())->toBe(0);
+});
+
+test('the sync command imports given guids and reports CAS failures', function () {
+    fakeCasAppointment();
+
+    $this->artisan('calendar-events:sync', ['gguid' => [strtolower(MEDICA_GUID)]])
+        ->expectsOutput('1 Veranstaltungen synchronisiert.')
+        ->assertSuccessful();
+
+    expect(CalendarEvent::sole()->cas_id)->toBe(MEDICA_GUID);
+});
+
+test('the sync command fails when CAS is unreachable', function () {
+    fakeCasAppointment(status: 500);
+
+    $this->artisan('calendar-events:sync', ['gguid' => [MEDICA_GUID]])->assertFailed();
+});
+
+test('the sync job is unique per event and retries through the CAS reboot window', function () {
+    $this->travelTo('2026-10-12 02:00');
+    $job = new SyncCalendarEvent(MEDICA_GUID);
+
+    expect($job->uniqueId())->toBe(MEDICA_GUID)
+        ->and($job->backoff())->toBe([60, 120, 300, 600])
+        ->and($job->retryUntil()->format('Y-m-d H:i'))->toBe('2026-10-12 05:00');
+});
+
+test('a permanently failed sync job is logged', function () {
+    Illuminate\Support\Facades\Log::shouldReceive('channel')->with('webhook')->andReturnSelf();
+    Illuminate\Support\Facades\Log::shouldReceive('error')->once()->with('SyncCalendarEvent permanently failed.', ['gguid' => MEDICA_GUID, 'message' => 'CAS down']);
+
+    (new SyncCalendarEvent(MEDICA_GUID))->failed(new RuntimeException('CAS down'));
+});
