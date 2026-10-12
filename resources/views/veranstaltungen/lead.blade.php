@@ -13,7 +13,8 @@
   -webkit-font-smoothing: antialiased;
   width: 100%;
   background: #fff;
-  padding: 1.75rem 1rem 3rem;
+  /* Header ist position:fixed mit 68px Höhe (--nav-h in style.css). */
+  padding: calc(68px + 1.75rem) 1rem 3rem;
 }
 .lead__inner { width: 100%; max-width: 560px; margin: 0 auto; }
 .lead__eyebrow {
@@ -117,7 +118,7 @@
 .lead__closed a { color: #0B5FB7; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
 @media (min-width: 640px) {
-  .lead__wrap { padding: 3rem 1.5rem 4rem; }
+  .lead__wrap { padding: calc(68px + 3rem) 1.5rem 4rem; }
   .lead__h1 { font-size: 2rem; }
   .lead__row--split { grid-template-columns: 1fr 1fr; }
   .lead__row--plz { grid-template-columns: 140px 1fr; }
