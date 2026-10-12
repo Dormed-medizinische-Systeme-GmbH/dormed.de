@@ -16,6 +16,7 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   pest:
@@ -60,19 +61,37 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      # Coverage per PCOV (schneller als Xdebug). Die Textfassung landet
-      # zusaetzlich in der Job-Zusammenfassung des Workflow-Laufs.
+      # Coverage per PCOV (schneller als Xdebug). Ausgabe und JUnit-Log werden
+      # danach zum Testbericht (PR-Kommentar + Job-Zusammenfassung) verarbeitet.
       - name: Tests mit Coverage
-        run: php artisan test --compact --coverage --coverage-text=coverage.txt
+        run: |
+          set -o pipefail
+          php artisan test --compact --coverage --log-junit junit.xml | tee pest-output.txt
 
-      - name: Coverage in die Zusammenfassung
+      - name: Testbericht erstellen
         if: always()
         run: |
-          if [ -f coverage.txt ]; then
-            {
-              echo '### Test-Coverage'
-              echo '```'
-              cat coverage.txt
-              echo '```'
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
+          python3 .github/scripts/test-report.py junit.xml pest-output.txt test-report.md
+          cat test-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Ein Kommentar pro PR, der bei jedem Lauf aktualisiert wird (erkannt am
+      # Marker <!-- test-report --> in der ersten Zeile).
+      - name: Testbericht als PR-Kommentar
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('test-report.md')) {
+              return;
+            }
+            const body = fs.readFileSync('test-report.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find((comment) => comment.body?.startsWith('<!-- test-report -->'));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }

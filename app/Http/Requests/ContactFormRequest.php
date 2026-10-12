@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NoForeignLinks;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,12 +24,12 @@ class ContactFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:128'],
+            'name' => ['required', 'string', 'max:128', new NoForeignLinks],
             'email' => ['required', 'email', 'max:64'],
             'telefon' => ['nullable', 'string', 'max:32'],
             'plz' => ['required', 'digits:5'],
-            'nachricht' => ['nullable', 'string', 'max:5000'],
-            'praxis' => ['nullable', 'string', 'max:64'],
+            'nachricht' => ['nullable', 'string', 'max:5000', new NoForeignLinks],
+            'praxis' => ['nullable', 'string', 'max:64', new NoForeignLinks],
             'fachgebiet' => ['nullable', 'string', 'max:64'],
             'rueckruf' => ['nullable', 'in:ja'],
             'rueckruf_datum' => ['nullable', 'date'],

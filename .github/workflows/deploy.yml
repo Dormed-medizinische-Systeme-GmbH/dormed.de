@@ -24,6 +24,12 @@ permissions:
 jobs:
   tests:
     uses: ./.github/workflows/tests.yml
+    # Der aufgerufene Workflow darf keine Rechte verlangen, die hier fehlen.
+    # pull-requests: write braucht nur der PR-Kommentar, der beim Deploy
+    # (push/workflow_dispatch) gar nicht laeuft.
+    permissions:
+      contents: read
+      pull-requests: write
 
   deploy:
     needs: tests
