@@ -1,0 +1,64 @@
+name: tests
+
+# Pest-Testsuite fuer jeden Pull Request. Der Job "pest" ist in GitHub als
+# Pflicht-Check fuer main hinterlegt (Settings -> Rules), damit nur gruene
+# PRs gemergt werden koennen.
+#
+# Zusaetzlich per workflow_call aus deploy.yml aufgerufen: auch ein direkter
+# Push auf main oder ein manueller Deploy laeuft erst nach gruenen Tests.
+on:
+  pull_request:
+  workflow_call:
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  pest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP einrichten
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Composer-Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Dependencies
+        run: |
+          composer install --no-interaction --prefer-dist --no-progress
+          npm ci
+
+      # Die Seiten binden Assets per @vite ein - ohne Manifest scheitern die
+      # Seiten-Tests (StaticPagesTest) mit einer ViteException.
+      - name: Frontend bauen
+        run: npm run build
+
+      - name: Laravel vorbereiten
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Tests
+        run: php artisan test --compact
