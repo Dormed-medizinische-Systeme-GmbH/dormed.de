@@ -14,21 +14,27 @@ use Illuminate\Support\Carbon;
 /**
  * Local copy of one CAS event record for /veranstaltungen. Named
  * CalendarEvent rather than Event to stay clear of Laravel's Event facade.
- * Kept flat like UsedDevice; the image lives on the public disk under
- * events/{cas_id}/ and is referenced by relative path.
+ * Kept flat like UsedDevice. No image: the CAS API can't deliver one
+ * properly, so the page shows events without pictures.
  *
  * @property-read string $typeLabel
+ * @property-read string $typeShort
+ * @property-read string $dateRangeLabel
+ * @property-read string $monthLabel
+ * @property-read string $locationLabel
+ * @property-read string $detailLocationLabel
+ * @property-read string|null $statusLabel
+ * @property-read string $registrationLink
  * @property-read string $displayTitle
  * @property-read string $schemaStatus
  * @property-read bool $isPast
  * @property-read Carbon $leadsUntil
  * @property-read bool $acceptsLeads
- * @property-read string|null $imageUrl
  */
 #[Fillable([
     'cas_id', 'etag', 'cas_updated_at', 'synced_at', 'slug', 'type', 'name', 'title',
     'starts_on', 'ends_on', 'status', 'venue', 'city', 'location_note', 'description',
-    'registration_url', 'image', 'image_alt',
+    'registration_url',
 ])]
 class CalendarEvent extends Model
 {
@@ -50,6 +56,33 @@ class CalendarEvent extends Model
         'postponed' => 'https://schema.org/EventPostponed',
         'cancelled' => 'https://schema.org/EventCancelled',
         'moved_online' => 'https://schema.org/EventMovedOnline',
+    ];
+
+    /**
+     * Short CSS modifier per type, as used by the existing timeline styles
+     * (ver-tl__ev-accent--ft, ver-tl__ev-badge--me, ...).
+     */
+    public const TYPE_SHORTS = [
+        'fachtagung' => 'ft',
+        'messe' => 'me',
+    ];
+
+    /**
+     * Labels shown next to the date when an event isn't simply scheduled.
+     */
+    public const STATUS_LABELS = [
+        'rescheduled' => 'Neuer Termin',
+        'postponed' => 'Verschoben',
+        'cancelled' => 'Abgesagt',
+        'moved_online' => 'Online',
+    ];
+
+    /**
+     * German month names, independent of the app locale.
+     */
+    public const MONTHS = [
+        1 => 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember',
     ];
 
     /**
@@ -136,10 +169,114 @@ class CalendarEvent extends Model
     }
 
     /**
+     * @return Attribute<string, never>
+     */
+    protected function typeShort(): Attribute
+    {
+        return Attribute::get(fn (): string => self::TYPE_SHORTS[$this->type] ?? 'st');
+    }
+
+    /**
+     * "09. Mai 2026", "18.–19. April 2026", "30. April – 2. Mai 2026",
+     * "29. Dezember 2026 – 2. Januar 2027".
+     *
+     * @return Attribute<string, never>
+     */
+    protected function dateRangeLabel(): Attribute
+    {
+        return Attribute::get(function (): string {
+            $start = $this->starts_on;
+            $end = $this->ends_on;
+
+            if ($end === null || $end->isSameDay($start)) {
+                return $start->format('d').'. '.self::MONTHS[$start->month].' '.$start->year;
+            }
+
+            if ($start->year !== $end->year) {
+                return $start->format('j').'. '.self::MONTHS[$start->month].' '.$start->year.' – '.$end->format('j').'. '.self::MONTHS[$end->month].' '.$end->year;
+            }
+
+            if ($start->month !== $end->month) {
+                return $start->format('j').'. '.self::MONTHS[$start->month].' – '.$end->format('j').'. '.self::MONTHS[$end->month].' '.$end->year;
+            }
+
+            return $start->format('j').'.–'.$end->format('j').'. '.self::MONTHS[$start->month].' '.$start->year;
+        });
+    }
+
+    /**
+     * Timeline group heading: "April 2026".
+     *
+     * @return Attribute<string, never>
+     */
+    protected function monthLabel(): Attribute
+    {
+        return Attribute::get(fn (): string => self::MONTHS[$this->starts_on->month].' '.$this->starts_on->year);
+    }
+
+    /**
+     * Short location for the meta line and the countdown: venue if known,
+     * otherwise the city.
+     *
+     * @return Attribute<string, never>
+     */
+    protected function locationLabel(): Attribute
+    {
+        return Attribute::get(fn (): string => $this->venue ?: $this->city);
+    }
+
+    /**
+     * Location line in the expanded card: "Travemünde · Ostseeküste".
+     *
+     * @return Attribute<string, never>
+     */
+    protected function detailLocationLabel(): Attribute
+    {
+        return Attribute::get(fn (): string => collect([$this->venue ?: $this->city, $this->location_note])->filter()->implode(' · '));
+    }
+
+    /**
      * @return Attribute<string|null, never>
      */
-    protected function imageUrl(): Attribute
+    protected function statusLabel(): Attribute
     {
-        return Attribute::get(fn (): ?string => $this->image ? '/storage/'.$this->image : null);
+        return Attribute::get(fn (): ?string => self::STATUS_LABELS[$this->status] ?? null);
+    }
+
+    /**
+     * @return Attribute<string, never>
+     */
+    protected function registrationLink(): Attribute
+    {
+        return Attribute::get(fn (): string => $this->registration_url ?: '/kontakt');
+    }
+
+    /**
+     * schema.org Event for the page's JSON-LD block.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSchema(): array
+    {
+        return array_filter([
+            '@type' => 'Event',
+            'name' => $this->name,
+            'startDate' => $this->starts_on->toDateString(),
+            'endDate' => ($this->ends_on ?? $this->starts_on)->toDateString(),
+            'eventStatus' => $this->schemaStatus,
+            'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+            'location' => [
+                '@type' => 'Place',
+                'name' => $this->venue ?: $this->city,
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'addressLocality' => $this->city,
+                    'addressCountry' => 'DE',
+                ],
+            ],
+            'organizer' => ['@id' => 'https://dormed.de/#organization'],
+            'description' => $this->description,
+            'url' => 'https://dormed.de/veranstaltungen',
+        ], fn (mixed $value): bool => $value !== null);
     }
 }

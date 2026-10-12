@@ -35,8 +35,6 @@ class CalendarEventFactory extends Factory
             'location_note' => null,
             'description' => fake()->sentence(12),
             'registration_url' => null,
-            'image' => null,
-            'image_alt' => null,
             'synced_at' => now(),
         ];
     }

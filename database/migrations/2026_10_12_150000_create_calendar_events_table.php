@@ -52,10 +52,6 @@ return new class extends Migration
             // "Zur Anmeldung" button, falls back to /kontakt
             $table->string('registration_url')->nullable();
 
-            // Detail image on the public disk (events/{cas_id}/...), plus alt text
-            $table->string('image')->nullable();
-            $table->string('image_alt')->nullable();
-
             $table->timestamps();
 
             $table->index('starts_on');

@@ -12,8 +12,6 @@ test('an event stores everything the events page renders', function () {
         'title' => 'MEDICA 2026 — Weltgrößte Medizinmesse',
         'starts_on' => '2026-11-16',
         'ends_on' => '2026-11-19',
-        'image' => 'events/ABC/medica.png',
-        'image_alt' => 'MEDICA 2026 — Weltgrößte Medizinmesse Düsseldorf',
     ])->fresh();
 
     expect($event->typeLabel)->toBe('Messe')
@@ -21,8 +19,7 @@ test('an event stores everything the events page renders', function () {
         ->and($event->venue)->toBe('Messe Düsseldorf')
         ->and($event->starts_on->toDateString())->toBe('2026-11-16')
         ->and($event->ends_on->toDateString())->toBe('2026-11-19')
-        ->and($event->status)->toBe('scheduled')
-        ->and($event->imageUrl)->toBe('/storage/events/ABC/medica.png');
+        ->and($event->status)->toBe('scheduled');
 });
 
 test('the display title falls back to the name', function () {

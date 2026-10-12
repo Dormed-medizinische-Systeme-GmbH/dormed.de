@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarEventController;
 use App\Http\Controllers\CasWebhookController;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\EventLeadController;
@@ -116,6 +117,8 @@ Route::view('/ultraschallgeraete/standgeraete/mindray-nuewa-i9', 'ultraschallger
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i8', 'ultraschallgeraete.standgeraete.mindray-resona-i8')->name('ultraschallgeraete.standgeraete.mindray-resona-i8');
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i9', 'ultraschallgeraete.standgeraete.mindray-resona-i9')->name('ultraschallgeraete.standgeraete.mindray-resona-i9');
 Route::view('/veranstaltungen', 'veranstaltungen')->name('veranstaltungen');
+// Arbeitskopie von /veranstaltungen mit Terminen aus calendar_events (CAS-Synchronisation), noindex.
+Route::get('/veranstaltungen2', [CalendarEventController::class, 'index'])->name('veranstaltungen2');
 
 // Lead-Formular je Veranstaltung, nur per QR-Code erreichbar: nicht verlinkt, nicht in der
 // Sitemap, noindex (Meta-Tag + X-Robots-Tag). Gültige Slugs stehen in config/events.php.
