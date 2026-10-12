@@ -7,6 +7,7 @@ of the <testcase> elements), the coverage table is Pest's own --coverage output,
 everything after the "Duration:" line with ANSI colours stripped.
 """
 
+import os
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -48,7 +49,9 @@ if junit_path.exists():
 else:
     lines.append("- ❌ Kein JUnit-Report gefunden, die Testsuite ist vermutlich vor dem Start abgebrochen.")
 
-lines += ["", "### Testabdeckung", ""]
+coverage_min = os.environ.get("COVERAGE_MIN")
+coverage_heading = f"### Testabdeckung (Minimum {coverage_min} %)" if coverage_min else "### Testabdeckung"
+lines += ["", coverage_heading, ""]
 
 output = output_path.read_text(encoding="utf-8", errors="replace") if output_path.exists() else ""
 output = re.sub(r"\x1b\[[0-9;]*m", "", output)

@@ -21,6 +21,9 @@ permissions:
 jobs:
   pest:
     runs-on: ubuntu-latest
+    env:
+      # Mindest-Coverage in Prozent - darunter wird der Lauf rot.
+      COVERAGE_MIN: 80
     timeout-minutes: 15
 
     steps:
@@ -66,7 +69,7 @@ jobs:
       - name: Tests mit Coverage
         run: |
           set -o pipefail
-          php artisan test --compact --coverage --log-junit junit.xml | tee pest-output.txt
+          php artisan test --compact --coverage --min="$COVERAGE_MIN" --log-junit junit.xml | tee pest-output.txt
 
       - name: Testbericht erstellen
         if: always()
