@@ -30,7 +30,7 @@ jobs:
         with:
           php-version: '8.4'
           extensions: mbstring, pdo_sqlite, sqlite3
-          coverage: none
+          coverage: pcov
 
       - name: Node einrichten
         uses: actions/setup-node@v4
@@ -60,5 +60,19 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      - name: Tests
-        run: php artisan test --compact
+      # Coverage per PCOV (schneller als Xdebug). Die Textfassung landet
+      # zusaetzlich in der Job-Zusammenfassung des Workflow-Laufs.
+      - name: Tests mit Coverage
+        run: php artisan test --compact --coverage --coverage-text=coverage.txt
+
+      - name: Coverage in die Zusammenfassung
+        if: always()
+        run: |
+          if [ -f coverage.txt ]; then
+            {
+              echo '### Test-Coverage'
+              echo '```'
+              cat coverage.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
