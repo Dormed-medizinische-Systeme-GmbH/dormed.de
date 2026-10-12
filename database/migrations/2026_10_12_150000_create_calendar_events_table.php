@@ -37,6 +37,9 @@ return new class extends Migration
             $table->date('starts_on');
             $table->date('ends_on')->nullable();
 
+            // Event-specific CAS status -> JSON-LD eventStatus (see CalendarEvent::STATUSES)
+            $table->string('status', 32)->default('scheduled');
+
             // JSON-LD Place name / meta line ("Messe Düsseldorf")
             $table->string('venue')->nullable();
             // JSON-LD addressLocality ("Düsseldorf", "Travemünde")
@@ -52,9 +55,6 @@ return new class extends Migration
             // Detail image on the public disk (events/{cas_id}/...), plus alt text
             $table->string('image')->nullable();
             $table->string('image_alt')->nullable();
-
-            // QR lead form accepts submissions until this day (replaces config/events.php)
-            $table->date('leads_until')->nullable();
 
             $table->timestamps();
 

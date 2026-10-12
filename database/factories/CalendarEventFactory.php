@@ -29,6 +29,7 @@ class CalendarEventFactory extends Factory
             'title' => null,
             'starts_on' => $startsOn,
             'ends_on' => (clone $startsOn)->modify('+1 day'),
+            'status' => 'scheduled',
             'venue' => null,
             'city' => fake()->city(),
             'location_note' => null,
@@ -36,7 +37,6 @@ class CalendarEventFactory extends Factory
             'registration_url' => null,
             'image' => null,
             'image_alt' => null,
-            'leads_until' => null,
             'synced_at' => now(),
         ];
     }
