@@ -4,8 +4,8 @@ name: deploy
 # nginx/PHP-FPM/systemd, kein Inertia/SSR/Wayfinder (anders als beim
 # Referenz-Workflow, von dem das hier abgeleitet ist).
 #
-# TODO: Test-/Lint-Gate folgt spaeter (siehe AGENTS.md/ROADMAP.md Phase 6) -
-# bis dahin deployt dieser Workflow direkt ohne vorgeschaltete Pruefung.
+# Deployt erst, wenn die Pest-Testsuite (tests.yml) gruen ist - auch bei
+# direktem Push auf main oder manuellem Start, nicht nur nach einem PR-Merge.
 on:
   push:
     branches: [main]
@@ -22,7 +22,11 @@ permissions:
   contents: read
 
 jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
   deploy:
+    needs: tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

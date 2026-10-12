@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CasWebhookController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\EventLeadController;
 use App\Http\Controllers\UsedDeviceController;
 use App\Http\Middleware\EnsureValidCasWebhookToken;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,12 @@ Route::view('/ultraschallgeraete/standgeraete/mindray-nuewa-i9', 'ultraschallger
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i8', 'ultraschallgeraete.standgeraete.mindray-resona-i8')->name('ultraschallgeraete.standgeraete.mindray-resona-i8');
 Route::view('/ultraschallgeraete/standgeraete/mindray-resona-i9', 'ultraschallgeraete.standgeraete.mindray-resona-i9')->name('ultraschallgeraete.standgeraete.mindray-resona-i9');
 Route::view('/veranstaltungen', 'veranstaltungen')->name('veranstaltungen');
+
+// Lead-Formular je Veranstaltung, nur per QR-Code erreichbar: nicht verlinkt, nicht in der
+// Sitemap, noindex (Meta-Tag + X-Robots-Tag). Gültige Slugs stehen in config/events.php.
+Route::get('/veranstaltungen/{event}/kontakt', [EventLeadController::class, 'show'])->where('event', '[a-z0-9\-]+')->name('veranstaltungen.lead.show');
+Route::post('/veranstaltungen/{event}/kontakt', [EventLeadController::class, 'store'])->where('event', '[a-z0-9\-]+')->name('veranstaltungen.lead.store');
+Route::get('/veranstaltungen/{event}/kontakt/danke', [EventLeadController::class, 'danke'])->where('event', '[a-z0-9\-]+')->name('veranstaltungen.lead.danke');
 
 // Webhook-Trigger aus CAS: nur die GUID kommt rein, die Daten holt der Job per API.
 Route::post('/webhooks/cas/gebrauchtgeraete', [CasWebhookController::class, 'usedDevice'])
