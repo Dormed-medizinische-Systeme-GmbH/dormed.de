@@ -133,6 +133,15 @@ return [
             'tap' => [PlainLineFormatter::class],
         ],
 
+        // Vom Spamschutz der Formulare abgelehnte Eingaben (Grund, Feld, Formular) -
+        // bewusst ohne Inhalt/Personendaten, nur zum Messen der Wirkung.
+        'spam' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/spam.log'),
+            'permission' => 0664,
+            'level' => 'info',
+        ],
+
         // api und webhook sind Stacks mit ignore_exceptions: Ein nicht beschreibbares
         // Logfile (z. B. falsche Gruppe nach Anlage durch einen anderen User) darf
         // niemals einen Queue-Job oder Request abbrechen.

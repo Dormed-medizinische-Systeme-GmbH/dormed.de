@@ -2,18 +2,42 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\AllowedScriptsOnly;
 use App\Rules\NoForeignLinks;
+use App\Support\FormGuard;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactFormRequest extends FormRequest
 {
     /**
+     * Free-text fields guarded against spam: no foreign links in any of
+     * them, and only Latin script in the message (see FormGuard).
+     *
+     * @var array<int, string>
+     */
+    public const LINK_FIELDS = ['name', 'praxis', 'nachricht'];
+
+    /**
+     * @var array<int, string>
+     */
+    public const SCRIPT_FIELDS = ['nachricht'];
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Strip invisible characters (zero-width space etc.) before validating,
+     * so they can neither hide a link nor end up in the mail.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge(FormGuard::sanitize($this->all(), self::LINK_FIELDS));
     }
 
     /**
@@ -28,7 +52,7 @@ class ContactFormRequest extends FormRequest
             'email' => ['required', 'email', 'max:64'],
             'telefon' => ['nullable', 'string', 'max:32'],
             'plz' => ['required', 'digits:5'],
-            'nachricht' => ['nullable', 'string', 'max:5000', new NoForeignLinks],
+            'nachricht' => ['nullable', 'string', 'max:5000', new NoForeignLinks, new AllowedScriptsOnly],
             'praxis' => ['nullable', 'string', 'max:64', new NoForeignLinks],
             'fachgebiet' => ['nullable', 'string', 'max:64'],
             'rueckruf' => ['nullable', 'in:ja'],

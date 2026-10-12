@@ -17,4 +17,22 @@ return [
         'dormed.de',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Erlaubte Schriften in der Nachricht
+    |--------------------------------------------------------------------------
+    |
+    | Unicode-Schriften, aus denen die Nachricht bestehen darf. "Common" deckt
+    | Ziffern, Satzzeichen, Symbole (€, %, µ) und Emojis ab, "Inherited"
+    | kombinierte Akzente. Alles andere (Kyrillisch, Georgisch, Arabisch, CJK,
+    | ...) wird abgelehnt - im Frontend schon beim Tippen verhindert.
+    |
+    */
+
+    'allowed_scripts' => [
+        'Latin',
+        'Common',
+        'Inherited',
+    ],
+
 ];

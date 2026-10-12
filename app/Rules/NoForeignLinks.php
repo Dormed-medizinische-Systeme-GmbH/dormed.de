@@ -2,19 +2,20 @@
 
 namespace App\Rules;
 
+use App\Support\FormGuard;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
  * Rejects links in free-text fields unless they point to an allowed domain
  * (config/contact.php). Around a third of contact-form spam carries links,
- * so this is enforced server-side; kontakt.blade.php runs the same pattern
- * client-side to mark the field before submitting.
+ * so this is enforced server-side; resources/js/form-guard.js runs the same
+ * pattern client-side to mark the field before submitting.
  */
 class NoForeignLinks implements ValidationRule
 {
     /**
-     * Shared with the frontend (new RegExp(PATTERN, 'gi')), so it must stay
+     * Shared with the frontend (form-guard.js: new RegExp(PATTERN, 'gi')), so it must stay
      * valid in both PCRE and JavaScript. Matches "http(s)://..." and
      * "www...." as well as bare domains with a common TLD ("example.com").
      * The lookbehind keeps e-mail addresses ("info@praxis.de") and
@@ -29,9 +30,13 @@ class NoForeignLinks implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (! is_string($value) || $this->firstForeignLink($value) === null) {
+        $link = is_string($value) ? $this->firstForeignLink($value) : null;
+
+        if ($link === null) {
             return;
         }
+
+        FormGuard::logRejection('link', $attribute, ['domain' => $this->hostOf($link)]);
 
         $fail(self::message($this->allowedDomains()));
     }
