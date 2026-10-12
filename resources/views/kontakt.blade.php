@@ -84,6 +84,7 @@
   
 
   
+        @vite('resources/js/form-guard.js')
     </x-slot:head>
 
 <main id="yuuble-main" class="main">
@@ -1008,7 +1009,7 @@
           <div class="kon-form__redirect-text">Weiterleitung …</div>
         </div>
 
-        <form id="kon-form" method="POST" action="{{ route('kontakt.store') }}" novalidate>
+        <form id="kon-form" method="POST" action="{{ route('kontakt.store') }}" novalidate data-form-guard="{{ json_encode(\App\Support\FormGuard::frontendConfig(\App\Http\Requests\ContactFormRequest::LINK_FIELDS, \App\Http\Requests\ContactFormRequest::SCRIPT_FIELDS)) }}">
           @csrf
 
           <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
@@ -1293,14 +1294,6 @@
         var val = (t.value || '').trim();
         if (val) t.removeAttribute('aria-invalid');
       }
-      // Fremde Links direkt beim Tippen markieren
-      if (LINK_FIELDS.indexOf(t.name) !== -1) {
-        if (hasForeignLink(t.value)) {
-          t.setAttribute('aria-invalid', 'true');
-        } else if (t.value.trim()) {
-          t.removeAttribute('aria-invalid');
-        }
-      }
     });
     // Checkboxen feuern 'change', nicht 'input'
     formForLive.addEventListener('change', function(e) {
@@ -1336,24 +1329,6 @@
   function isValidEmail(val) {
     if (!val) return false;
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
-  }
-
-  // Links in Freitextfeldern: dasselbe Muster und dieselbe Domain-Whitelist
-  // wie serverseitig (App\Rules\NoForeignLinks, config/contact.php).
-  var LINK_PATTERN = @json(\App\Rules\NoForeignLinks::PATTERN);
-  var LINK_ALLOWED_DOMAINS = @json(config('contact.allowed_link_domains'));
-  var LINK_FIELDS = ['name', 'praxis', 'nachricht'];
-  var LINK_MESSAGE = @json(\App\Rules\NoForeignLinks::message(config('contact.allowed_link_domains')));
-
-  function hasForeignLink(val) {
-    var links = (val || '').match(new RegExp(LINK_PATTERN, 'gi')) || [];
-    return links.some(function(link) {
-      var host = link.replace(/^https?:\/\//i, '').split(/[\/?#:]/)[0].toLowerCase().replace(/[.,;!?)]+$/, '');
-      return !LINK_ALLOWED_DOMAINS.some(function(domain) {
-        domain = domain.toLowerCase();
-        return host === domain || host.slice(-(domain.length + 1)) === '.' + domain;
-      });
-    });
   }
 
   function validateForm() {
@@ -1411,15 +1386,15 @@
       }
     });
 
-    // Links (Spamschutz) — wird serverseitig genauso abgelehnt
-    LINK_FIELDS.forEach(function(name) {
-      var field = form.querySelector('[name="' + name + '"]');
-      if (field && hasForeignLink(field.value)) {
-        errors.push(LINK_MESSAGE);
-        field.setAttribute('aria-invalid', 'true');
-        if (!firstInvalidEl) firstInvalidEl = field;
-      }
-    });
+    // Spamschutz (Links, fremde Schriften) — resources/js/form-guard.js,
+    // dieselben Regeln lehnt das Backend ab (App\Support\FormGuard)
+    if (window.dormedFormGuard) {
+      window.dormedFormGuard.problems(form).forEach(function(problem) {
+        errors.push(problem.message);
+        problem.field.setAttribute('aria-invalid', 'true');
+        if (!firstInvalidEl) firstInvalidEl = problem.field;
+      });
+    }
 
     // ★★★ Rückruf-Check: Telefon wird required wenn Rückruf gechecked,
     // aber das required-Attribut wird dynamisch gesetzt — also ist es

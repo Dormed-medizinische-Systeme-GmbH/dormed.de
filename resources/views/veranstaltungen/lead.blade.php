@@ -2,6 +2,7 @@
     <x-slot:head>
         <title>Kontakt {{ $event['name'] }} | SONORING DORMED</title>
         <meta name="robots" content="noindex, nofollow">
+        @vite('resources/js/form-guard.js')
     </x-slot:head>
 
 <main class="main">
@@ -133,7 +134,7 @@
     @if ($isAcceptingLeads)
       <p class="lead__sub">Hinterlassen Sie uns Ihre Kontaktdaten — Ihr persönlicher Ansprechpartner meldet sich nach der Veranstaltung bei Ihnen.</p>
 
-      <form method="POST" action="{{ route('veranstaltungen.lead.store', $slug) }}">
+      <form id="lead-form" method="POST" action="{{ route('veranstaltungen.lead.store', $slug) }}" data-form-guard="{{ json_encode(\App\Support\FormGuard::frontendConfig(\App\Http\Requests\EventLeadRequest::LINK_FIELDS, \App\Http\Requests\EventLeadRequest::SCRIPT_FIELDS)) }}">
         @csrf
 
         <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
@@ -141,13 +142,11 @@
           <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off" value=""/>
         </div>
 
-        @if ($errors->any())
-          <div class="lead__errors" role="alert">
-            @foreach (array_unique($errors->all()) as $message)
-              <div>&bull; {{ $message }}</div>
-            @endforeach
-          </div>
-        @endif
+        <div class="lead__errors" id="lead-errors" role="alert" @if (! $errors->any()) hidden @endif>
+          @foreach (array_unique($errors->all()) as $message)
+            <div>&bull; {{ $message }}</div>
+          @endforeach
+        </div>
 
         <div class="lead__row">
           <div class="lead__field">
@@ -214,6 +213,29 @@
 
         <button type="submit" class="lead__submit">Kontaktdaten senden</button>
       </form>
+
+      <script>
+        // Spamschutz vor dem Absenden (resources/js/form-guard.js) - dieselben
+        // Regeln lehnt auch das Backend ab, das hier spart nur den Roundtrip.
+        document.getElementById('lead-form').addEventListener('submit', function (event) {
+          var problems = window.dormedFormGuard ? window.dormedFormGuard.problems(this) : [];
+          if (problems.length === 0) {
+            return;
+          }
+          event.preventDefault();
+          var errorBox = document.getElementById('lead-errors');
+          errorBox.textContent = '';
+          problems.forEach(function (problem) {
+            var line = document.createElement('div');
+            line.textContent = '\u2022 ' + problem.message;
+            errorBox.appendChild(line);
+            problem.field.setAttribute('aria-invalid', 'true');
+          });
+          errorBox.hidden = false;
+          problems[0].field.focus();
+          errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      </script>
     @else
       <p class="lead__closed">
         Die Veranstaltung ist vorbei und das Formular nicht mehr aktiv. Sie erreichen uns jederzeit

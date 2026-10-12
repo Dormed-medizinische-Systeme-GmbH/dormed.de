@@ -73,8 +73,12 @@ test('additional domains can be whitelisted via config', function () {
 test('the contact page ships the same link pattern and whitelist to the frontend', function () {
     $this->withoutVite();
 
-    $this->get(route('kontakt'))
-        ->assertOk()
-        ->assertSee('var LINK_PATTERN = '.json_encode(NoForeignLinks::PATTERN, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), false)
-        ->assertSee('var LINK_ALLOWED_DOMAINS = ["dormed.de"]', false);
+    $config = json_decode(
+        html_entity_decode(str($this->get(route('kontakt'))->assertOk()->getContent())->match('/data-form-guard="([^"]*)"/')->toString()),
+        true,
+    );
+
+    expect($config['linkPattern'])->toBe(NoForeignLinks::PATTERN)
+        ->and($config['allowedDomains'])->toBe(['dormed.de'])
+        ->and($config['linkFields'])->toBe(['name', 'praxis', 'nachricht']);
 });
