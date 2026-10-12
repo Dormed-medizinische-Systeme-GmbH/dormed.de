@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
+
+// /ultraschallgeraete/gebraucht2 liest aus der used_devices-Tabelle.
+uses(RefreshDatabase::class);
 
 test('every static page route responds successfully', function () {
     $uris = collect(Route::getRoutes())
