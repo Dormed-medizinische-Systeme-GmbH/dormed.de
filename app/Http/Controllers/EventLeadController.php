@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CalendarEvent;
 use App\Http\Requests\EventLeadRequest;
 use App\Jobs\SendEventLeadMails;
 use Illuminate\Http\RedirectResponse;
@@ -67,23 +68,40 @@ class EventLeadController extends Controller
     }
 
     /**
-     * @return array{name: string, location: string, accepts_leads_until: string}
+     * Events synced from CAS (calendar_events) come first; config/events.php
+     * stays as fallback for QR codes printed before the sync went live.
+     *
+     * @return array{name: string, location: string, accepts_leads: bool}
      */
     private function resolveEvent(string $slug): array
     {
+        $calendarEvent = CalendarEvent::firstWhere('slug', $slug);
+
+        if ($calendarEvent !== null) {
+            return [
+                'name' => $calendarEvent->name,
+                'location' => $calendarEvent->locationLabel,
+                'accepts_leads' => $calendarEvent->acceptsLeads,
+            ];
+        }
+
         $eventDetails = config("events.{$slug}");
 
         abort_unless(is_array($eventDetails), 404);
 
-        return $eventDetails;
+        return [
+            'name' => $eventDetails['name'],
+            'location' => $eventDetails['location'],
+            'accepts_leads' => now()->lte(Carbon::parse($eventDetails['accepts_leads_until'])->endOfDay()),
+        ];
     }
 
     /**
-     * @param  array{accepts_leads_until: string}  $eventDetails
+     * @param  array{accepts_leads: bool}  $eventDetails
      */
     private function isAcceptingLeads(array $eventDetails): bool
     {
-        return now()->lte(Carbon::parse($eventDetails['accepts_leads_until'])->endOfDay());
+        return $eventDetails['accepts_leads'];
     }
 
     private function noindex(Response $response): Response

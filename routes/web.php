@@ -130,3 +130,7 @@ Route::get('/veranstaltungen/{event}/kontakt/danke', [EventLeadController::class
 Route::post('/webhooks/cas/gebrauchtgeraete', [CasWebhookController::class, 'usedDevice'])
     ->middleware([EnsureValidCasWebhookToken::class, 'throttle:60,1'])
     ->name('webhooks.cas.gebrauchtgeraete');
+
+Route::post('/webhooks/cas/veranstaltungen', [CasWebhookController::class, 'calendarEvent'])
+    ->middleware([EnsureValidCasWebhookToken::class, 'throttle:60,1'])
+    ->name('webhooks.cas.veranstaltungen');

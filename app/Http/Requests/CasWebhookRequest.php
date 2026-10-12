@@ -2,11 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Services\UsedDevices\UsedDeviceSynchronizer;
+use App\Services\Cas\CasClient;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsedDeviceWebhookRequest extends FormRequest
+/**
+ * Payload of every CAS webhook (used devices, events): only the GUID of the
+ * changed record, the queued job fetches the data itself.
+ */
+class CasWebhookRequest extends FormRequest
 {
     /**
      * Authenticated by the EnsureValidCasWebhookToken middleware.
@@ -22,7 +26,7 @@ class UsedDeviceWebhookRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         if (is_string($this->input('gguid'))) {
-            $this->merge(['gguid' => UsedDeviceSynchronizer::normalizeGuid($this->input('gguid'))]);
+            $this->merge(['gguid' => CasClient::normalizeGuid($this->input('gguid'))]);
         }
     }
 

@@ -30,7 +30,7 @@ class UsedDeviceSynchronizer
      */
     public static function normalizeGuid(string $guid): string
     {
-        return strtoupper(str_replace(['{', '}', '-'], '', trim($guid)));
+        return CasClient::normalizeGuid($guid);
     }
 
     /**
