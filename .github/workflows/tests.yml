@@ -16,10 +16,14 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   pest:
     runs-on: ubuntu-latest
+    env:
+      # Mindest-Coverage in Prozent - darunter wird der Lauf rot.
+      COVERAGE_MIN: 80
     timeout-minutes: 15
 
     steps:
@@ -30,7 +34,7 @@ jobs:
         with:
           php-version: '8.4'
           extensions: mbstring, pdo_sqlite, sqlite3
-          coverage: none
+          coverage: pcov
 
       - name: Node einrichten
         uses: actions/setup-node@v4
@@ -60,5 +64,37 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      - name: Tests
-        run: php artisan test --compact
+      # Coverage per PCOV (schneller als Xdebug). Ausgabe und JUnit-Log werden
+      # danach zum Testbericht (PR-Kommentar + Job-Zusammenfassung) verarbeitet.
+      - name: Tests mit Coverage
+        run: |
+          set -o pipefail
+          php artisan test --compact --coverage --min="$COVERAGE_MIN" --log-junit junit.xml | tee pest-output.txt
+
+      - name: Testbericht erstellen
+        if: always()
+        run: |
+          python3 .github/scripts/test-report.py junit.xml pest-output.txt test-report.md
+          cat test-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Ein Kommentar pro PR, der bei jedem Lauf aktualisiert wird (erkannt am
+      # Marker <!-- test-report --> in der ersten Zeile).
+      - name: Testbericht als PR-Kommentar
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('test-report.md')) {
+              return;
+            }
+            const body = fs.readFileSync('test-report.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find((comment) => comment.body?.startsWith('<!-- test-report -->'));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }

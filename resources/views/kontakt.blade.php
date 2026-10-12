@@ -1293,6 +1293,14 @@
         var val = (t.value || '').trim();
         if (val) t.removeAttribute('aria-invalid');
       }
+      // Fremde Links direkt beim Tippen markieren
+      if (LINK_FIELDS.indexOf(t.name) !== -1) {
+        if (hasForeignLink(t.value)) {
+          t.setAttribute('aria-invalid', 'true');
+        } else if (t.value.trim()) {
+          t.removeAttribute('aria-invalid');
+        }
+      }
     });
     // Checkboxen feuern 'change', nicht 'input'
     formForLive.addEventListener('change', function(e) {
@@ -1328,6 +1336,24 @@
   function isValidEmail(val) {
     if (!val) return false;
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val.trim());
+  }
+
+  // Links in Freitextfeldern: dasselbe Muster und dieselbe Domain-Whitelist
+  // wie serverseitig (App\Rules\NoForeignLinks, config/contact.php).
+  var LINK_PATTERN = @json(\App\Rules\NoForeignLinks::PATTERN);
+  var LINK_ALLOWED_DOMAINS = @json(config('contact.allowed_link_domains'));
+  var LINK_FIELDS = ['name', 'praxis', 'nachricht'];
+  var LINK_MESSAGE = @json(\App\Rules\NoForeignLinks::message(config('contact.allowed_link_domains')));
+
+  function hasForeignLink(val) {
+    var links = (val || '').match(new RegExp(LINK_PATTERN, 'gi')) || [];
+    return links.some(function(link) {
+      var host = link.replace(/^https?:\/\//i, '').split(/[\/?#:]/)[0].toLowerCase().replace(/[.,;!?)]+$/, '');
+      return !LINK_ALLOWED_DOMAINS.some(function(domain) {
+        domain = domain.toLowerCase();
+        return host === domain || host.slice(-(domain.length + 1)) === '.' + domain;
+      });
+    });
   }
 
   function validateForm() {
@@ -1382,6 +1408,16 @@
         field.setAttribute('aria-invalid', 'true');
         if (!firstInvalidEl) firstInvalidEl = field;
         return;
+      }
+    });
+
+    // Links (Spamschutz) — wird serverseitig genauso abgelehnt
+    LINK_FIELDS.forEach(function(name) {
+      var field = form.querySelector('[name="' + name + '"]');
+      if (field && hasForeignLink(field.value)) {
+        errors.push(LINK_MESSAGE);
+        field.setAttribute('aria-invalid', 'true');
+        if (!firstInvalidEl) firstInvalidEl = field;
       }
     });
 
