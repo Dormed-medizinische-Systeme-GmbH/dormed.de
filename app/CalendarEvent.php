@@ -28,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @property-read bool $isPast
  * @property-read Carbon $leadsUntil
  * @property-read bool $acceptsLeads
+ * @property-read bool $hasConfirmedDate
  */
 #[Fillable([
     'cas_id', 'etag', 'cas_updated_at', 'synced_at', 'slug', 'type', 'name',
@@ -49,7 +50,6 @@ class CalendarEvent extends Model
      */
     public const STATUSES = [
         'scheduled' => 'https://schema.org/EventScheduled',
-        'rescheduled' => 'https://schema.org/EventRescheduled',
         'postponed' => 'https://schema.org/EventPostponed',
         'cancelled' => 'https://schema.org/EventCancelled',
         'moved_online' => 'https://schema.org/EventMovedOnline',
@@ -68,8 +68,7 @@ class CalendarEvent extends Model
      * Labels shown next to the date when an event isn't simply scheduled.
      */
     public const STATUS_LABELS = [
-        'rescheduled' => 'Neuer Termin',
-        'postponed' => 'Verschoben',
+        'postponed' => 'Verschoben, neuer Termin folgt',
         'cancelled' => 'Abgesagt',
         'moved_online' => 'Online',
     ];
@@ -123,15 +122,30 @@ class CalendarEvent extends Model
 
     /**
      * Only upcoming events are shown; past ones stay in the table until CAS
-     * drops them, so the lead form keeps working after the event.
+     * drops them, so the lead form keeps working after the event. A
+     * postponed event keeps its original date until a new one is set, so it
+     * stays listed even once that date has passed.
      *
      * @param  Builder<self>  $query
      */
     #[Scope]
     protected function upcoming(Builder $query): void
     {
-        $query->whereRaw('coalesce(ends_on, starts_on) >= ?', [now()->toDateString()])
+        $query->where(fn (Builder $query) => $query
+            ->whereRaw('coalesce(ends_on, starts_on) >= ?', [now()->toDateString()])
+            ->orWhere('status', 'postponed'))
             ->orderBy('starts_on');
+    }
+
+    /**
+     * False for postponed and cancelled events: their stored date is not
+     * going to happen, so nothing counts down to it.
+     *
+     * @return Attribute<bool, never>
+     */
+    protected function hasConfirmedDate(): Attribute
+    {
+        return Attribute::get(fn (): bool => ! in_array($this->status, ['postponed', 'cancelled'], true));
     }
 
     /**

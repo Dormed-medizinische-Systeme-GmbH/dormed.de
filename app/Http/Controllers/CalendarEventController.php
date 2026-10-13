@@ -20,7 +20,7 @@ class CalendarEventController extends Controller
             'eventsByMonth' => $events->groupBy(fn (CalendarEvent $event): string => $event->monthLabel),
             // Hero countdown and ticker (same shape as the old hard-coded EVENTS array)
             'countdownEvents' => $events
-                ->reject(fn (CalendarEvent $event): bool => $event->status === 'cancelled')
+                ->filter(fn (CalendarEvent $event): bool => $event->hasConfirmedDate)
                 ->map(fn (CalendarEvent $event): array => [
                     'name' => $event->name,
                     'location' => $event->locationLabel,

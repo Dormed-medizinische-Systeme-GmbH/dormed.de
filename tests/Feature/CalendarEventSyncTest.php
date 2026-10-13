@@ -188,6 +188,21 @@ describe('synchronizer', function () {
         ]);
     });
 
+    test('the CAS status values map to the page status', function (string $casValue, string $status) {
+        config()->set('calendar_events.fields.status', 'WEB_STATUS');
+        fakeCasAppointment(['WEB_STATUS' => $casValue]);
+
+        syncMedica();
+
+        expect(CalendarEvent::sole()->status)->toBe($status);
+    })->with([
+        ['Geplant', 'scheduled'],
+        ['Verschoben', 'postponed'],
+        ['Abgesagt', 'cancelled'],
+        ['Online', 'moved_online'],
+        ['', 'scheduled'],
+    ]);
+
     test('only http links are used for the registration button', function () {
         config()->set('calendar_events.fields.registration_url', 'WEB_URL');
         fakeCasAppointment(['WEB_URL' => 'javascript:alert(1)']);

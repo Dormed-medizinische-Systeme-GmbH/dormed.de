@@ -805,7 +805,9 @@
             <div class="ver-tl__ev-meta">{{ $event->dateRangeLabel }} · {{ $event->locationLabel }}{{ $event->statusLabel ? ' · '.$event->statusLabel : '' }}</div>
           </div>
           <div class="ver-tl__ev-right">
+            @if ($event->hasConfirmedDate)
             <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="{{ $event->starts_on->toDateString() }}">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            @endif
             <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
           </div>
         </div>

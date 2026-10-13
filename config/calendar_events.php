@@ -36,13 +36,16 @@ return [
     ],
 
     /*
-    | Werte des CAS-Statusfelds -> interner Status (siehe
-    | CalendarEvent::STATUSES). Unbekannte Werte gelten als "scheduled".
+    | Werte der CAS-Auswahlliste -> interner Status (siehe
+    | CalendarEvent::STATUSES). Leer oder unbekannt gilt als "Geplant".
+    | Steht ein neues Datum fest, werden Start/Ende angepasst und der Status
+    | zurück auf "Geplant" gesetzt - einen eigenen Status dafür gibt es nicht.
     */
     'statuses' => [
-        // 'Abgesagt' => 'cancelled',
-        // 'Verschoben' => 'postponed',
-        // 'Neuer Termin' => 'rescheduled',
+        'Geplant' => 'scheduled',
+        'Verschoben' => 'postponed',
+        'Abgesagt' => 'cancelled',
+        'Online' => 'moved_online',
     ],
 
 ];

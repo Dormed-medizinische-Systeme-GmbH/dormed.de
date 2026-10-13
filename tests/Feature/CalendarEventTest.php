@@ -69,7 +69,6 @@ test('the cas status maps to the schema.org event status', function (string $sta
     expect(CalendarEvent::factory()->make(['status' => $status])->schemaStatus)->toBe($expected);
 })->with([
     ['scheduled', 'https://schema.org/EventScheduled'],
-    ['rescheduled', 'https://schema.org/EventRescheduled'],
     ['postponed', 'https://schema.org/EventPostponed'],
     ['cancelled', 'https://schema.org/EventCancelled'],
     ['moved_online', 'https://schema.org/EventMovedOnline'],
@@ -85,4 +84,13 @@ test('only upcoming events are listed, ordered by start date', function () {
     CalendarEvent::factory()->create(['name' => 'Heute', 'starts_on' => '2026-11-18', 'ends_on' => null]);
 
     expect(CalendarEvent::upcoming()->pluck('name')->all())->toBe(['Läuft noch', 'Heute', 'Später']);
+});
+
+test('a postponed event stays listed after its original date until a new one is set', function () {
+    $this->travelTo('2026-11-18');
+
+    CalendarEvent::factory()->create(['name' => 'Verschoben', 'starts_on' => '2026-11-10', 'status' => 'postponed']);
+    CalendarEvent::factory()->create(['name' => 'Abgesagt', 'starts_on' => '2026-11-10', 'status' => 'cancelled']);
+
+    expect(CalendarEvent::upcoming()->pluck('name')->all())->toBe(['Verschoben']);
 });

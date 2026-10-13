@@ -61,8 +61,18 @@ test('a cancelled event is marked, offers no registration and is left out of the
         ->and($response->getContent())->not->toContain('Zur Anmeldung<svg');
 });
 
+test('a postponed event keeps its old date but shows no countdown to it', function () {
+    CalendarEvent::factory()->create(['name' => 'Verschobene Tagung', 'starts_on' => '2026-11-01', 'status' => 'postponed']);
+
+    $response = $this->get(route('veranstaltungen2'))->assertOk()->assertSee('· Verschoben, neuer Termin folgt');
+
+    expect($response->viewData('countdownEvents'))->toBeEmpty()
+        ->and($response->getContent())->not->toContain('data-date="2026-11-01"')
+        ->and($response->getContent())->toContain('Zur Anmeldung<svg');
+});
+
 test('the countdown and the event JSON-LD are generated from the database', function () {
-    CalendarEvent::factory()->messe()->create(['name' => 'MEDICA 2026', 'starts_on' => '2026-11-16', 'ends_on' => '2026-11-19', 'status' => 'postponed']);
+    CalendarEvent::factory()->messe()->create(['name' => 'MEDICA 2026', 'starts_on' => '2026-11-16', 'ends_on' => '2026-11-19', 'status' => 'moved_online']);
 
     $response = $this->get(route('veranstaltungen2'))->assertOk();
 
@@ -78,7 +88,7 @@ test('the countdown and the event JSON-LD are generated from the database', func
             'name' => 'MEDICA 2026',
             'startDate' => '2026-11-16',
             'endDate' => '2026-11-19',
-            'eventStatus' => 'https://schema.org/EventPostponed',
+            'eventStatus' => 'https://schema.org/EventMovedOnline',
         ])
         ->and($schema['@graph'][0]['location'])->toBe([
             '@type' => 'Place',
