@@ -4997,6 +4997,8 @@
         <ul class="hp-hers__card-models" aria-label="Esaote Modelle">
           <li class="hp-hers__card-model">MyLab A70</li>
           <li class="hp-hers__card-model">MyLab A50</li>
+          <li class="hp-hers__card-model">MyLab X1 Go</li>
+          <li class="hp-hers__card-model">MyLab C25</li>
           <li class="hp-hers__card-model"></li>
           <li class="hp-hers__card-model"></li>
           <li class="hp-hers__card-model"></li>

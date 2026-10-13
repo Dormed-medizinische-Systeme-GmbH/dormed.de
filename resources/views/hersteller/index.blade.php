@@ -360,6 +360,8 @@
             <span class="her-hub__tag">Augmented Insight™</span>
             <span class="her-hub__tag">MyLab A70</span>
             <span class="her-hub__tag">MyLab A50</span>
+            <span class="her-hub__tag">MyLab X1 Go</span>
+            <span class="her-hub__tag">MyLab C25</span>
             <span class="her-hub__tag">Italian Design</span>
           </div>
           <div class="her-hub__card-cta">
