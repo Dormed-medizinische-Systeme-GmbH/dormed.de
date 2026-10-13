@@ -649,7 +649,7 @@
           Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Wir setzen technisch notwendige Cookies für den Betrieb der Website ein (z. B. für Einstellungen und Sitzungsverwaltung) sowie optionale Cookies für Analyse und Marketing — aber nur mit Ihrer ausdrücklichen Einwilligung.
         </div>
         <div class="dsgvo__p">
-          Beim ersten Besuch unserer Website fragen wir Sie über unser Consent-Management-Tool <strong>Cookiebot</strong> (Usercentrics A/S, Havnegade 39, 1058 Kopenhagen, Dänemark) nach Ihrer Einwilligung. Trackingdienste werden erst nach Ihrer Zustimmung aktiviert. Rechtsgrundlage für zustimmungspflichtige Cookies: Art. 6 Abs. 1 lit. a DS-GVO. Weitere Informationen: <a href="https://www.cookiebot.com/de/privacy-policy/" target="_blank" rel="noopener">cookiebot.com/de/privacy-policy</a>.
+          Beim ersten Besuch unserer Website fragen wir Sie über ein eigenes Einwilligungsbanner nach Ihrer Einwilligung für optionale Cookies (Kategorien „Analyse“ und „Marketing“). Optionale Dienste, insbesondere Analyse-Dienste, werden erst nach Ihrer Zustimmung geladen. Ihre Auswahl speichern wir in einem Cookie mit dem Namen <code>cc_cookie</code> auf Ihrem Endgerät (Speicherdauer: 182 Tage); es werden dafür keine Daten an Dritte übermittelt. Rechtsgrundlage für zustimmungspflichtige Cookies: Art. 6 Abs. 1 lit. a DS-GVO.
         </div>
         <div class="dsgvo__p">
           Sie können das Setzen von Cookies generell über Ihre Browsereinstellungen unterbinden oder jederzeit Ihre Einwilligung über unser Consent-Banner anpassen. Das Ablehnen optionaler Cookies hat keinen Einfluss auf die grundlegende Nutzbarkeit der Website.

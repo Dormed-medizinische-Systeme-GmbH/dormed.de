@@ -23,3 +23,13 @@ test('every legal link in the footer resolves to an existing page', function () 
         $this->get($uri)->assertOk();
     }
 });
+
+test('the privacy policy describes the own consent banner instead of a third-party consent tool', function () {
+    $this->withoutVite();
+
+    $this->get('/datenschutz')
+        ->assertOk()
+        ->assertDontSee('Cookiebot')
+        ->assertDontSee('Usercentrics')
+        ->assertSee('cc_cookie', false);
+});
