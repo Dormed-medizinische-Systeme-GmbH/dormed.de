@@ -3,9 +3,11 @@
 use App\Jobs\SendEventLeadMails;
 use App\Mail\EventLeadCompanyMail;
 use App\Mail\EventLeadCustomerMail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 uses(RefreshDatabase::class);
@@ -202,4 +204,66 @@ test('the company mail renders all lead fields', function () {
         ->assertSeeInHtml('Mindray TE 7')
         ->assertSeeInHtml('ca. 30.000 €')
         ->assertSeeInHtml('Bitte nach der Messe anrufen.');
+});
+
+test('the pdf attachment is a valid pdf with the mail filename', function () {
+    $mail = new EventLeadCompanyMail(
+        eventName: 'Testmesse 2026',
+        praxisName: 'Praxis Dr. Müller & Söhne',
+        strasse: null,
+        plz: null,
+        ort: null,
+        email: 'praxis@example.com',
+        telefon: null,
+        interesse: null,
+        budget: 'ca. 30.000 €',
+        nachricht: "Zeile 1\nZeile 2",
+    );
+
+    $attachments = $mail->attachments();
+
+    expect($attachments)->toHaveCount(1);
+
+    $attachment = $attachments[0];
+    $filename = null;
+    $data = null;
+    $attachment->attachWith(
+        fn () => null,
+        function ($callback) use (&$data, &$filename, $attachment) {
+            $data = $callback();
+            $filename = $attachment->as;
+        },
+    );
+
+    expect($filename)->toBe('Lead_testmesse-2026_praxis-dr-muller-sohne_'.now()->format('Y-m-d').'.pdf')
+        ->and($attachment->mime)->toBe('application/pdf')
+        ->and($data)->toStartWith('%PDF');
+});
+
+test('the company mail is still sent without attachment when the pdf cannot be rendered', function () {
+    Mail::fake();
+    Pdf::shouldReceive('loadView')->andThrow(new RuntimeException('render failed'));
+    Log::spy();
+
+    $mail = new EventLeadCompanyMail(
+        eventName: 'Testmesse 2026',
+        praxisName: 'Praxis Dr. Mustermann',
+        strasse: null,
+        plz: null,
+        ort: null,
+        email: null,
+        telefon: '0231123456',
+        interesse: null,
+        budget: null,
+        nachricht: null,
+    );
+
+    expect($mail->attachments())->toBe([]);
+    Log::shouldHaveReceived('error')->once();
+});
+
+test('the customer confirmation has no attachment', function () {
+    $mail = new EventLeadCustomerMail(eventName: 'Testmesse 2026', praxisName: 'Praxis', email: 'praxis@example.com');
+
+    expect($mail->attachments())->toBe([]);
 });
