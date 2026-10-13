@@ -27,6 +27,14 @@ class CasClient
      */
     private const GUID_CANDIDATE_KEYS = ['GGUID', 'guid', 'Guid', 'id', 'Id'];
 
+    /**
+     * CAS may send a GUID in any case and with braces or dashes.
+     */
+    public static function normalizeGuid(string $guid): string
+    {
+        return strtoupper(str_replace(['{', '}', '-'], '', trim($guid)));
+    }
+
     private function client(): PendingRequest
     {
         return Http::baseUrl($this->baseUrl())

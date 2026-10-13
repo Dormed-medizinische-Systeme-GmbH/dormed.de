@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsedDeviceWebhookRequest;
+use App\Http\Requests\CasWebhookRequest;
+use App\Jobs\SyncCalendarEvent;
 use App\Jobs\SyncUsedDevice;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +16,7 @@ class CasWebhookController extends Controller
      * deleted) is logged but not acted on - the job reconciles against the
      * CAS view either way.
      */
-    public function usedDevice(UsedDeviceWebhookRequest $request): JsonResponse
+    public function usedDevice(CasWebhookRequest $request): JsonResponse
     {
         $guid = $request->validated('gguid');
 
@@ -25,6 +26,23 @@ class CasWebhookController extends Controller
         ]);
 
         SyncUsedDevice::dispatch($guid);
+
+        return response()->json(['status' => 'queued'], 202);
+    }
+
+    /**
+     * Same trigger-only contract for events (CAS APPOINTMENT records).
+     */
+    public function calendarEvent(CasWebhookRequest $request): JsonResponse
+    {
+        $guid = $request->validated('gguid');
+
+        Log::channel('webhook')->info('CAS webhook: event changed.', [
+            'gguid' => $guid,
+            'action' => $request->validated('action'),
+        ]);
+
+        SyncCalendarEvent::dispatch($guid);
 
         return response()->json(['status' => 'queued'], 202);
     }
