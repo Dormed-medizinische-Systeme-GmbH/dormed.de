@@ -15,6 +15,10 @@ hervor; dessen Original liegt unverändert in `.old/` und dient als Referenz fü
   Seite in ihrer Datei vollständig editierbar bleibt.
 - **JSON-LD:** `"@context"` als `"@@context"` schreiben (Laravel 13 kennt `@context` als
   Blade-Direktive, sonst Compile-Fehler).
+- **Seitenvergleiche** gegen `.old/` über sichtbaren Text, Meta-Tags und geparstes JSON-LD,
+  nicht über Pixel-Diffs: `laravel/boost` injiziert in `local`/`debug` ein
+  Log-Capture-Script in jede Response, das Rauschen erzeugt (außerhalb davon und mit
+  `composer install --no-dev` fehlt es).
 - **Keine Builder-Reste:** keine `yb-`/`yb_`/`yu-`-Präfixe und keine Marker wie
   `data-uuid`, `data-type`, `yuuble-engine-node`, `data-project-id`. Content, der neu von
   der Live-Seite oder aus `.old/` kommt, vorher davon bereinigen.

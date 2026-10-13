@@ -21,6 +21,8 @@ Policy-Änderung). Das sichtbare Banner ist eigenes Markup
   niedrigeren Revision zugestimmt hat, bekommt das Banner erneut.
 - **Das Rybbit-Skript im Layout wird nicht über diese Kategorien gesteuert**; es lädt
   immer ([resources](../README.md)).
+- **Drittanbieter-Embeds** (z. B. Maps) gate die Website nicht serverseitig über den
+  Consent-Cookie. Bindet man eines ein, muss es erst nach Consent rendern.
 - **Tests mit Playwright:** `hideFromBots` bleibt auf `true` (SEO). Playwright setzt
   `navigator.webdriver = true`, wodurch die Library Consent nie als gültig wertet. Per
   `page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () =>

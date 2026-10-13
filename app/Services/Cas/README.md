@@ -6,15 +6,19 @@ eine Option, nur nach Rücksprache.
 
 ## Regeln
 
-- **Zugang:** Basic Auth plus Header `X-CAS-PRODUCT-KEY`. Env-Variablen:
+- **Zugang:** Basic Auth (`username:password`, **ohne** Datenbank-Präfix) plus Header
+  `X-CAS-PRODUCT-KEY`. Env-Variablen:
   `CAS_GENESIS_WORLD_HOST`, `_USERNAME`, `_PASSWORD`, `_PRODUCT_KEY`; für eingehende
   Webhooks zusätzlich `_WEBHOOK_BEARER`. Fehlt das Schema im Host, setzt der Client
   `https://` vor.
 - **Die Swagger-Doku ist zu etwa 95 % korrekt**; einzelne Payload-/Response-Schemas sind
-  falsch verlinkt oder als „undocumented" markiert. Deshalb loggt der Client jeden
-  Schreibaufruf mit Roh-Request und -Response in `api.log`, und das Rohprotokoll ist die
-  verlässliche Referenz.
-- **Create:** Der Body trägt die Werte unter `fields`. Eine erfolgreiche Anlage antwortet
+  falsch verlinkt (`CreateDataObject`/`GetDataObject` zeigen auf
+  `CheckForContactDuplicatesRequestData`) oder als „undocumented" markiert. Deshalb loggt
+  der Client jeden Schreibaufruf mit Roh-Request und -Response in `api.log`, und das
+  Rohprotokoll ist die verlässliche Referenz.
+- **Create:** Der Body trägt die Werte unter `fields` (`fields` ist neben den hier
+  ungenutzten Permission-Keys der einzige erlaubte Top-Level-Key); flach im Body antwortet
+  CAS mit `400 ILLEGAL_ARGUMENT_VALUE`. Eine erfolgreiche Anlage antwortet
   `201` mit leerem Body, die GUID steht als letztes Pfadsegment im `Location`-Header. Die
   GUID dient nur dem Logging; ein nicht auswertbarer Header zählt trotzdem als Erfolg.
 - **Lesen (`getDataObject`):** Nur `404` bedeutet „in CAS gelöscht" und liefert `null`.

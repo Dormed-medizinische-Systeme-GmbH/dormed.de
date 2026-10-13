@@ -28,7 +28,7 @@ class ContactFormCompanyMail extends Mailable
 
     /**
      * Recipient is the company's own mailbox (MAIL_FROM_ADDRESS sends to
-     * itself, see AGENTS.md). Reply-To is the customer's own address, so a
+     * itself, see app/README.md). Reply-To is the customer's own address, so a
      * staff member can answer directly from their inbox without looking the
      * address up separately.
      */

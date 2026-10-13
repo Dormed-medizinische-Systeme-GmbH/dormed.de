@@ -23,7 +23,8 @@ Konfiguration dazu: [config](../config/README.md). Tabellen: [database](../datab
 
 Es gibt keine Job-Kette und keine Rückmeldung an CAS; der Mailversand kennt CAS nicht.
 
-- **Rate-Limit** je IP: 1 pro Minute, 3 pro Tag.
+- **Rate-Limit** je IP: 1 pro Minute, 3 pro Tag. Erfolg führt per Post/Redirect/Get auf
+  `/danke` (`noindex, follow`).
 - **Honeypot:** Löst er aus, leitet der Controller still auf `/danke` weiter und verwirft
   die Anfrage (Eintrag in `laravel.log`).
 - **Empfänger der Firmenmail** ist `MAIL_FROM_ADDRESS` (Sender und Postfach sind
