@@ -69,3 +69,10 @@ Verzeichnisses, bevor du darin arbeitest.
   Änderung an Formularen, Mails oder Jobs.
 - [config](config/README.md) — projekteigene Configs und Env-Variablen.
 - [database](database/README.md) — SQLite, Spiegel-Tabellen, was ein Reset kostet.
+- [resources](resources/README.md) — CSS, Vite-Eingänge, Sitemap, Analytics; darunter
+  [views](resources/views/README.md) (Seiten, Neues-Gerät-Checkliste) und
+  [js](resources/js/README.md) (Consent, Formular-Spamschutz).
+- [routes](routes/README.md) — URL-Stabilität, Routen-Konventionen.
+- [tests](tests/README.md) — Pest, CI-Gate, Konventionen.
+- [public](public/README.md) — Webroot, Bild-Ablage, Storage-Link.
+- [.github](.github/README.md) — Workflows, Deploy, Server-Voraussetzungen.
