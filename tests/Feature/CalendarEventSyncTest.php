@@ -31,6 +31,7 @@ function casAppointment(array $fields = []): array
         'id' => MEDICA_GUID,
         'fields' => $fields + [
             'GGUID' => MEDICA_GUID,
+            'GWTYPE' => 'Veranstaltung',
             'KEYWORD' => 'Medica 2026',
             'CATEGORY' => 'Messe/Kongreß/Veranstaltung',
             'WHOLEDAY' => true,
@@ -156,6 +157,15 @@ describe('synchronizer', function () {
 
         expect(CalendarEvent::count())->toBe(0);
     });
+
+    test('appointments that are not of type Veranstaltung are removed', function (?string $gwtype) {
+        CalendarEvent::factory()->create(['cas_id' => MEDICA_GUID]);
+        fakeCasAppointment(['GWTYPE' => $gwtype]);
+
+        syncMedica();
+
+        expect(CalendarEvent::count())->toBe(0);
+    })->with(['Besprechung', null]);
 
     test('appointments deleted in CAS are removed', function () {
         CalendarEvent::factory()->create(['cas_id' => MEDICA_GUID]);
