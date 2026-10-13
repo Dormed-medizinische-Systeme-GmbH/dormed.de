@@ -36,7 +36,8 @@ class BlockListedSubmissions
     private function redirectToThanks(Request $request): Response
     {
         $routeName = $request->route()?->getName();
-        $target = $routeName !== null ? config("contact.blocklist_redirects.{$routeName}") : null;
+        $redirects = (array) config('contact.blocklist_redirects', []);
+        $target = $routeName !== null ? ($redirects[$routeName] ?? null) : null;
         $targetRoute = $target !== null ? app('router')->getRoutes()->getByName($target) : null;
 
         if ($targetRoute === null) {
