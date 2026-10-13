@@ -119,6 +119,21 @@ function initBanner() {
         hideBanner();
     });
 
+    // Elements with data-consent-open (e.g. the "hier" link in the privacy
+    // policy) reopen the banner for a fresh choice, preselected with the
+    // current one.
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('[data-consent-open]')) {
+            return;
+        }
+
+        event.preventDefault();
+        analyticsToggle.checked = CookieConsent.acceptedCategory('analytics');
+        marketingToggle.checked = CookieConsent.acceptedCategory('marketing');
+        prefsPanel.classList.remove('consent-banner__preferences--open');
+        showBanner();
+    });
+
     if (!CookieConsent.validConsent()) {
         showBanner();
     }
