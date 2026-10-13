@@ -10,9 +10,10 @@ Ansprechpartner und Auftraggeber: Lukas.
 
 1. **URLs sind fix.** Keine Route ändert sich; Google kennt jede Seite exakt so. Neue Seiten
    sind erlaubt, bestehende URLs bleiben.
-2. **Keine Business-/Content-Datenbank.** Produktdaten und Formular-Einträge liegen nicht
-   dauerhaft in einer DB. Erlaubt ist SQLite als ephemerer Framework-Zustand (Cache,
-   Sessions, Queue); die Datei ist gitignored und per `migrate:fresh` neu aufbaubar.
+2. **CAS genesisWorld führt die Geschäftsdaten.** Anfragen, Veranstaltungen und
+   Gebrauchtgeräte leben dort; die Website hält eine SQLite-Datei mit Framework-Zustand
+   (Cache, Sessions, Queue) und einem Spiegel der CAS-Daten. Formular-Einträge werden nicht
+   gespeichert. Details und Wiederherstellung: [database](database/README.md).
 3. **Kein Dauerprozess.** Klassisches PHP-FPM-Hosting; `npm run build` läuft nur beim
    Deploy, die Queue arbeitet per Cron (`schedule:run`).
 
@@ -64,4 +65,7 @@ Verzeichnisses, bevor du darin arbeitest.
 
 **Verzeichnisse**
 
-_Noch keine Unterverzeichnis-READMEs._
+- [app](app/README.md) — Formulare, Lead-Flow, Queue und Logs, Spamschutz; lesen bei jeder
+  Änderung an Formularen, Mails oder Jobs.
+- [config](config/README.md) — projekteigene Configs und Env-Variablen.
+- [database](database/README.md) — SQLite, Spiegel-Tabellen, was ein Reset kostet.
