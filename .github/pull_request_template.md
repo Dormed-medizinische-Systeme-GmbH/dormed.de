@@ -9,3 +9,7 @@
 ## Implementation Details
 
 <Wie umgesetzt, welche Verifikation gelaufen ist, nennenswerte Entscheidungen unterwegs>
+
+## Checkliste
+
+- [ ] README.md der berührten Verzeichnisse geprüft und aktualisiert
