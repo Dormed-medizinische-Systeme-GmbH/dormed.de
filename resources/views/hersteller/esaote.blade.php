@@ -3,15 +3,15 @@
     <link rel="alternate" hreflang="de-DE" href="https://dormed.de/hersteller/esaote">
         <link rel="alternate" hreflang="x-default" href="https://dormed.de/hersteller/esaote">
 
-        <title>Esaote Ultraschall – MyLab A50 &amp; A70 | SONORING DORMED</title>
-        <meta name="description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <title>Esaote Ultraschall – MyLab A50, A70, X1 Go &amp; C25 | SONORING DORMED</title>
+        <meta name="description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
         <meta name="robots" content="index, follow">
         <link rel="canonical" href="https://dormed.de/hersteller/esaote">
 
     
 
-        <meta property="og:title" content="Esaote Ultraschall – MyLab A50 &amp;amp; A70 | SONORING DORMED">
-        <meta property="og:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <meta property="og:title" content="Esaote Ultraschall – MyLab A50, A70, X1 Go &amp;amp; C25 | SONORING DORMED">
+        <meta property="og:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
         <meta property="og:url" content="https://dormed.de/hersteller/esaote">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Dormed med. Systeme GmbH">
@@ -19,8 +19,8 @@
     
 
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Esaote Ultraschall – MyLab A50 &amp;amp; A70 | SONORING DORMED">
-        <meta name="twitter:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <meta name="twitter:title" content="Esaote Ultraschall – MyLab A50, A70, X1 Go &amp;amp; C25 | SONORING DORMED">
+        <meta name="twitter:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
 
     
 
@@ -30,8 +30,8 @@
         {
           "@type": "AboutPage",
           "@id": "https://dormed.de/hersteller/esaote/#webpage",
-          "name": "Esaote Ultraschall – MyLab A50 & A70 | SONORING DORMED",
-          "description": "Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.",
+          "name": "Esaote Ultraschall – MyLab A50, A70, X1 Go & C25 | SONORING DORMED",
+          "description": "Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.",
           "url": "https://dormed.de/hersteller/esaote",
           "publisher": { "@id": "https://dormed.de/#organization" },
           "inLanguage": "de-DE",
