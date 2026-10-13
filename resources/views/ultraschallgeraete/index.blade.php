@@ -2942,6 +2942,8 @@
         <div class="ug-hers__models">
           <span class="ug-hers__model">MyLab&#8482; A70</span>
           <span class="ug-hers__model">MyLab&#8482; A50</span>
+          <span class="ug-hers__model">MyLab&#8482; X1 Go</span>
+          <span class="ug-hers__model">MyLab&#8482; C25</span>
         </div>
       </div>
       <div class="ug-hers__td-chison" role="cell">

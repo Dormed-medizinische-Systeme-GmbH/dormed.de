@@ -3,15 +3,15 @@
     <link rel="alternate" hreflang="de-DE" href="https://dormed.de/hersteller/esaote">
         <link rel="alternate" hreflang="x-default" href="https://dormed.de/hersteller/esaote">
 
-        <title>Esaote Ultraschall – MyLab A50 &amp; A70 | SONORING DORMED</title>
-        <meta name="description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <title>Esaote Ultraschall – MyLab A50, A70, X1 Go &amp; C25 | SONORING DORMED</title>
+        <meta name="description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
         <meta name="robots" content="index, follow">
         <link rel="canonical" href="https://dormed.de/hersteller/esaote">
 
     
 
-        <meta property="og:title" content="Esaote Ultraschall – MyLab A50 &amp;amp; A70 | SONORING DORMED">
-        <meta property="og:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <meta property="og:title" content="Esaote Ultraschall – MyLab A50, A70, X1 Go &amp;amp; C25 | SONORING DORMED">
+        <meta property="og:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
         <meta property="og:url" content="https://dormed.de/hersteller/esaote">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Dormed med. Systeme GmbH">
@@ -19,8 +19,8 @@
     
 
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Esaote Ultraschall – MyLab A50 &amp;amp; A70 | SONORING DORMED">
-        <meta name="twitter:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.">
+        <meta name="twitter:title" content="Esaote Ultraschall – MyLab A50, A70, X1 Go &amp;amp; C25 | SONORING DORMED">
+        <meta name="twitter:description" content="Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.">
 
     
 
@@ -30,8 +30,8 @@
         {
           "@type": "AboutPage",
           "@id": "https://dormed.de/hersteller/esaote/#webpage",
-          "name": "Esaote Ultraschall – MyLab A50 & A70 | SONORING DORMED",
-          "description": "Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50 und A70.",
+          "name": "Esaote Ultraschall – MyLab A50, A70, X1 Go & C25 | SONORING DORMED",
+          "description": "Esaote MyLab Ultraschallsysteme bei SONORING DORMED – autorisierter Händler mit bundesweitem Service. Beratung, Lieferung und Wartung für MyLab A50, A70, X1 Go und C25.",
           "url": "https://dormed.de/hersteller/esaote",
           "publisher": { "@id": "https://dormed.de/#organization" },
           "inLanguage": "de-DE",
@@ -55,10 +55,12 @@
         {
           "@type": "ItemList",
           "name": "Esaote Ultraschallgeräte bei SONORING DORMED",
-          "numberOfItems": 2,
+          "numberOfItems": 4,
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Esaote MyLab A70", "url": "https://dormed.de/ultraschallgeraete/standgeraete/esaote-mylab-a70" },
-            { "@type": "ListItem", "position": 2, "name": "Esaote MyLab A50", "url": "https://dormed.de/ultraschallgeraete/standgeraete/esaote-mylab-a50" }
+            { "@type": "ListItem", "position": 2, "name": "Esaote MyLab A50", "url": "https://dormed.de/ultraschallgeraete/standgeraete/esaote-mylab-a50" },
+            { "@type": "ListItem", "position": 3, "name": "Esaote MyLab X1 Go", "url": "https://dormed.de/ultraschallgeraete/mobile-geraete/esaote-mylab-x1-go" },
+            { "@type": "ListItem", "position": 4, "name": "Esaote MyLab C25", "url": "https://dormed.de/ultraschallgeraete/mobile-geraete/esaote-mylab-c25" }
           ]
         },
         {
@@ -82,10 +84,10 @@
             },
             {
               "@type": "Question",
-              "name": "Warum gibt es nur zwei Esaote-Modelle im Sortiment?",
+              "name": "Warum gibt es nur vier Esaote-Modelle im Sortiment?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Esaote positioniert sich bewusst als Spezialist — nicht als Vollsortimenter. Das MyLab A50 und A70 decken den Bereich Mittelklasse bis Oberklasse vollständig ab und sind die Modelle mit dem besten Verhältnis aus Bedienbarkeit, Bildqualität und Preis. Unser Fokus liegt auf den zwei Modellen die wir aus eigener Erfahrung empfehlen können."
+                "text": "Esaote positioniert sich bewusst als Spezialist — nicht als Vollsortimenter. Das MyLab A50 und A70 decken den Bereich Mittelklasse bis Oberklasse vollständig ab und sind die Modelle mit dem besten Verhältnis aus Bedienbarkeit, Bildqualität und Preis. Für den mobilen Einsatz ergänzen das MyLab X1 Go (Ultra-Slim Portable) und das MyLab C25 (klappbares Kompaktgerät) das Sortiment. Unser Fokus liegt auf den vier Modellen die wir aus eigener Erfahrung empfehlen können."
               }
             },
             {
@@ -502,7 +504,7 @@
         <div class="es-hero__pills">
           <span class="es-hero__pill">Esaote MyLab</span>
           <span class="es-hero__pill">Esaote Ultraschall Deutschland</span>
-          <span class="es-hero__pill">MyLab A50 · A70</span>
+          <span class="es-hero__pill">MyLab A50 · A70 · X1 Go · C25</span>
           <span class="es-hero__pill">Esaote Händler</span>
           <span class="es-hero__pill">European Design</span>
         </div>
@@ -527,6 +529,22 @@
           <div class="es-hero__product-info">
             <span class="es-hero__product-name"> MyLab™ A50</span>
             <span class="es-hero__product-desc">Mittelklasse · KI-Copilot · 4+1 Ports · Akku optional</span>
+          </div>
+          <div class="es-hero__product-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </a>
+        <a class="es-hero__product-card" href="/ultraschallgeraete/mobile-geraete/esaote-mylab-x1-go">
+          <span class="es-hero__product-series">X1 Go</span>
+          <div class="es-hero__product-info">
+            <span class="es-hero__product-name">MyLab™ X1 Go</span>
+            <span class="es-hero__product-desc">Ultra-Slim Portable · 1,2 kg · 8" Full HD Touch · 4,5 h Akku</span>
+          </div>
+          <div class="es-hero__product-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </a>
+        <a class="es-hero__product-card" href="/ultraschallgeraete/mobile-geraete/esaote-mylab-c25">
+          <span class="es-hero__product-series">C25</span>
+          <div class="es-hero__product-info">
+            <span class="es-hero__product-name">MyLab™ C25</span>
+            <span class="es-hero__product-desc">Kompakt-Portable · klappbar · 15,6" + 15" Touch · 5 h Akku</span>
           </div>
           <div class="es-hero__product-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </a>
@@ -870,6 +888,7 @@
 }
 .es-devices__card-class--ober { color: rgba(62,178,240,0.85); background: rgba(62,178,240,0.07); border: 1px solid rgba(62,178,240,0.18); }
 .es-devices__card-class--mittel { color: rgba(52,211,153,0.85); background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.18); }
+.es-devices__card-class--mobil { color: rgba(245,158,11,0.9); background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); }
 .es-devices__card-model { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; color: #0B1A2E; line-height: 1.1; }
 .es-devices__card-tagline { font-size: 0.88rem; font-weight: 500; color: rgb(72,87,112); font-style: italic; }
 .es-devices__card-specs { display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
@@ -934,7 +953,7 @@
       <div class="es-devices__header-left">
         <div class="es-devices__eyebrow">
           <div class="es-devices__eyebrow-line"></div>
-          <span class="es-devices__eyebrow-text">Alle Esaote-Produkte · MyLab A-Serie</span>
+          <span class="es-devices__eyebrow-text">Alle Esaote-Produkte · MyLab A-Serie · Mobile Geräte</span>
         </div>
         <h2 class="es-devices__h2">Das Esaote-Sortiment<br><span>bei SONORING DORMED</span></h2>
       </div>
@@ -987,6 +1006,54 @@
             <span class="es-devices__card-spec">KI-Copilot Augmented Insight™ · easyMode · easyColor</span>
             <span class="es-devices__card-spec">4+1 aktive Ports · Akku optional · ergonomisches Design</span>
             <span class="es-devices__card-spec">3 Jahre Herstellergarantie · CE MDR · TÜV SÜD</span>
+          </div>
+          <div class="es-devices__card-cta">
+            <span class="es-devices__card-link">Gerät ansehen <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span class="es-devices__card-consult">Anfragen</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- MyLab X1 Go -->
+      <a class="es-devices__card" href="/ultraschallgeraete/mobile-geraete/esaote-mylab-x1-go">
+        <div class="es-devices__card-img">
+          <img src="/assets/img/produkte/esaote-mylab-x1-go/652c2df7-a421-45a9-187b-1439b97de700.png" alt="Esaote MyLab X1 Go Ultraschallgerät" loading="lazy"/>
+        </div>
+        <div class="es-devices__card-body">
+          <div class="es-devices__card-top">
+            <span class="es-devices__card-brand">Esaote</span>
+            <span class="es-devices__card-class es-devices__card-class--mobil">Mobil</span>
+          </div>
+          <span class="es-devices__card-model">MyLab™ X1 Go</span>
+          <span class="es-devices__card-tagline">Ultra-Slim Portable</span>
+          <div class="es-devices__card-specs">
+            <span class="es-devices__card-spec">Nur 1,2 kg · 8" Full HD Touchscreen</span>
+            <span class="es-devices__card-spec">4,5 h Akkulaufzeit</span>
+            <span class="es-devices__card-spec">MDR Klasse IIa</span>
+          </div>
+          <div class="es-devices__card-cta">
+            <span class="es-devices__card-link">Gerät ansehen <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            <span class="es-devices__card-consult">Anfragen</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- MyLab C25 -->
+      <a class="es-devices__card" href="/ultraschallgeraete/mobile-geraete/esaote-mylab-c25">
+        <div class="es-devices__card-img">
+          <img src="/assets/img/produkte/esaote-mylab-c25/d04604fd-b27d-48ff-e8ec-fcf28220e500.png" alt="Esaote MyLab C25 Ultraschallgerät" loading="lazy"/>
+        </div>
+        <div class="es-devices__card-body">
+          <div class="es-devices__card-top">
+            <span class="es-devices__card-brand">Esaote</span>
+            <span class="es-devices__card-class es-devices__card-class--mobil">Mobil</span>
+          </div>
+          <span class="es-devices__card-model">MyLab™ C25</span>
+          <span class="es-devices__card-tagline">Kompakt-Portable · klappbar</span>
+          <div class="es-devices__card-specs">
+            <span class="es-devices__card-spec">15,6" Monitor + 15" Touchscreen</span>
+            <span class="es-devices__card-spec">5 h Akkulaufzeit</span>
+            <span class="es-devices__card-spec">KI-gestützte Bildgebung</span>
           </div>
           <div class="es-devices__card-cta">
             <span class="es-devices__card-link">Gerät ansehen <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
@@ -1369,11 +1436,11 @@
       </div>
       <div class="es-faq__item">
         <button class="es-faq__question" aria-expanded="false">
-          <span class="es-faq__question-text"> Warum gibt es nur zwei Esaote-Modelle im Sortiment?</span>
+          <span class="es-faq__question-text"> Warum gibt es nur vier Esaote-Modelle im Sortiment?</span>
           <span class="es-faq__icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
         <div class="es-faq__answer" role="region">
-          <div class="es-faq__answer-inner"><p class="es-faq__answer-text">Esaote positioniert sich bewusst als Spezialist — nicht als Vollsortimenter. Das MyLab A50 und A70 decken den Bereich Mittelklasse bis Oberklasse vollständig ab und sind die Modelle mit dem besten Verhältnis aus Bedienbarkeit, Bildqualität und Preis. Esaote bietet weitere Modelle an (z.B. MyLab Sigma Series) die wir auf Anfrage beschaffen können. Unser Fokus liegt auf den zwei Modellen die wir aus eigener Erfahrung empfehlen können.</p></div>
+          <div class="es-faq__answer-inner"><p class="es-faq__answer-text">Esaote positioniert sich bewusst als Spezialist — nicht als Vollsortimenter. Das MyLab A50 und A70 decken den Bereich Mittelklasse bis Oberklasse vollständig ab und sind die Modelle mit dem besten Verhältnis aus Bedienbarkeit, Bildqualität und Preis. Für den mobilen Einsatz ergänzen das MyLab X1 Go (Ultra-Slim Portable) und das MyLab C25 (klappbares Kompaktgerät) das Sortiment. Esaote bietet weitere Modelle an (z.B. MyLab Sigma Series) die wir auf Anfrage beschaffen können. Unser Fokus liegt auf den vier Modellen die wir aus eigener Erfahrung empfehlen können.</p></div>
         </div>
       </div>
       <div class="es-faq__item">
