@@ -9,7 +9,7 @@ window.CookieConsent = CookieConsent;
 // default, its own modal DOM is only ever created on demand - since we never ask
 // for it, nothing gets rendered. Only cookie/consent-state logic is actually
 // used; the visible banner below is our own markup/CSS driven through the
-// public API - see AGENTS.md "Consent-Management".
+// public API - see resources/js/README.md.
 CookieConsent.run({
     mode: 'opt-in',
     autoShow: false,

@@ -1,58 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# dormed.de
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website der SONORING DORMED med. Systeme GmbH (Ultraschallgeräte-Fachhändler). Laravel 13 /
+PHP 8.4, Blade-Views, Vite für CSS/JS. Das Projekt ging aus dem statischen Export eines
+Website-Builders („Yuuble") hervor; Details zur Migration: Verzeichnis-READMEs unten.
 
-## About Laravel
+Ansprechpartner und Auftraggeber: Lukas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Leitplanken
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **URLs sind fix.** Keine Route ändert sich; Google kennt jede Seite exakt so. Neue Seiten
+   sind erlaubt, bestehende URLs bleiben.
+2. **CAS genesisWorld führt die Geschäftsdaten.** Anfragen, Veranstaltungen und
+   Gebrauchtgeräte leben dort; die Website hält eine SQLite-Datei mit Framework-Zustand
+   (Cache, Sessions, Queue) und einem Spiegel der CAS-Daten. Formular-Einträge werden nicht
+   gespeichert. Details und Wiederherstellung: [database](database/README.md).
+3. **Kein Dauerprozess.** Klassisches PHP-FPM-Hosting; `npm run build` läuft nur beim
+   Deploy, die Queue arbeitet per Cron (`schedule:run`).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Umgebungen
 
-## Learning Laravel
+- **Produktiv: dormed.de.** Push auf `main` löst den Deploy aus
+  (`.github/workflows/deploy.yml`), sobald `tests.yml` grün ist.
+- **Netzwerk in Agenten-Sessions:** Ein 403 auf CONNECT-Ebene ist die Egress-Policy der
+  Session, keine Website-Blockade. Melden und um Freigabe bitten.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Arbeiten
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Setup: `composer run setup`, Entwicklung: `composer run dev`.
+- Vor „fertig": `php artisan test --compact` und `vendor/bin/pint --dirty --format agent`.
+- PRs folgen `.github/pull_request_template.md`.
+- Ein Commit pro logischer Einheit; die Message erklärt das Warum.
+- Scope: genau das Verlangte. Architektur-, Setup- und Dependency-Entscheidungen vorab mit
+  Lukas klären.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Dokumentationsbaum
 
-## Agentic Development
+Das Projektwissen steht in `README.md`-Dateien, die einen Baum bilden: Jede README
+verlinkt ihre Unterverzeichnisse, und nur diese eine Ebene tiefer. Lies die README eines
+Verzeichnisses, bevor du darin arbeitest.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+**Regeln**
 
-```bash
-composer require laravel/boost --dev
+1. Wissen steht im tiefsten Verzeichnis, das es vollständig umfasst. Querschnittsthemen
+   haben ein Zuhause; alle anderen Stellen verlinken dorthin.
+2. Eine README entsteht nur, wo es Nicht-Ableitbares gibt: Konvention, Begründung, Falle.
+   Was Code, Config oder `composer.json` sagen, wird nicht abgeschrieben.
+3. Keine Zeitangaben, Projektphasen oder „geplant"-Aussagen.
+4. Ändert ein Commit das Verhalten eines Verzeichnisses, aktualisiert derselbe Commit
+   dessen README.
+5. `tests/Feature/DocsTreeTest.php` prüft Links und Verlinkung durch den Elternknoten.
 
-php artisan boost:install
+**Gerüst einer README**
+
+```markdown
+# <Verzeichnis>
+<Ein Satz: wofür das Verzeichnis da ist.>
+
+## Inhalt
+- [Unterverzeichnis](Unterverzeichnis/README.md) — <Thema>; <wann lesen>.
+
+## Regeln
+<Nur Nicht-Ableitbares.>
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**Verzeichnisse**
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [app](app/README.md) — Formulare, Lead-Flow, Queue und Logs, Spamschutz; lesen bei jeder
+  Änderung an Formularen, Mails oder Jobs.
+- [config](config/README.md) — projekteigene Configs und Env-Variablen.
+- [database](database/README.md) — SQLite, Spiegel-Tabellen, was ein Reset kostet.
+- [resources](resources/README.md) — CSS, Vite-Eingänge, Sitemap, Analytics; darunter
+  [views](resources/views/README.md) (Seiten, Neues-Gerät-Checkliste) und
+  [js](resources/js/README.md) (Consent, Formular-Spamschutz).
+- [routes](routes/README.md) — URL-Stabilität, Routen-Konventionen.
+- [tests](tests/README.md) — Pest, CI-Gate, Konventionen.
+- [public](public/README.md) — Webroot, Bild-Ablage, Storage-Link.
+- [.github](.github/README.md) — Workflows, Deploy, Server-Voraussetzungen.
