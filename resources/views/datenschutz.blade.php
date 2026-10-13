@@ -652,7 +652,7 @@
           Beim ersten Besuch unserer Website fragen wir Sie über ein eigenes Einwilligungsbanner nach Ihrer Einwilligung für optionale Cookies (Kategorien „Analyse“ und „Marketing“). Optionale Dienste, insbesondere Analyse-Dienste, werden erst nach Ihrer Zustimmung geladen. Ihre Auswahl speichern wir in einem Cookie mit dem Namen <code>cc_cookie</code> auf Ihrem Endgerät (Speicherdauer: 182 Tage); es werden dafür keine Daten an Dritte übermittelt. Rechtsgrundlage für zustimmungspflichtige Cookies: Art. 6 Abs. 1 lit. a DS-GVO.
         </div>
         <div class="dsgvo__p">
-          Sie können das Setzen von Cookies generell über Ihre Browsereinstellungen unterbinden oder jederzeit Ihre Einwilligung über unser Consent-Banner anpassen. Das Ablehnen optionaler Cookies hat keinen Einfluss auf die grundlegende Nutzbarkeit der Website.
+          Sie können das Setzen von Cookies generell über Ihre Browsereinstellungen unterbinden oder jederzeit Ihre Einwilligung <a href="#dsgvo-cookies" data-consent-open>hier</a> anpassen. Das Ablehnen optionaler Cookies hat keinen Einfluss auf die grundlegende Nutzbarkeit der Website.
         </div>
       </div>
 

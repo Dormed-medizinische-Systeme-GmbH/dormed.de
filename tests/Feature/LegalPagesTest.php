@@ -31,5 +31,6 @@ test('the privacy policy describes the own consent banner instead of a third-par
         ->assertOk()
         ->assertDontSee('Cookiebot')
         ->assertDontSee('Usercentrics')
-        ->assertSee('cc_cookie', false);
+        ->assertSee('cc_cookie', false)
+        ->assertSee('data-consent-open', false);
 });
