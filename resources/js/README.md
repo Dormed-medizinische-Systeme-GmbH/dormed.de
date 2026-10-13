@@ -19,6 +19,10 @@ Policy-Änderung). Das sichtbare Banner ist eigenes Markup
 - **Kategorien** `necessary` (readOnly), `analytics`, `marketing`, ohne konkrete Dienste.
   `revision` hochzählen, sobald sich Kategorien oder Zweck ändern: Wer unter einer
   niedrigeren Revision zugestimmt hat, bekommt das Banner erneut.
+- **Banner erneut öffnen:** Jedes Element mit `data-consent-open` (z. B. der Link „hier" in
+  Abschnitt „Cookies" der Datenschutzerklärung) öffnet das Banner zur neuen Auswahl,
+  vorbelegt mit dem aktuellen Stand. Eine Abwahl wirkt auf bereits geladene Skripte erst
+  ab dem nächsten Seitenaufruf.
 - **Skripte hinter Consent:** Ein Skript mit `type="text/plain"` und `data-category="…"`
   führt die Library (`manageScriptTags`, Default an) erst aus, wenn die Kategorie
   akzeptiert ist, so beim Rybbit-Skript im Layout ([resources](../README.md)). Ohne
