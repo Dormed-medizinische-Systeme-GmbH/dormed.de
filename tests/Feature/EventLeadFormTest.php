@@ -265,5 +265,7 @@ test('the company mail is still sent without attachment when the pdf cannot be r
 test('the customer confirmation has no attachment', function () {
     $mail = new EventLeadCustomerMail(eventName: 'Testmesse 2026', praxisName: 'Praxis', email: 'praxis@example.com');
 
-    expect($mail->attachments())->toBe([]);
+    expect($mail->attachments)->toBe([])
+        ->and($mail->rawAttachments)->toBe([])
+        ->and($mail->diskAttachments)->toBe([]);
 });
