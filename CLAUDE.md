@@ -1,3 +1,9 @@
+# dormed.de — Einstieg
+
+Projektwissen steht in einem Baum aus `README.md`-Dateien, Start: [README.md](README.md).
+Lies die README eines Verzeichnisses, bevor du darin arbeitest, und halte sie im selben
+Commit aktuell, wenn sich dessen Verhalten ändert.
+
 <laravel-boost-guidelines>
 === foundation rules ===
 
