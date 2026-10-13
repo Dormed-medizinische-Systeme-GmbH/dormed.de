@@ -33,7 +33,7 @@ function casAppointment(array $fields = []): array
             'GGUID' => MEDICA_GUID,
             'GWTYPE' => 'Veranstaltung',
             'KEYWORD' => 'Medica 2026',
-            'CATEGORY' => 'Messe/Kongreß/Veranstaltung',
+            'CATEGORY' => 'Messe',
             'WHOLEDAY' => true,
             'START_DT' => '2026-11-16T00:00:00.000Z',
             'END_DT' => '2026-11-20T00:00:00.000Z',
@@ -147,6 +147,14 @@ describe('synchronizer', function () {
         syncMedica();
 
         expect(CalendarEvent::where('cas_id', MEDICA_GUID)->sole()->slug)->toBe('medica-2026-2');
+    });
+
+    test('the CAS category sets the event type', function () {
+        fakeCasAppointment(['CATEGORY' => 'Fachtagung']);
+
+        syncMedica();
+
+        expect(CalendarEvent::sole()->type)->toBe('fachtagung');
     });
 
     test('appointments outside the published categories are removed', function () {

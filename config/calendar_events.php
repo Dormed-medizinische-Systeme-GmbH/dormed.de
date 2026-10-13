@@ -24,12 +24,12 @@ return [
 
     /*
     | CAS-Kategorie (Feld CATEGORY = Veranstaltungsart) -> Typ auf der Seite
-    | (Badge, Farbe, Filter). Nur Termine in einer hier eingetragenen
-    | Kategorie kommen auf die Website, alle anderen werden lokal entfernt -
-    | solange es keine Prüfung gegen die CAS-View gibt, ist das der Filter.
+    | (Badge, Farbe, Filter). Veranstaltungen ohne oder mit einer hier nicht
+    | eingetragenen Kategorie werden lokal entfernt.
     */
     'categories' => [
-        'Messe/Kongreß/Veranstaltung' => 'messe',
+        'Messe' => 'messe',
+        'Fachtagung' => 'fachtagung',
     ],
 
     /*
