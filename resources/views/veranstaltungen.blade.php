@@ -812,149 +812,31 @@
     <div class="ver-tl__timeline ver-tl__anim ver-tl__anim--d2"
          role="list" aria-label="Veranstaltungskalender">
 
-      <div class="ver-tl__month" aria-label="April 2026">April 2026</div>
+      <div class="ver-tl__month" aria-label="November 2026">November 2026</div>
 
-      <!-- E1 — Gynäkologische Fortbildung Travemünde -->
-      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
+      <!-- E7 — MEDICA -->
+      <div class="ver-tl__ev" data-type="messe" role="listitem">
         <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">18</div><div class="ver-tl__ev-mon">Apr</div></div>
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--me" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">16</div><div class="ver-tl__ev-mon">Nov</div></div>
           <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
-            <div class="ver-tl__ev-title">Gynäkologische Fortbildung Travemünde</div>
-            <div class="ver-tl__ev-meta">18.–19. April 2026 · Travemünde</div>
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--me">Messe</span>
+            <div class="ver-tl__ev-title">MEDICA 2026 — Weltgrößte Medizinmesse</div>
+            <div class="ver-tl__ev-meta">16.–19. Nov 2026 · Messe Düsseldorf</div>
           </div>
           <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-04-18">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-11-16">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
             <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
           </div>
         </div>
         <div class="ver-tl__ev-expand" aria-hidden="true">
           <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="/assets/img/73b45284-ce82-4883-e864-615e5f717b00.jpg" alt="Gynäkologische Fortbildung Travemünde 2026" loading="lazy"/></div>
+            <div class="ver-tl__ev-img"><img src="/assets/img/1139b9ae-9fae-4ce8-73f3-5c08b42fda00.png" alt="MEDICA 2026 — Weltgrößte Medizinmesse Düsseldorf" loading="lazy"/></div>
             <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">Gynäkologische Fortbildung Travemünde 2026</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Travemünde · Ostseeküste</div>
-              <p class="ver-tl__ev-detail-desc">Jährliche Fortbildung für Gynäkologen und Geburtshelfer an der Ostsee. SONORING DORMED ist mit Ultraschallgeräten vor Ort — Live-Demos mit Esaote und Mindray Systemen auf Anfrage.</p>
+              <div class="ver-tl__ev-detail-title">MEDICA 2026 · Messe Düsseldorf</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Messe Düsseldorf · 16.–19. November 2026</div>
+              <p class="ver-tl__ev-detail-desc">Jährlicher Pflichttermin für die medizinische Fachwelt. SONORING DORMED präsentiert die neuesten Mindray-, Esaote- und Chison-Systeme. Persönlicher Termin am Stand vorab buchbar.</p>
               <a href="/kontakt" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- E2 — Hamburger Update Gyn & Geburtshilfe -->
-      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
-        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">24</div><div class="ver-tl__ev-mon">Apr</div></div>
-          <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
-            <div class="ver-tl__ev-title">22. Hamburger Update Gynäkologie &amp; Geburtshilfe</div>
-            <div class="ver-tl__ev-meta">24.–25. April 2026 · Hamburg</div>
-          </div>
-          <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-04-24">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
-            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
-          </div>
-        </div>
-        <div class="ver-tl__ev-expand" aria-hidden="true">
-          <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="/assets/img/06bab690-7bc6-4e4f-4281-e33fa6d67d00.png" alt="22. Hamburger Update Gynäkologie und Geburtshilfe 2026" loading="lazy"/></div>
-            <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">22. Hamburger Update Gynäkologie &amp; Geburtshilfe</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hamburg · Hamburger Team vor Ort</div>
-              <p class="ver-tl__ev-detail-desc">Etablierte Fortbildungsreihe mit aktuellen Themen aus Gynäkologie und Geburtshilfe. Unser Hamburger Team berät zu gynäkologischen Ultraschallgeräten und 3D/4D-Systemen.</p>
-              <a href="https://www.hamburger-update.de/anmeldung.html" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ver-tl__month" aria-label="Mai 2026">Mai 2026</div>
-
-      <!-- E3 — Hamburger Tag hausärztliche Fortbildung -->
-      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
-        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">09</div><div class="ver-tl__ev-mon">Mai</div></div>
-          <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
-            <div class="ver-tl__ev-title">Hamburger Tag der hausärztlichen Fortbildung</div>
-            <div class="ver-tl__ev-meta">09. Mai 2026 · Hamburg</div>
-          </div>
-          <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-05-09">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
-            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
-          </div>
-        </div>
-        <div class="ver-tl__ev-expand" aria-hidden="true">
-          <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="/assets/img/64772b3f-bf90-4af1-b2e3-4de7eade0300.png" alt="Hamburger Tag der hausärztlichen Fortbildung 2026" loading="lazy"/></div>
-            <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">Hamburger Tag der hausärztlichen Fortbildung 2026</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hamburg · Hamburger Team vor Ort</div>
-              <p class="ver-tl__ev-detail-desc">Fortbildungstag für Allgemeinmediziner und Hausärzte. DORMED zeigt kompakte Ultraschallgeräte für die Allgemeinmedizin — von der Abdomensonographie bis zum Gefäßscreening.</p>
-              <a href="https://aerzte.ihf-fortbildung.de/veranstaltungen/hamburger-tag-der-hausaerztlichen-fortbildung-09-05-2026/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ver-tl__month" aria-label="August 2026">August 2026</div>
-
-      <!-- E4 — Werkstatt Pädiatrie Lübeck -->
-      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
-        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">29</div><div class="ver-tl__ev-mon">Aug</div></div>
-          <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
-            <div class="ver-tl__ev-title">Werkstatt Pädiatrie · LV Nord</div>
-            <div class="ver-tl__ev-meta">29.–30. August 2026 · Lübeck</div>
-          </div>
-          <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-08-29">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
-            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
-          </div>
-        </div>
-        <div class="ver-tl__ev-expand" aria-hidden="true">
-          <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="/assets/img/4ccf1f50-d664-427f-3694-694d1f7cf900.jpg" alt="Werkstatt Pädiatrie 2026 Lübeck" loading="lazy"/></div>
-            <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">Werkstatt Pädiatrie · LV Hamburg, Bremen, Niedersachsen, Schleswig-Holstein</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Lübeck · Schleswig-Holstein</div>
-              <p class="ver-tl__ev-detail-desc">Fortbildungsveranstaltung der vier norddeutschen Landesverbände für niedergelassene Kinder- und Jugendärzte. SONORING DORMED stellt pädiatrisch geeignete Ultraschallsysteme vor — mit passenden Schallköpfen für Säuglings- und Kinderdiagnostik.</p>
-              <a href=" https://www.bvkj.de/fortbildungen/veranstaltung/werkstatt-paediatrie-1/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ver-tl__month" aria-label="September 2026">September 2026</div>
-
-      <!-- E5 — Pränatales Symposium Hamburg (NEU) -->
-      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
-        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">05</div><div class="ver-tl__ev-mon">Sep</div></div>
-          <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
-            <div class="ver-tl__ev-title">Pränatales Symposium Hamburg 2026</div>
-            <div class="ver-tl__ev-meta">05. September 2026 · Hamburg</div>
-          </div>
-          <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-09-05">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
-            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
-          </div>
-        </div>
-        <div class="ver-tl__ev-expand" aria-hidden="true">
-          <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="https://dgh-kongress.de/wp-content/uploads/2023/06/DGH26_Banner_Mobil.webp" alt="Pränatales Symposium Hamburg 2026 in der Bucerius Law School" loading="lazy"/></div>
-            <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">Pränatales Symposium Hamburg 2026</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Bucerius Law School · Hamburg</div>
-              <p class="ver-tl__ev-detail-desc">Etabliertes Symposium zur Pränataldiagnostik mit aktuellen Themen aus Feinultraschall, Ersttrimester-Screening und Doppleruntersuchungen. SONORING DORMED ist mit hochauflösenden Esaote- und Mindray-Systemen vor Ort — Live-Demos und persönliche Beratung am Stand.</p>
-              <a href="https://dgh-kongress.de/anmeldung/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
             </div>
           </div>
         </div>
@@ -990,30 +872,148 @@
         </div>
       </div>
 
-      <div class="ver-tl__month" aria-label="November 2026">November 2026</div>
+      <div class="ver-tl__month" aria-label="September 2026">September 2026</div>
 
-      <!-- E7 — MEDICA -->
-      <div class="ver-tl__ev" data-type="messe" role="listitem">
+      <!-- E5 — Pränatales Symposium Hamburg (NEU) -->
+      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
         <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
-          <div class="ver-tl__ev-accent ver-tl__ev-accent--me" aria-hidden="true"></div>
-          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">16</div><div class="ver-tl__ev-mon">Nov</div></div>
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">05</div><div class="ver-tl__ev-mon">Sep</div></div>
           <div class="ver-tl__ev-body">
-            <span class="ver-tl__ev-badge ver-tl__ev-badge--me">Messe</span>
-            <div class="ver-tl__ev-title">MEDICA 2026 — Weltgrößte Medizinmesse</div>
-            <div class="ver-tl__ev-meta">16.–19. Nov 2026 · Messe Düsseldorf</div>
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
+            <div class="ver-tl__ev-title">Pränatales Symposium Hamburg 2026</div>
+            <div class="ver-tl__ev-meta">05. September 2026 · Hamburg</div>
           </div>
           <div class="ver-tl__ev-right">
-            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-11-16">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-09-05">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
             <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
           </div>
         </div>
         <div class="ver-tl__ev-expand" aria-hidden="true">
           <div class="ver-tl__ev-expand-inner">
-            <div class="ver-tl__ev-img"><img src="/assets/img/1139b9ae-9fae-4ce8-73f3-5c08b42fda00.png" alt="MEDICA 2026 — Weltgrößte Medizinmesse Düsseldorf" loading="lazy"/></div>
+            <div class="ver-tl__ev-img"><img src="https://dgh-kongress.de/wp-content/uploads/2023/06/DGH26_Banner_Mobil.webp" alt="Pränatales Symposium Hamburg 2026 in der Bucerius Law School" loading="lazy"/></div>
             <div class="ver-tl__ev-detail">
-              <div class="ver-tl__ev-detail-title">MEDICA 2026 · Messe Düsseldorf</div>
-              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Messe Düsseldorf · 16.–19. November 2026</div>
-              <p class="ver-tl__ev-detail-desc">Jährlicher Pflichttermin für die medizinische Fachwelt. SONORING DORMED präsentiert die neuesten Mindray-, Esaote- und Chison-Systeme. Persönlicher Termin am Stand vorab buchbar.</p>
+              <div class="ver-tl__ev-detail-title">Pränatales Symposium Hamburg 2026</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Bucerius Law School · Hamburg</div>
+              <p class="ver-tl__ev-detail-desc">Etabliertes Symposium zur Pränataldiagnostik mit aktuellen Themen aus Feinultraschall, Ersttrimester-Screening und Doppleruntersuchungen. SONORING DORMED ist mit hochauflösenden Esaote- und Mindray-Systemen vor Ort — Live-Demos und persönliche Beratung am Stand.</p>
+              <a href="https://dgh-kongress.de/anmeldung/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ver-tl__month" aria-label="August 2026">August 2026</div>
+
+      <!-- E4 — Werkstatt Pädiatrie Lübeck -->
+      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
+        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">29</div><div class="ver-tl__ev-mon">Aug</div></div>
+          <div class="ver-tl__ev-body">
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
+            <div class="ver-tl__ev-title">Werkstatt Pädiatrie · LV Nord</div>
+            <div class="ver-tl__ev-meta">29.–30. August 2026 · Lübeck</div>
+          </div>
+          <div class="ver-tl__ev-right">
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-08-29">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
+          </div>
+        </div>
+        <div class="ver-tl__ev-expand" aria-hidden="true">
+          <div class="ver-tl__ev-expand-inner">
+            <div class="ver-tl__ev-img"><img src="/assets/img/4ccf1f50-d664-427f-3694-694d1f7cf900.jpg" alt="Werkstatt Pädiatrie 2026 Lübeck" loading="lazy"/></div>
+            <div class="ver-tl__ev-detail">
+              <div class="ver-tl__ev-detail-title">Werkstatt Pädiatrie · LV Hamburg, Bremen, Niedersachsen, Schleswig-Holstein</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Lübeck · Schleswig-Holstein</div>
+              <p class="ver-tl__ev-detail-desc">Fortbildungsveranstaltung der vier norddeutschen Landesverbände für niedergelassene Kinder- und Jugendärzte. SONORING DORMED stellt pädiatrisch geeignete Ultraschallsysteme vor — mit passenden Schallköpfen für Säuglings- und Kinderdiagnostik.</p>
+              <a href=" https://www.bvkj.de/fortbildungen/veranstaltung/werkstatt-paediatrie-1/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ver-tl__month" aria-label="Mai 2026">Mai 2026</div>
+
+      <!-- E3 — Hamburger Tag hausärztliche Fortbildung -->
+      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
+        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">09</div><div class="ver-tl__ev-mon">Mai</div></div>
+          <div class="ver-tl__ev-body">
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
+            <div class="ver-tl__ev-title">Hamburger Tag der hausärztlichen Fortbildung</div>
+            <div class="ver-tl__ev-meta">09. Mai 2026 · Hamburg</div>
+          </div>
+          <div class="ver-tl__ev-right">
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-05-09">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
+          </div>
+        </div>
+        <div class="ver-tl__ev-expand" aria-hidden="true">
+          <div class="ver-tl__ev-expand-inner">
+            <div class="ver-tl__ev-img"><img src="/assets/img/64772b3f-bf90-4af1-b2e3-4de7eade0300.png" alt="Hamburger Tag der hausärztlichen Fortbildung 2026" loading="lazy"/></div>
+            <div class="ver-tl__ev-detail">
+              <div class="ver-tl__ev-detail-title">Hamburger Tag der hausärztlichen Fortbildung 2026</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hamburg · Hamburger Team vor Ort</div>
+              <p class="ver-tl__ev-detail-desc">Fortbildungstag für Allgemeinmediziner und Hausärzte. DORMED zeigt kompakte Ultraschallgeräte für die Allgemeinmedizin — von der Abdomensonographie bis zum Gefäßscreening.</p>
+              <a href="https://aerzte.ihf-fortbildung.de/veranstaltungen/hamburger-tag-der-hausaerztlichen-fortbildung-09-05-2026/" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ver-tl__month" aria-label="April 2026">April 2026</div>
+
+      <!-- E2 — Hamburger Update Gyn & Geburtshilfe -->
+      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
+        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">24</div><div class="ver-tl__ev-mon">Apr</div></div>
+          <div class="ver-tl__ev-body">
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
+            <div class="ver-tl__ev-title">22. Hamburger Update Gynäkologie &amp; Geburtshilfe</div>
+            <div class="ver-tl__ev-meta">24.–25. April 2026 · Hamburg</div>
+          </div>
+          <div class="ver-tl__ev-right">
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-04-24">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
+          </div>
+        </div>
+        <div class="ver-tl__ev-expand" aria-hidden="true">
+          <div class="ver-tl__ev-expand-inner">
+            <div class="ver-tl__ev-img"><img src="/assets/img/06bab690-7bc6-4e4f-4281-e33fa6d67d00.png" alt="22. Hamburger Update Gynäkologie und Geburtshilfe 2026" loading="lazy"/></div>
+            <div class="ver-tl__ev-detail">
+              <div class="ver-tl__ev-detail-title">22. Hamburger Update Gynäkologie &amp; Geburtshilfe</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hamburg · Hamburger Team vor Ort</div>
+              <p class="ver-tl__ev-detail-desc">Etablierte Fortbildungsreihe mit aktuellen Themen aus Gynäkologie und Geburtshilfe. Unser Hamburger Team berät zu gynäkologischen Ultraschallgeräten und 3D/4D-Systemen.</p>
+              <a href="https://www.hamburger-update.de/anmeldung.html" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E1 — Gynäkologische Fortbildung Travemünde -->
+      <div class="ver-tl__ev" data-type="fachtagung" role="listitem">
+        <div class="ver-tl__ev-row" role="button" aria-expanded="false" tabindex="0">
+          <div class="ver-tl__ev-accent ver-tl__ev-accent--ft" aria-hidden="true"></div>
+          <div class="ver-tl__ev-date" aria-hidden="true"><div class="ver-tl__ev-day">18</div><div class="ver-tl__ev-mon">Apr</div></div>
+          <div class="ver-tl__ev-body">
+            <span class="ver-tl__ev-badge ver-tl__ev-badge--ft">Fachtagung</span>
+            <div class="ver-tl__ev-title">Gynäkologische Fortbildung Travemünde</div>
+            <div class="ver-tl__ev-meta">18.–19. April 2026 · Travemünde</div>
+          </div>
+          <div class="ver-tl__ev-right">
+            <div class="ver-tl__ev-cd" aria-label="Countdown"><div class="ver-tl__ev-cd-num" data-date="2026-04-18">—</div><div class="ver-tl__ev-cd-lbl">Tage</div></div>
+            <div class="ver-tl__ev-chevron" aria-hidden="true"><svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></div>
+          </div>
+        </div>
+        <div class="ver-tl__ev-expand" aria-hidden="true">
+          <div class="ver-tl__ev-expand-inner">
+            <div class="ver-tl__ev-img"><img src="/assets/img/73b45284-ce82-4883-e864-615e5f717b00.jpg" alt="Gynäkologische Fortbildung Travemünde 2026" loading="lazy"/></div>
+            <div class="ver-tl__ev-detail">
+              <div class="ver-tl__ev-detail-title">Gynäkologische Fortbildung Travemünde 2026</div>
+              <div class="ver-tl__ev-detail-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Travemünde · Ostseeküste</div>
+              <p class="ver-tl__ev-detail-desc">Jährliche Fortbildung für Gynäkologen und Geburtshelfer an der Ostsee. SONORING DORMED ist mit Ultraschallgeräten vor Ort — Live-Demos mit Esaote und Mindray Systemen auf Anfrage.</p>
               <a href="/kontakt" class="ver-tl__ev-detail-cta" target="_blank" rel="noopener noreferrer">Zur Anmeldung<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
             </div>
           </div>
