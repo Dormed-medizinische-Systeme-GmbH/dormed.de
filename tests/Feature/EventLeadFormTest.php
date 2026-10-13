@@ -132,6 +132,62 @@ test('a valid lead dispatches the mail job with the event taken from the url', f
         && $job->nachricht === 'Bitte nach der Messe anrufen.');
 });
 
+test('the lead form offers trade-in, purchase date, financing and services', function () {
+    $this->get(route('veranstaltungen.lead.show', 'testmesse-2026'))
+        ->assertOk()
+        ->assertSee('Ankauf / Entsorgung Ihres Altgeräts')
+        ->assertSee('name="altgeraet_system"', false)
+        ->assertSee('name="anschaffungsdatum" type="date"', false)
+        ->assertSee('name="finanzierung" value="full_service"', false)
+        ->assertSee('name="dienstleistungen[]" value="netzwerkanbindung"', false)
+        ->assertSee('Ausstattung / Bemerkungen')
+        ->assertDontSee('>Nachricht<', false);
+});
+
+test('the new lead fields reach the mail job as readable values', function () {
+    Bus::fake();
+
+    $this->post(route('veranstaltungen.lead.store', 'testmesse-2026'), leadFormData([
+        'altgeraet' => 'ja',
+        'altgeraet_system' => 'GE Voluson E8',
+        'anschaffungsdatum' => '2027-03-01',
+        'finanzierung' => 'full_service',
+        'dienstleistungen' => ['wartung', 'garantieverlaengerung'],
+    ]))->assertRedirect(route('veranstaltungen.lead.danke', 'testmesse-2026'));
+
+    Bus::assertDispatched(SendEventLeadMails::class, fn (SendEventLeadMails $job) => $job->altgeraetAnkauf === true
+        && $job->altgeraetSystem === 'GE Voluson E8'
+        && $job->anschaffungsdatum === '01.03.2027'
+        && $job->finanzierung === 'Full-Service'
+        && $job->dienstleistungen === ['Wartung', 'Garantieverlängerung']);
+});
+
+test('the new lead fields are optional and the old system is dropped without the trade-in box', function () {
+    Bus::fake();
+
+    $this->post(route('veranstaltungen.lead.store', 'testmesse-2026'), leadFormData(['altgeraet_system' => 'GE Voluson E8']))
+        ->assertRedirect(route('veranstaltungen.lead.danke', 'testmesse-2026'));
+
+    Bus::assertDispatched(SendEventLeadMails::class, fn (SendEventLeadMails $job) => $job->altgeraetAnkauf === false
+        && $job->altgeraetSystem === null
+        && $job->anschaffungsdatum === null
+        && $job->finanzierung === null
+        && $job->dienstleistungen === []);
+});
+
+test('unknown financing, services or dates are rejected', function (string $field, mixed $value) {
+    Bus::fake();
+
+    $this->post(route('veranstaltungen.lead.store', 'testmesse-2026'), leadFormData([$field => $value]))
+        ->assertSessionHasErrors(is_array($value) ? $field.'.0' : $field);
+
+    Bus::assertNothingDispatched();
+})->with([
+    'financing' => ['finanzierung', 'ratenkauf'],
+    'service' => ['dienstleistungen', ['schulung']],
+    'date' => ['anschaffungsdatum', '01.03.2027'],
+]);
+
 test('the lead form has no rate limit so staff can enter several leads in a row', function () {
     Bus::fake();
 
@@ -204,6 +260,33 @@ test('the company mail renders all lead fields', function () {
         ->assertSeeInHtml('Mindray TE 7')
         ->assertSeeInHtml('ca. 30.000 €')
         ->assertSeeInHtml('Bitte nach der Messe anrufen.');
+});
+
+test('the company mail renders trade-in, purchase date, financing and services', function () {
+    $mail = new EventLeadCompanyMail(
+        eventName: 'Testmesse 2026',
+        praxisName: 'Praxis Dr. Mustermann',
+        strasse: null,
+        plz: null,
+        ort: null,
+        email: 'praxis@example.com',
+        telefon: null,
+        interesse: null,
+        budget: null,
+        nachricht: 'Mit Linearsonde',
+        altgeraetAnkauf: true,
+        altgeraetSystem: 'GE Voluson E8',
+        anschaffungsdatum: '01.03.2027',
+        finanzierung: 'Leasing',
+        dienstleistungen: ['Wartung', 'Netzwerkanbindung'],
+    );
+
+    $mail->assertSeeInHtml('Ankauf / Entsorgung gewünscht: GE Voluson E8')
+        ->assertSeeInHtml('01.03.2027')
+        ->assertSeeInHtml('Leasing')
+        ->assertSeeInHtml('Wartung, Netzwerkanbindung')
+        ->assertSeeInHtml('Ausstattung / Bemerkungen')
+        ->assertDontSeeInHtml('>Nachricht<', false);
 });
 
 test('the pdf attachment is a valid pdf with the mail filename', function () {
