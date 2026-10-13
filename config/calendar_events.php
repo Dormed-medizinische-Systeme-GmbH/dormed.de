@@ -16,11 +16,12 @@ return [
     'data_object_type' => 'APPOINTMENT',
 
     /*
-    | Nur Termine mit diesem GWTYPE kommen auf die Website. Der CAS-Webhook
-    | filtert bereits darauf; der Abgleich prüft es zusätzlich, damit ein
-    | Termin, dessen Typ in CAS geändert wird, beim nächsten Sync verschwindet.
+    | Nur Termine mit diesem Typ (CAS-Feld GWSTYPE) kommen auf die Website.
+    | Der CAS-Webhook filtert bereits darauf; der Abgleich prüft es
+    | zusätzlich, damit ein Termin, dessen Typ in CAS geändert wird, beim
+    | nächsten Sync verschwindet.
     */
-    'gwtype' => 'Veranstaltung',
+    'gwstype' => 'Veranstaltung',
 
     /*
     | CAS-Kategorie (Feld CATEGORY = Veranstaltungsart) -> Typ auf der Seite
@@ -33,13 +34,14 @@ return [
     ],
 
     /*
-    | Optionale CAS-Felder, die es noch nicht gibt. null = nicht übernommen
-    | (Beschreibung leer, Anmeldung verlinkt auf /kontakt, Status "scheduled").
+    | Optionale CAS-Felder. null = nicht übernommen. Leere Felder liefert CAS
+    | gar nicht mit; dann ist die Beschreibung leer, die Anmeldung verlinkt
+    | auf /kontakt und der Status ist "Geplant".
     */
     'fields' => [
         'description' => null,
-        'registration_url' => null,
-        'status' => null,
+        'registration_url' => 'VERANSTALTUNGS_LINK',
+        'status' => 'GWSSTATUS',
     ],
 
     /*

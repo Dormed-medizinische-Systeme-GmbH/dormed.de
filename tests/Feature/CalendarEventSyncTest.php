@@ -31,7 +31,7 @@ function casAppointment(array $fields = []): array
         'id' => MEDICA_GUID,
         'fields' => $fields + [
             'GGUID' => MEDICA_GUID,
-            'GWTYPE' => 'Veranstaltung',
+            'GWSTYPE' => 'Veranstaltung',
             'KEYWORD' => 'Medica 2026',
             'CATEGORY' => 'Messe',
             'WHOLEDAY' => true,
@@ -97,6 +97,25 @@ describe('synchronizer', function () {
             ->and($event->description)->toBeNull()
             ->and($event->registration_url)->toBeNull()
             ->and($event->cas_updated_at->toIso8601String())->toBe('2026-10-12T09:45:04+00:00');
+    });
+
+    test('the configured CAS fields are read', function () {
+        fakeCasAppointment(['GWSSTATUS' => 'Abgesagt', 'VERANSTALTUNGS_LINK' => 'https://medica.de']);
+
+        syncMedica();
+
+        expect(CalendarEvent::sole()->only(['status', 'registration_url']))->toBe([
+            'status' => 'cancelled',
+            'registration_url' => 'https://medica.de',
+        ]);
+    });
+
+    test('whitespace in the location is collapsed', function () {
+        fakeCasAppointment(['GISDESCRIPTION' => ' Düsseldorfer  Messegelände ']);
+
+        syncMedica();
+
+        expect(CalendarEvent::sole()->location)->toBe('Düsseldorfer Messegelände');
     });
 
     test('a whole-day appointment ends the day before END_DT', function () {
@@ -168,7 +187,7 @@ describe('synchronizer', function () {
 
     test('appointments that are not of type Veranstaltung are removed', function (?string $gwtype) {
         CalendarEvent::factory()->create(['cas_id' => MEDICA_GUID]);
-        fakeCasAppointment(['GWTYPE' => $gwtype]);
+        fakeCasAppointment(['GWSTYPE' => $gwtype]);
 
         syncMedica();
 
