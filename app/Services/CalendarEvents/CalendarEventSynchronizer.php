@@ -122,7 +122,7 @@ class CalendarEventSynchronizer
             'starts_on' => $startsOn,
             'ends_on' => $endsOn,
             'status' => $this->status($fields),
-            'location' => trim((string) ($fields['GISDESCRIPTION'] ?? '')),
+            'location' => str((string) ($fields['GISDESCRIPTION'] ?? ''))->squish()->toString(),
             'description' => $this->optionalField($fields, 'description'),
             'registration_url' => $this->registrationUrl($fields),
             'cas_updated_at' => $fields['UPDATETIMESTAMP'] ?? null,

@@ -34,13 +34,14 @@ return [
     ],
 
     /*
-    | Optionale CAS-Felder, die es noch nicht gibt. null = nicht übernommen
-    | (Beschreibung leer, Anmeldung verlinkt auf /kontakt, Status "scheduled").
+    | Optionale CAS-Felder. null = nicht übernommen. Leere Felder liefert CAS
+    | gar nicht mit; dann ist die Beschreibung leer, die Anmeldung verlinkt
+    | auf /kontakt und der Status ist "Geplant".
     */
     'fields' => [
         'description' => null,
-        'registration_url' => null,
-        'status' => null,
+        'registration_url' => 'VERANSTALTUNGS_LINK',
+        'status' => 'GWSSTATUS',
     ],
 
     /*
