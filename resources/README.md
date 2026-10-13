@@ -25,6 +25,7 @@ Frontend: Blade-Views, CSS, JS und die Sitemap-Inhalte.
   liefert `routes/web.php` aus (`/sitemap.xml`, `/sitemap-system-pages.xml`), nie als Datei
   aus `public/`. Eine neue indexierbare Seite trägt man von Hand in
   `sitemap-system-pages.xml` ein.
-- **Analytics:** `components/layout.blade.php` bindet das Rybbit-Skript ein. Es lädt
-  unabhängig vom Consent-Zustand, die Consent-Kategorie `analytics` steuert es nicht
-  ([js](js/README.md)).
+- **Analytics:** `components/layout.blade.php` bindet das Rybbit-Skript als
+  `type="text/plain" data-category="analytics"` ein. Die Consent-Library aktiviert es erst
+  nach Zustimmung zur Kategorie `analytics` ([js](js/README.md)). Weitere Drittanbieter-
+  Skripte folgen demselben Muster, nie als normales `<script src>`.

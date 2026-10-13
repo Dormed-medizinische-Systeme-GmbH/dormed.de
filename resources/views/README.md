@@ -32,9 +32,10 @@ hervor; dessen Original liegt unverändert in `.old/` und dient als Referenz fü
 - **Mail- und Lead-Views:** `mail/contact-form`, `mail/event-lead` (inklusive PDF-Vorlage)
   und `veranstaltungen/lead*` gehören zu den Flows in [app](../../app/README.md).
   Firmenmails haben Reply-To = Kunde und müssen präsentabel bleiben.
-- **Rechtstexte** (`impressum`, `datenschutz`, `agb`) stammen unverändert aus der
-  Übergabe. Die Datenschutzerklärung nennt Cookiebot und Google Tag Manager, nicht aber
-  das tatsächliche Consent-Tool, Rybbit, die CAS-Anbindung und den Spam-Score-Dienst.
+- **Rechtstexte** (`impressum`, `datenschutz`, `agb`) stammen aus der Übergabe. Wer
+  Tracking, Consent, Drittdienste oder Datenflüsse ändert (z. B. Analytics, CAS,
+  Spam-Score), prüft den Abschnitt „Cookies" und die Dienste-Abschnitte der
+  Datenschutzerklärung mit.
 
 ## Produktseiten
 

@@ -33,7 +33,8 @@ Es gibt keine Job-Kette und keine Rückmeldung an CAS; der Mailversand kennt CAS
 - **Spam-Score:** `SendInquiryMails` schickt ausschließlich das Freitextfeld `nachricht`
   an einen externen Bewertungsdienst (`services.decision_model`, 8 s Timeout) und hängt
   das Ergebnis (0–1) an die Firmenmail. Jeder Fehler ergibt `null`, die Mails gehen
-  trotzdem raus.
+  trotzdem raus. Der Dienst ist derzeit nicht angebunden: Jeder Aufruf läuft in den
+  Timeout, die Firmenmail geht ohne Score raus und der Job braucht entsprechend 8 s länger.
 
 ## Event-Lead (`/veranstaltungen/{event}/kontakt`)
 

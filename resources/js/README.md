@@ -19,10 +19,13 @@ Policy-Änderung). Das sichtbare Banner ist eigenes Markup
 - **Kategorien** `necessary` (readOnly), `analytics`, `marketing`, ohne konkrete Dienste.
   `revision` hochzählen, sobald sich Kategorien oder Zweck ändern: Wer unter einer
   niedrigeren Revision zugestimmt hat, bekommt das Banner erneut.
-- **Das Rybbit-Skript im Layout wird nicht über diese Kategorien gesteuert**; es lädt
-  immer ([resources](../README.md)).
+- **Skripte hinter Consent:** Ein Skript mit `type="text/plain"` und `data-category="…"`
+  führt die Library (`manageScriptTags`, Default an) erst aus, wenn die Kategorie
+  akzeptiert ist, so beim Rybbit-Skript im Layout ([resources](../README.md)). Ohne
+  Zustimmung oder bei „Nur notwendige" gibt es keinen Request an den Anbieter.
 - **Drittanbieter-Embeds** (z. B. Maps) gate die Website nicht serverseitig über den
-  Consent-Cookie. Bindet man eines ein, muss es erst nach Consent rendern.
+  Consent-Cookie. Bindet man eines ein, muss es erst nach Consent rendern (Skripte per
+  `data-category`, Frames/Bilder gesondert).
 - **Tests mit Playwright:** `hideFromBots` bleibt auf `true` (SEO). Playwright setzt
   `navigator.webdriver = true`, wodurch die Library Consent nie als gültig wertet. Per
   `page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () =>
