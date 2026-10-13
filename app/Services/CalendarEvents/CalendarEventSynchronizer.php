@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
  * Mirrors single CAS APPOINTMENT records into the calendar_events table,
  * same contract as UsedDeviceSynchronizer: the record is fetched by GUID;
  * found and published -> stored, deleted in CAS (404), not (or no longer)
- * of GWTYPE "Veranstaltung" or not in a published category -> removed
+ * of type (GWSTYPE) "Veranstaltung" or not in a published category -> removed
  * locally. Any other CAS
  * failure throws and leaves local data untouched, so the queue retries.
  * Field mapping and the published categories live in
@@ -39,8 +39,8 @@ class CalendarEventSynchronizer
 
         $fields = $result['record']['fields'];
 
-        if (($fields['GWTYPE'] ?? null) !== config('calendar_events.gwtype')) {
-            $this->remove($guid, 'not an event: '.($fields['GWTYPE'] ?? '-'));
+        if (($fields['GWSTYPE'] ?? null) !== config('calendar_events.gwstype')) {
+            $this->remove($guid, 'not an event: '.($fields['GWSTYPE'] ?? '-'));
 
             return;
         }

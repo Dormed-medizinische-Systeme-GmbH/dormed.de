@@ -16,11 +16,12 @@ return [
     'data_object_type' => 'APPOINTMENT',
 
     /*
-    | Nur Termine mit diesem GWTYPE kommen auf die Website. Der CAS-Webhook
-    | filtert bereits darauf; der Abgleich prüft es zusätzlich, damit ein
-    | Termin, dessen Typ in CAS geändert wird, beim nächsten Sync verschwindet.
+    | Nur Termine mit diesem Typ (CAS-Feld GWSTYPE) kommen auf die Website.
+    | Der CAS-Webhook filtert bereits darauf; der Abgleich prüft es
+    | zusätzlich, damit ein Termin, dessen Typ in CAS geändert wird, beim
+    | nächsten Sync verschwindet.
     */
-    'gwtype' => 'Veranstaltung',
+    'gwstype' => 'Veranstaltung',
 
     /*
     | CAS-Kategorie (Feld CATEGORY = Veranstaltungsart) -> Typ auf der Seite
