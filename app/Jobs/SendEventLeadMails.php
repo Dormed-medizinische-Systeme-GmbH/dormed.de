@@ -32,6 +32,12 @@ class SendEventLeadMails implements ShouldQueue
         public ?string $interesse,
         public ?string $budget,
         public ?string $nachricht,
+        public bool $altgeraetAnkauf = false,
+        public ?string $altgeraetSystem = null,
+        public ?string $anschaffungsdatum = null,
+        public ?string $finanzierung = null,
+        /** @var array<int, string> */
+        public array $dienstleistungen = [],
     ) {}
 
     public function retryUntil(): DateTime
@@ -60,6 +66,11 @@ class SendEventLeadMails implements ShouldQueue
             interesse: $this->interesse,
             budget: $this->budget,
             nachricht: $this->nachricht,
+            altgeraetAnkauf: $this->altgeraetAnkauf,
+            altgeraetSystem: $this->altgeraetSystem,
+            anschaffungsdatum: $this->anschaffungsdatum,
+            finanzierung: $this->finanzierung,
+            dienstleistungen: $this->dienstleistungen,
         ));
 
         if (filled($this->email)) {

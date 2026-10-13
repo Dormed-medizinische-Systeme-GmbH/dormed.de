@@ -112,7 +112,7 @@ test('the lead form blocks foreign links in all its free-text fields like the co
     submitMessage('lead', 'Hallo', [$field => 'siehe https://spam.example.com'])->assertSessionHasErrors($field);
 
     Bus::assertNothingDispatched();
-})->with(['praxis_name', 'strasse', 'ort', 'interesse', 'budget', 'nachricht']);
+})->with(['praxis_name', 'strasse', 'ort', 'interesse', 'altgeraet_system', 'budget', 'nachricht']);
 
 test('rejections are logged with reason, form and field but without the submitted content', function () {
     Bus::fake();
@@ -153,5 +153,5 @@ test('both forms ship the same guard configuration to the frontend', function (s
         ->and($config['invisiblePattern'])->toBe(FormGuard::INVISIBLE_PATTERN);
 })->with([
     'kontakt' => ['kontakt', [], ['name', 'praxis', 'nachricht']],
-    'lead' => ['veranstaltungen.lead.show', ['testmesse-2026'], ['praxis_name', 'strasse', 'ort', 'interesse', 'budget', 'nachricht']],
+    'lead' => ['veranstaltungen.lead.show', ['testmesse-2026'], ['praxis_name', 'strasse', 'ort', 'interesse', 'altgeraet_system', 'budget', 'nachricht']],
 ]);

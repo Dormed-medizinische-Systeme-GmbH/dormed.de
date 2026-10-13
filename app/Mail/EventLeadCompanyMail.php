@@ -29,6 +29,12 @@ class EventLeadCompanyMail extends Mailable
         public ?string $interesse,
         public ?string $budget,
         public ?string $nachricht,
+        public bool $altgeraetAnkauf = false,
+        public ?string $altgeraetSystem = null,
+        public ?string $anschaffungsdatum = null,
+        public ?string $finanzierung = null,
+        /** @var array<int, string> */
+        public array $dienstleistungen = [],
     ) {}
 
     /**
@@ -84,7 +90,7 @@ class EventLeadCompanyMail extends Mailable
     }
 
     /**
-     * @return array<string, string|null>
+     * @return array<string, string|bool|array<int, string>|null>
      */
     private function viewData(): array
     {
@@ -97,7 +103,12 @@ class EventLeadCompanyMail extends Mailable
             'email' => $this->email,
             'telefon' => $this->telefon,
             'interesse' => $this->interesse,
+            'altgeraetAnkauf' => $this->altgeraetAnkauf,
+            'altgeraetSystem' => $this->altgeraetSystem,
             'budget' => $this->budget,
+            'anschaffungsdatum' => $this->anschaffungsdatum,
+            'finanzierung' => $this->finanzierung,
+            'dienstleistungen' => $this->dienstleistungen,
             'nachricht' => $this->nachricht,
         ];
     }

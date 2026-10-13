@@ -54,6 +54,11 @@ class EventLeadController extends Controller
             interesse: $request->validated('interesse'),
             budget: $request->validated('budget'),
             nachricht: $request->validated('nachricht'),
+            altgeraetAnkauf: $request->wantsOldDeviceTradeIn(),
+            altgeraetSystem: $request->oldDeviceSystem(),
+            anschaffungsdatum: $request->plannedPurchaseDate(),
+            finanzierung: $request->financingLabel(),
+            dienstleistungen: $request->serviceLabels(),
         );
 
         return redirect()->route('veranstaltungen.lead.danke', $event);

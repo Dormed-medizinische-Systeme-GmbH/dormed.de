@@ -33,17 +33,41 @@
         <td style="padding:6px 0;">{{ $interesse }}</td>
     </tr>
     @endif
+    @if ($altgeraetAnkauf)
+    <tr>
+        <td style="padding:6px 0;color:#4c5770;">Altgerät</td>
+        <td style="padding:6px 0;">Ankauf / Entsorgung gewünscht{{ $altgeraetSystem ? ': '.$altgeraetSystem : '' }}</td>
+    </tr>
+    @endif
     @if ($budget)
     <tr>
         <td style="padding:6px 0;color:#4c5770;">Budget</td>
         <td style="padding:6px 0;">{{ $budget }}</td>
     </tr>
     @endif
+    @if ($anschaffungsdatum)
+    <tr>
+        <td style="padding:6px 0;color:#4c5770;">Anschaffung geplant</td>
+        <td style="padding:6px 0;">{{ $anschaffungsdatum }}</td>
+    </tr>
+    @endif
+    @if ($finanzierung)
+    <tr>
+        <td style="padding:6px 0;color:#4c5770;">Finanzierung</td>
+        <td style="padding:6px 0;">{{ $finanzierung }}</td>
+    </tr>
+    @endif
+    @if ($dienstleistungen)
+    <tr>
+        <td style="padding:6px 0;color:#4c5770;">Dienstleistungen</td>
+        <td style="padding:6px 0;">{{ implode(', ', $dienstleistungen) }}</td>
+    </tr>
+    @endif
 </table>
 
 @if ($nachricht)
 <div style="margin-top:24px;padding-top:20px;border-top:1px solid #e5e7eb;">
-    <p style="margin:0 0 8px;color:#4c5770;font-size:14px;">Nachricht</p>
+    <p style="margin:0 0 8px;color:#4c5770;font-size:14px;">Ausstattung / Bemerkungen</p>
     <p style="margin:0;font-size:15px;line-height:1.6;">{!! nl2br(e($nachricht)) !!}</p>
 </div>
 @endif

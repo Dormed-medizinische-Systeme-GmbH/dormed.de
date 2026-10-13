@@ -115,6 +115,32 @@
 }
 .lead__submit:active { opacity: 0.9; }
 
+/* Altgerät: das Systemfeld erscheint nur bei angehakter Checkbox (ohne JS via :has). */
+.lead__alt { margin-bottom: 0.85rem; }
+.lead__alt .lead__check { margin-top: 0; }
+.lead__alt-system { margin-top: 0.85rem; margin-bottom: 0; }
+.lead__alt:not(:has(#lead-altgeraet:checked)) .lead__alt-system { display: none; }
+
+.lead__group { border: 0; padding: 0; margin: 0 0 0.85rem; min-width: 0; }
+.lead__group .lead__label { display: block; margin-bottom: 0.35rem; }
+.lead__options { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
+.lead__option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.6rem 0.95rem;
+  background: #F7F9FC;
+  border: 1px solid rgba(9,58,126,0.15);
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #0B1A2E;
+  transition: border-color 0.15s, background 0.15s;
+}
+.lead__option input { width: 20px; height: 20px; flex-shrink: 0; margin: 0; accent-color: #0B5FB7; cursor: pointer; }
+.lead__option:has(input:checked) { border-color: #0B5FB7; background: rgba(11,95,183,0.06); }
+.lead__option:has(input:focus-visible) { box-shadow: 0 0 0 3px rgba(11,95,183,0.15); }
+
 .lead__closed { font-size: 0.95rem; line-height: 1.6; color: #48576F; }
 .lead__closed a { color: #0B5FB7; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
@@ -123,6 +149,7 @@
   .lead__h1 { font-size: 2rem; }
   .lead__row--split { grid-template-columns: 1fr 1fr; }
   .lead__row--plz { grid-template-columns: 140px 1fr; }
+  .lead__options { grid-template-columns: 1fr 1fr; }
 }
 </style>
 
@@ -192,17 +219,58 @@
           </div>
         </div>
 
-        <div class="lead__row">
+        <div class="lead__alt">
+          <label class="lead__check">
+            <input type="checkbox" id="lead-altgeraet" name="altgeraet" value="ja" @checked(old('altgeraet') === 'ja')/>
+            <span class="lead__check-label">Ankauf / Entsorgung Ihres Altgeräts</span>
+          </label>
+          <div class="lead__row lead__alt-system">
+            <div class="lead__field">
+              <label class="lead__label" for="lead-altgeraet-system">Bisheriges System</label>
+              <input class="lead__input" id="lead-altgeraet-system" name="altgeraet_system" type="text" placeholder="z. B. GE Voluson E8, Baujahr 2015" value="{{ old('altgeraet_system') }}" autocomplete="off" @if ($errors->has('altgeraet_system')) aria-invalid="true" @endif/>
+            </div>
+          </div>
+        </div>
+
+        <div class="lead__row lead__row--split">
           <div class="lead__field">
             <label class="lead__label" for="lead-budget">Budget</label>
             <input class="lead__input" id="lead-budget" name="budget" type="text" placeholder="z. B. ca. 30.000 €" value="{{ old('budget') }}" autocomplete="off" @if ($errors->has('budget')) aria-invalid="true" @endif/>
           </div>
+          <div class="lead__field">
+            <label class="lead__label" for="lead-anschaffungsdatum">Geplante Anschaffung</label>
+            <input class="lead__input" id="lead-anschaffungsdatum" name="anschaffungsdatum" type="date" value="{{ old('anschaffungsdatum') }}" autocomplete="off" @if ($errors->has('anschaffungsdatum')) aria-invalid="true" @endif/>
+          </div>
         </div>
+
+        <fieldset class="lead__group">
+          <legend class="lead__label">Finanzierungsform</legend>
+          <div class="lead__options">
+            @foreach (\App\Http\Requests\EventLeadRequest::FINANCING_OPTIONS as $value => $label)
+              <label class="lead__option">
+                <input type="radio" name="finanzierung" value="{{ $value }}" @checked(old('finanzierung') === $value)/>
+                <span>{{ $label }}</span>
+              </label>
+            @endforeach
+          </div>
+        </fieldset>
+
+        <fieldset class="lead__group">
+          <legend class="lead__label">Dienstleistungen</legend>
+          <div class="lead__options">
+            @foreach (\App\Http\Requests\EventLeadRequest::SERVICE_OPTIONS as $value => $label)
+              <label class="lead__option">
+                <input type="checkbox" name="dienstleistungen[]" value="{{ $value }}" @checked(in_array($value, (array) old('dienstleistungen', []), true))/>
+                <span>{{ $label }}</span>
+              </label>
+            @endforeach
+          </div>
+        </fieldset>
 
         <div class="lead__row">
           <div class="lead__field">
-            <label class="lead__label" for="lead-nachricht">Nachricht</label>
-            <textarea class="lead__textarea" id="lead-nachricht" name="nachricht" placeholder="Weitere Wünsche oder Fragen (optional)" @if ($errors->has('nachricht')) aria-invalid="true" @endif>{{ old('nachricht') }}</textarea>
+            <label class="lead__label" for="lead-nachricht">Ausstattung / Bemerkungen</label>
+            <textarea class="lead__textarea" id="lead-nachricht" name="nachricht" placeholder="z. B. gewünschte Sonden, Zubehör oder weitere Fragen (optional)" @if ($errors->has('nachricht')) aria-invalid="true" @endif>{{ old('nachricht') }}</textarea>
           </div>
         </div>
 
