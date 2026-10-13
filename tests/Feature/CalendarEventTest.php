@@ -89,8 +89,8 @@ test('only upcoming events are listed, ordered by start date', function () {
 test('a postponed event stays listed after its original date until a new one is set', function () {
     $this->travelTo('2026-11-18');
 
-    CalendarEvent::factory()->create(['name' => 'Verschoben', 'starts_on' => '2026-11-10', 'status' => 'postponed']);
-    CalendarEvent::factory()->create(['name' => 'Abgesagt', 'starts_on' => '2026-11-10', 'status' => 'cancelled']);
+    CalendarEvent::factory()->create(['name' => 'Verschoben', 'starts_on' => '2026-11-10', 'ends_on' => null, 'status' => 'postponed']);
+    CalendarEvent::factory()->create(['name' => 'Abgesagt', 'starts_on' => '2026-11-10', 'ends_on' => null, 'status' => 'cancelled']);
 
     expect(CalendarEvent::upcoming()->pluck('name')->all())->toBe(['Verschoben']);
 });
