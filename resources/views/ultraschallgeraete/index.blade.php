@@ -418,7 +418,7 @@
             Alle Geräte ansehen
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
           </a>
-          <a href="/ultraschallgeraet-kaufen" class="ug-hero__btn-secondary"
+          <a href="/kontakt" class="ug-hero__btn-secondary"
              aria-label="Kostenlos beraten lassen — kostenlose Beratung anfragen">
             Kostenlos beraten lassen
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
