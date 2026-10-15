@@ -59,7 +59,7 @@ return [
 
     'blocklist' => [
         'name' => [
-            'Robertloult',
+            'Robertloult', "Robertbax",
         ],
         'email' => [
             'filip.b@hotmail.de',
