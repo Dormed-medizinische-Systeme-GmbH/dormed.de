@@ -527,7 +527,7 @@
           <span class="dsgvo__section-title">Datenschutzbeauftragter</span>
         </div>
         <div class="dsgvo__p">
-          Unsere Unternehmen sind nach den gesetzlichen Bestimmungen nicht verpflichtet, einen Datenschutzbeauftragten zu bestellen. Verantwortlich für den Datenschutz in der DORMED medizinische Systeme GmbH sind Herr Geschäftsführer Thomas Stücker-Everding und Herr Geschäftsführer Andreas Draheim.
+          Unsere Unternehmen sind nach den gesetzlichen Bestimmungen nicht verpflichtet, einen Datenschutzbeauftragten zu bestellen. Verantwortlich für den Datenschutz in der DORMED medizinische Systeme GmbH ist Herr Geschäftsführer Thomas Stücker-Everding.
         </div>
       </div>
 

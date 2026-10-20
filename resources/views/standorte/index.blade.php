@@ -1025,7 +1025,6 @@
           <div class="std-map__card-tags">
             <span class="std-map__tag">Vertrieb</span>
             <span class="std-map__tag">Service</span>
-            <span class="std-map__tag">Geschäftsführung</span>
             <span class="std-map__tag">Backoffice</span>
           </div>
           <div class="std-map__card-team">
@@ -1035,7 +1034,7 @@
                 <div class="std-map__avatar"><div class="std-map__avatar-init">AD</div></div>
                 <div class="std-map__person-info">
                   <span class="std-map__person-name">Andreas Draheim</span>
-                  <span class="std-map__person-role">Geschäftsführer</span>
+                  <span class="std-map__person-role">Systemberater Ultraschall</span>
                 </div>
               </div>
               <div class="std-map__team-person">
@@ -1503,23 +1502,6 @@
           </div>
         </div>
 
-        <div class="std-team__gf-card">
-          <div class="std-team__gf-photo">
-            <img src="/assets/img/9b23a632-7e41-48b0-4e5d-5daa3a5cea00.jpg" alt="Andreas Draheim, Geschäftsführer SONORING DORMED" loading="lazy"/>
-          </div>
-          <div class="std-team__gf-body">
-            <div>
-              <div class="std-team__gf-name">Andreas Draheim</div>
-              <div class="std-team__gf-since">Geschäftsführer · Hamburg</div>
-            </div>
-            <div class="std-team__gf-role">Geschäftsführer mit Verantwortung für Vertrieb, Service und die operative Steuerung aller Standorte. Direkter Ansprechpartner für Großkunden und Kooperationspartner.</div>
-            <div class="std-team__gf-tags">
-              <span class="std-team__gf-tag">Hamburg</span>
-              <span class="std-team__gf-tag">Geschäftsführung</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
@@ -1527,9 +1509,25 @@
     <div class="std-team__group" id="std-grp-vtb">
       <div class="std-team__group-head">
         <div class="std-team__group-title">Vertrieb &amp; Beratung</div>
-        <div class="std-team__group-count">3 Personen</div>
+        <div class="std-team__group-count">4 Personen</div>
       </div>
       <div class="std-team__list">
+
+        <div class="std-team__row">
+          <div class="std-team__row-avatar">
+            <img src="/assets/img/9b23a632-7e41-48b0-4e5d-5daa3a5cea00.jpg" alt="Andreas Draheim" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="std-team__row-avatar-init" style="display:none">AD</div>
+          </div>
+          <div class="std-team__row-info">
+            <div class="std-team__row-name">Andreas Draheim</div>
+            <div class="std-team__row-role">Systemberater Ultraschall</div>
+          </div>
+          <div class="std-team__row-tags">
+            <span class="std-team__tag std-team__tag--hh"><a href="/standorte/hamburg/" style="color:inherit;text-decoration:none">Hamburg</a></span>
+            <span class="std-team__tag std-team__tag--fn">Vertrieb</span>
+          </div>
+        </div>
 
         <div class="std-team__row">
           <div class="std-team__row-avatar">

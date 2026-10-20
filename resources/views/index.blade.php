@@ -4292,7 +4292,7 @@
             </div>
             <div class="hp-ueber__tl-content">
               <h3 class="hp-ueber__tl-title">Größte Sono-Fachhändlerorganisation DE</h3>
-              <p class="hp-ueber__tl-text">1.700 aktive Wartungskunden, 15+ Mitarbeiter, 4 Standorte — und zwei Geschäftsführer, die ihren Job noch selbst gelernt haben, bevor sie ihn delegiert haben.</p>
+              <p class="hp-ueber__tl-text">1.700 aktive Wartungskunden, 15+ Mitarbeiter, 4 Standorte — und ein Geschäftsführer, der seinen Job noch selbst gelernt hat, bevor er ihn delegiert hat.</p>
             </div>
           </li>
 
@@ -4375,7 +4375,7 @@
             <div class="hp-ueber__team-card" role="listitem">
               <div class="hp-ueber__team-avatar">
                 <img src="/assets/img/9b23a632-7e41-48b0-4e5d-5daa3a5cea00.jpg"
-                     alt=" Andreas Draheim, Geschäftsführer"
+                     alt="Andreas Draheim, Systemberater Ultraschall"
                      loading="lazy"
                      onerror="this.style.display='none'"/>
                 <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
@@ -4383,8 +4383,8 @@
                   <path d="M8 50 Q8 35 28 35 Q48 35 48 50" fill="rgba(62,178,240,0.1)" stroke="rgba(62,178,240,0.15)" stroke-width="1"/>
                 </svg>
               </div>
-              <h3 class="hp-ueber__team-name"> Andreas Draheim</h3>
-              <p class="hp-ueber__team-role">Geschäftsführer</p>
+              <h3 class="hp-ueber__team-name">Andreas Draheim</h3>
+              <p class="hp-ueber__team-role">Systemberater Ultraschall</p>
             </div>
 
             <div class="hp-ueber__team-card" role="listitem">

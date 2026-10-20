@@ -936,14 +936,14 @@
         <div class="std-team__photo-wrap">
           <img class="std-team__photo"
             src="/assets/img/9397f206-89b7-4a9c-dd4e-921832331300.jpg"
-            alt="Andreas Draheim, Geschäftsführer / Vertrieb"
+            alt="Andreas Draheim, Systemberater Ultraschall"
             loading="lazy"
           />
           <span class="std-team__dept-badge">Vertrieb</span>
         </div>
         <div class="std-team__info">
           <span class="std-team__name">Andreas Draheim</span>
-          <span class="std-team__role">Geschäftsführer / Vertrieb</span>
+          <span class="std-team__role">Systemberater Ultraschall</span>
           <div class="std-team__contacts">
             <a href="tel:015226013865" class="std-team__contact">
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
@@ -973,11 +973,11 @@
           <div class="std-team__contacts">
             <a href="tel:01743353633" class="std-team__contact">
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.35 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z"/></svg>
-              01522 / 60 13 865
+              0174 / 33 53 633
             </a>
-            <a href="mailto:a.draheim@dormed.de" class="std-team__contact">
+            <a href="mailto:f.johannsen@dormed.de" class="std-team__contact">
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              a.draheim@dormed.de
+              f.johannsen@dormed.de
             </a>
           </div>
         </div>

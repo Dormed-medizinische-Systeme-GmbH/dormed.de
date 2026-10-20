@@ -301,8 +301,7 @@
         <div>
           <div class="imp__field-label">Geschäftsführung</div>
           <div class="imp__field-value">
-            Thomas Stücker-Everding<br>
-            Andreas Draheim
+            Thomas Stücker-Everding
           </div>
         </div>
         <div>
