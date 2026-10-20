@@ -71,7 +71,7 @@
             {
               "@type": "Person",
               "name": "Andreas Draheim",
-              "jobTitle": "Geschäftsführer",
+              "jobTitle": "Systemberater Ultraschall",
               "worksFor": { "@id": "https://dormed.de/#organization" }
             }
           ],
@@ -1856,7 +1856,7 @@
     <!-- BOTTOM: LEADERSHIP + CTA -->
     <div class="od-team__bottom">
 
-      <!-- Two GF as human anchors -->
+      <!-- GF as human anchor -->
       <div class="od-team__leadership" id="od-tm-lead">
         <span class="od-team__leadership-label">Geschäftsführung</span>
         <div class="od-team__leaders">
@@ -1869,17 +1869,6 @@
             <div class="od-team__leader-info">
               <span class="od-team__leader-name">Thomas Stücker-Everding</span>
               <span class="od-team__leader-title">Gründer & Geschäftsführer</span>
-            </div>
-          </div>
-          <div class="od-team__leader">
-            <img class="od-team__leader-photo"
-              src="/assets/img/9b23a632-7e41-48b0-4e5d-5daa3a5cea00.jpg"
-              alt="Andreas Draheim"
-              loading="lazy"
-            />
-            <div class="od-team__leader-info">
-              <span class="od-team__leader-name">Andreas Draheim</span>
-              <span class="od-team__leader-title">Andreas Draheim</span>
             </div>
           </div>
         </div>
